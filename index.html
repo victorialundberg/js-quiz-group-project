@@ -1,13 +1,79 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div class="app" id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- HTML Meta Tags -->
+  <title>Rubber duck quiz</title>
+  <meta name="description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url"
+    content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-kumquaterna/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rubber duck quiz">
+  <meta property="og:description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
+  <meta property="og:image" content="">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="medieinstitutet.github.io">
+  <meta property="twitter:url"
+    content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-kumquaterna/">
+  <meta name="twitter:title" content="Rubber duck quiz">
+  <meta name="twitter:description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
+  <meta name="twitter:image" content="">
+
+  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+  <link rel="stylesheet" href="./src/scss/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.ts"></script>
+</head>
+
+<body>
+  <div class="app" id="app">
+    <header class="header">
+      <div class="scrolltext">
+        <h2>Welcome text</h2>
+      </div>
+
+      <div class="timer" hidden></div>
+
+      <button class="quit-quiz">Abort quiz</button>
+      <div class="points">
+        <p class="points-counter">Points: <span class="number">0</span></p>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="main-heading">Rubber duck quiz</h1>
+
+      <section class="game-rules">
+        <p class="high-score-heading">Gamerules</p>
+        <div class="left-eye-container">
+          <div class="left-pupil"></div>
+        </div>
+      </section>
+
+      <button class="start-quiz-button">Start your quiz</button>
+
+      <section class="high-score">
+        <p class="high-score-heading">High Score</p>
+        <div class="right-eye-container">
+          <div class="right-pupil"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      &copy;
+    </footer>
+  </div>
+</body>
+
 </html>

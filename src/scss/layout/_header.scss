@@ -1,0 +1,31 @@
+.header {
+  width: 100svw;
+  height: 12svh;
+  background: linear-gradient(180deg, #fffcbc 0%, #fff500 100%);
+
+  @include grid-template(
+    (
+      columns: 10svw 80svw 10svw,
+      rows: 10svh,
+    )
+  );
+
+  .quit-quiz {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .scrolltext {
+    @include flexCenter;
+    font-size: 1.3rem;
+    grid-area: 1 / 2 / 2 / 3;
+  }
+
+  .points {
+    @include flexCenter;
+    grid-area: 1 / 3 / 2 / 4;
+  }
+}
+
+.hidden {
+  display: none;
+}

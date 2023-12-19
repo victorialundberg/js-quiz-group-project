@@ -1,13 +1,9 @@
-:root {
-  font-family: 'Comic Sans MS', sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import 'vendor/normalize';
+@import 'base/base';
 
-.app {
-  max-width: 320px;
-  margin: 0 auto;
-  text-align: center;
-}
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/responsive';
+
+@import 'layout/header';
+@import 'layout/main';
