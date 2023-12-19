@@ -26,6 +26,7 @@ main {
       background-color: white;
       height: 170px;
       width: 150px;
+      box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,6);
 
       .left-pupil {
         border-radius: 50px;
@@ -69,7 +70,7 @@ main {
       background-color: white;
       height: 170px;
       width: 150px;
-      box-shadow: inset 0px 0px 20px 10px rgba(0,0,0,6);
+      box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,6);
 
       .right-pupil {
         border-radius: 50px;
