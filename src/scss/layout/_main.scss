@@ -1,17 +1,82 @@
 main {
   background-color: #ffbb00;
+  height: 76svh;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 15% 85%;
+  padding-bottom: 8svh; 
+  padding-top: 1rem; 
 
   .main-heading {
     font-size: 3.1rem;
+    grid-column: 2 / 3;
+    margin: 0;
+    padding: 0; 
+  }
+  .game-rules {
+    grid-column: 1 / 2;
+    position: relative;
+
+    .left-eye-container {
+      position: absolute;
+      bottom: 10px; 
+      right: 10px; 
+      border-radius: 30px;
+      background-color: white;
+      height: 170px;
+      width: 150px;
+
+      .left-pupil {
+        border-radius: 50px;
+        background-color: black;
+        height: 80px; 
+        width: 80px;
+      }
+    }
+    
+  }
+  .game-rules, .high-score {
+    align-self: end;
+    background-color: #BDB7FF;
+    height: 350px;
+    width: 300px;
+    border-radius: 20px;
+    padding-top: 0.5rem; 
   }
 
   .start-quiz-button {
     border: none;
-    width: 15svw;
-    height: 8svh;
+    width: 18svw;
+    height: 9svh;
     border-radius: 20px;
-    font-size: 1.2rem;
-
+    cursor: pointer;
     background-color: color(beak);
+    align-self: end; 
+    font-family: $font-grover;
+    font-size: fontSize(xs);
+  }
+
+  .high-score {
+    grid-column: 3 / 4;
+    position: relative;
+
+    .right-eye-container {
+      position: absolute;
+      bottom: 10px; 
+      left: 10px; 
+      border-radius: 30px;
+      background-color: white;
+      height: 170px;
+      width: 150px;
+      box-shadow: inset 0px 0px 20px 10px rgba(0,0,0,6);
+
+      .right-pupil {
+        border-radius: 50px;
+        background-color: black;
+        height: 80px; 
+        width: 80px;
+      }
+    }
   }
 }
