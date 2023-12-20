@@ -1,0 +1,88 @@
+.quiz-container {
+  height: 76svh;
+  background-color: color(primary);
+  @include flexCenter;
+
+  .img-container {
+    height: 60svh;
+    width: 30%;
+    background-color: #fff;
+    border-radius: 12px 0px 0px 12px;
+    object-fit: cover;
+  }
+
+  .question-container {
+    position: relative;
+    display: flex;
+    background-color: color(purple-blue);
+    background: linear-gradient(
+      to top,
+      red 10%,
+      purple 35%,
+      color(purple-blue) 60%
+    );
+
+    border-radius: 0 12px 12px 0;
+    width: 60svw;
+    height: 60svh;
+    padding-left: 2rem;
+    @include flexCenter($fd: column, $jc: space-around, $ai: flex-start);
+
+    .question-text-container {
+      display: flex;
+      @include flexCenter($fd: column, $jc: space-between, $ai: flex-start);
+      gap: 1.1rem;
+      padding-left: 2rem;
+
+      .question-text,
+      .answer-alternative {
+        font-family: $font-roboto;
+      }
+      .answer-container {
+        @include flexCenter($fd: column, $ai: flex-start);
+        gap: 0.5rem;
+        .answer-button {
+          margin-right: 7px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    .result-text-container {
+      position: relative;
+      width: 60svw;
+      height: 60svh;
+
+      .input-name {
+        font-family: $font-grover;
+        position: absolute;
+        bottom: 2rem;
+        right: 14.3rem;
+        border-radius: 20px;
+        border: none;
+        height: 42px;
+        width: 300px;
+        padding: 16px;
+      }
+    }
+
+    .next-button {
+      position: absolute;
+      bottom: 2rem;
+      right: 0;
+      align-self: flex-end;
+      margin-right: 2rem;
+      background-color: color(header);
+      height: 42px;
+      width: 150px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: $font-grover;
+      font-size: fontSize(sm) * 0.888;
+    }
+    .hidden {
+      display: none;
+    }
+  }
+}

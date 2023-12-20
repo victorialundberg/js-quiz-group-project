@@ -1,8 +1,9 @@
 footer {
-    width: 100svw;
-    height: 12svh;
-    background: linear-gradient(180deg, #FF6A6A 0%, #000000 100%);
-    color: white; 
-    font-family: sans-serif;
-    @include flexCenter; 
+  width: 100svw;
+  height: 12svh;
+  background: linear-gradient(180deg, #ff6a6a 0%, #000000 100%);
+  color: white;
+  font-family: $font-roboto;
+  font-size: fontSize(xs) * 0.5;
+  @include flexCenter;
 }

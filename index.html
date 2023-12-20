@@ -38,42 +38,121 @@
 <body>
   <div class="app" id="app">
     <header class="header">
-      <div class="scrolltext">
+      <!-- <div class="scrolltext">
         <h2>Welcome text</h2>
-      </div>
-
-      <div class="timer" hidden></div>
+      </div> -->
 
       <button class="abort-quiz-button">Abort quiz</button>
+
+      <!-- <div class="timer" hidden>04:35</div> -->
+      <div class="timer">04:35</div>
+
       <div class="points">
         <p class="points-counter">Points: <span class="number">0</span></p>
       </div>
     </header>
 
     <main>
-      <h1 class="main-heading">Rubber duck quiz</h1>
+      <div class="landing-page hidden">
+        <h1 class="main-heading">Rubber duck quiz</h1>
 
-      <section class="game-rules">
-        <p class="game-rules-heading">Gamerules</p>
-        <div class="left-eye-container">
-          <div class="left-pupil"></div>
+        <section class="game-rules">
+          <p class="game-rules-heading">Gamerules</p>
+          <div class="left-eye-container">
+            <div class="left-pupil"></div>
+          </div>
+        </section>
+
+        <button class="start-quiz-button">Start your quiz</button>
+
+        <section class="high-score">
+          <p class="high-score-heading">High Score</p>
+          <div class="right-eye-container">
+            <div class="right-pupil"></div>
+          </div>
+        </section>
+      </div>
+
+      <!--     question view       -->
+
+      <section class="quiz-container">
+        <img src="./img/rubber-duck-bathtub-640x420.jpg" alt="rubber ducks on the edge of a swimming pool"
+          class="img-container">
+
+        <div class="question-container timer-color">
+          <!-- <div class="question-text-container hidden">
+            <h2 class="question-counter">Fråga 1 / 10</h2>
+
+            <p class="question-text">Hur många ankor ryms det i ett badkar?</p>
+
+            <h3 class="answers">Svarsalternativ</h3>
+
+            <div class="answer-container">
+              <label for="a1" class="answer-alternative">
+                <input type="radio" class="answer-button" name="radio" id="a1">
+                1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eaque!
+              </label>
+
+              <label for="a2" class="answer-alternative">
+                <input type="radio" class="answer-button" name="radio" id="a2">
+                X. fds
+              </label>
+
+              <label for="a3" class="answer-alternative">
+                <input type="radio" class="answer-button" name="radio" id="a3">
+                2. dfsfs
+              </label>
+            </div>
+          </div>-->
+          <input type="submit" class="next-button" value="Next">
+
+          <div class="result-text-container question-text-container">
+            <h2 class="result-title">Resultat</h2>
+
+            <p class="your-result">Du fick 4/10 antal rätt.</p>
+
+            <h3 class="right-answers-title">Rätt Svar</h3>
+
+            <div class="right-answers-1to5">
+              <p class="right-answers">1. -</p>
+              <p class="right-answers">2. -</p>
+              <p class="right-answers">3. -</p>
+              <p class="right-answers">4. -</p>
+              <p class="right-answers">5. -</p>
+            </div>
+            <div class="right-answers-6to10">
+              <p class="right-answers">6. -</p>
+              <p class="right-answers">7. -</p>
+              <p class="right-answers">8. -</p>
+              <p class="right-answers">9. -</p>
+              <p class="right-answers">10. -</p>
+            </div>
+
+            <input type="text" class="input-name" placeholder="Ange ditt namn">
+          </div>
+
         </div>
+
       </section>
 
-      <button class="start-quiz-button">Start your quiz</button>
-
-      <section class="high-score">
-        <p class="high-score-heading">High Score</p>
-        <div class="right-eye-container">
-          <div class="right-pupil"></div>
-        </div>
-      </section>
     </main>
 
     <footer>
-      &copy; Caroline Vårsaga, Ellinor Friström, Jari Leminaho, Johan Forsling, Linda Leminaho, Victoria Lundberg
+      &copy; 2023/2024 Caroline Vårsaga, Ellinor Friström, Jari Leminaho, Johan Forsling, Linda Leminaho, Victoria
+      Lundberg
     </footer>
   </div>
 </body>
 
 </html>
+
+
+<section class="score-container">
+
+  <img src="" alt="" class="img-container">
+  <div class="highscore-container">
+    <div class="question"></div>
+    <div class="answer"></div>
+  </div>
+
+</section>

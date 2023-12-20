@@ -33,7 +33,6 @@ Var och en skriver va de tycker:
 > Victoria: När saker funkar. Det mesta är roligt i ett projekt, klura på/rita upp logik (och design i viss mån), implementera logiken och lägga på styling. Älskar att lära mig.<br>
 > Linda: När saker funkar och när man förstår logiken. Styling är kul, när man får till det snyggt. Alltid kul att lära sig nytt.
 
-
 **Vad är tråkigt:**
 
 > Carro: När programmeringen inte fungerar och jag inte vet varför. <br>
@@ -41,16 +40,16 @@ Var och en skriver va de tycker:
 > Jari: Typescript <br>
 > Johan:  
 > Victoria: Felsöka är inte så roligt. Inte heller klura FÖR länge och försöka söka efter en lösning. <br>
-> Linda: När det inte blir som vill hur mycket man än försöker. Kaos. 
+> Linda: När det inte blir som vill hur mycket man än försöker. Kaos.
 
-**Kunslkapsnivåer sedan innan:**
+**Kunskapsnivåer sedan innan:**
 
 > Carro: Har ingen kunskap om TypeScript sedan innan. Min JavaScript-kunskap är det vi lärt oss hittills i kursen. <br>
 > Ellinor: Har ingen tidigare kunskap i TypeScript. Min JavaScript kunskap är det vi gått igenom i klass. <br>
 > Jari: Lite av allt i uppgiften vi har framför oss. <br>
 > Johan:  
 > Victoria: TypeScript är helt nytt. I övrigt kunskaper från tidigare uppgifter och en ganska basic uppfattning om programmering. Har liite koll på hur man debuggar. <br>
-> Linda: När det inte blir som vill hur mycket man än försöker. Kaos, och när man inte förstår.
+> Linda: Hyfsat bra på HTML & CSS/scss, lite Javascript, men helt ny på Typescript.
 
 ### Arbetsmetoder
 
