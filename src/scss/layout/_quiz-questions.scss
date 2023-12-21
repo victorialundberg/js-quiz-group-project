@@ -1,88 +1,60 @@
-.quiz-container {
-  height: 76svh;
-  background-color: color(primary);
-  @include flexCenter;
+.question-text-container {
+  // display: flex;
+  // align-items: flex-start;
+  @include flexCenter($fd: column, $jc: space-between, $ai: flex-start);
+  gap: 1.1rem;
 
-  .img-container {
-    height: 60svh;
-    width: 30%;
-    background-color: #fff;
-    border-radius: 12px 0px 0px 12px;
-    object-fit: cover;
+  .question-counter {
+    font-size: fontSize(lg);
+    padding-top: 1rem;
   }
 
-  .question-container {
-    position: relative;
-    display: flex;
-    background-color: color(purple-blue);
-    background: linear-gradient(
-      to top,
-      red 10%,
-      purple 35%,
-      color(purple-blue) 60%
-    );
+  .question-text {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: fontSize(md) * 0.8;
+  }
 
-    border-radius: 0 12px 12px 0;
-    width: 60svw;
-    height: 60svh;
-    padding-left: 2rem;
-    @include flexCenter($fd: column, $jc: space-around, $ai: flex-start);
+  .question-text,
+  .answer-alternative {
+    font-family: $font-roboto;
+    text-align: start;
+    &:nth-child(3) {
+      margin-bottom: 70px;
+    }
+  }
 
-    .question-text-container {
+  .answer-container {
+    @include flexCenter($fd: column, $ai: flex-start);
+
+    .answer-alternative {
+      margin-top: 1rem;
+      font-size: fontSize(md) * 0.6;
       display: flex;
-      @include flexCenter($fd: column, $jc: space-between, $ai: flex-start);
-      gap: 1.1rem;
-      padding-left: 2rem;
+      align-items: start;
+      justify-content: center;
 
-      .question-text,
-      .answer-alternative {
-        font-family: $font-roboto;
+      .answer-button {
+        margin-right: 0.5rem;
+        min-width: 1rem;
+        min-height: 1rem;
+        accent-color: color(primary);
       }
-      .answer-container {
-        @include flexCenter($fd: column, $ai: flex-start);
-        gap: 0.5rem;
-        .answer-button {
-          margin-right: 7px;
-          margin-bottom: 5px;
-        }
-      }
-    }
 
-    .result-text-container {
-      position: relative;
-      width: 60svw;
-      height: 60svh;
-
-      .input-name {
-        font-family: $font-grover;
-        position: absolute;
-        bottom: 2rem;
-        right: 14.3rem;
-        border-radius: 20px;
-        border: none;
-        height: 42px;
-        width: 300px;
-        padding: 16px;
+      .answer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        // padding-left: 0.5rem;
       }
     }
 
-    .next-button {
-      position: absolute;
-      bottom: 2rem;
-      right: 0;
-      align-self: flex-end;
-      margin-right: 2rem;
-      background-color: color(header);
-      height: 42px;
-      width: 150px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: $font-grover;
-      font-size: fontSize(sm) * 0.888;
-    }
-    .hidden {
-      display: none;
+    .answers {
+      font-size: fontSize(md);
     }
   }
+}
+
+.hidden {
+  display: none;
 }

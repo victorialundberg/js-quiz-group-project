@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- HTML Meta Tags -->
   <title>Rubber duck quiz</title>
   <meta name="description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
@@ -75,84 +75,97 @@
 
       <!--     question view       -->
 
-      <section class="quiz-container">
-        <img src="./img/rubber-duck-bathtub-640x420.jpg" alt="rubber ducks on the edge of a swimming pool"
-          class="img-container">
+      <section class="section-content-container">
+        <div class="wrapper-container">
+          <img src="./img/rubber-duck-bathtub-640x420.jpg" alt="rubber ducks on the edge of a swimming pool"
+            class="img-container">
 
-        <div class="question-container timer-color">
-          <!-- <div class="question-text-container hidden">
-            <h2 class="question-counter">Fråga 1 / 10</h2>
+          <div class="content-container timer-color">
 
-            <p class="question-text">Hur många ankor ryms det i ett badkar?</p>
+            <!--            Renderas ut i js                -->
 
-            <h3 class="answers">Svarsalternativ</h3>
+            <div class="question-text-container hidden">
+              <h2 class="question-counter">Fråga 1 / 10</h2>
 
-            <div class="answer-container">
-              <label for="a1" class="answer-alternative">
-                <input type="radio" class="answer-button" name="radio" id="a1">
-                1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eaque!
-              </label>
+              <p class="question-text">
+                Hur många ankor ryms det i ett badkar?
+              </p>
 
-              <label for="a2" class="answer-alternative">
-                <input type="radio" class="answer-button" name="radio" id="a2">
-                X. fds
-              </label>
+              <h3 class="answers">Svarsalternativ</h3>
 
-              <label for="a3" class="answer-alternative">
-                <input type="radio" class="answer-button" name="radio" id="a3">
-                2. dfsfs
-              </label>
-            </div>
-          </div>-->
-          <input type="submit" class="next-button" value="Next">
+              <div class="answer-container">
+                <label for="a1" class="answer-alternative">
+                  <input type="radio" class="answer-button" name="radio" id="a1">
+                  1. &nbsp;<span class="answer">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Rem eaque!</span>
+                </label>
 
-          <div class="result-text-container question-text-container">
-            <h2 class="result-title">Resultat</h2>
+                <label for="a2" class="answer-alternative">
+                  <input type="radio" class="answer-button" name="radio" id="a2">
+                  X. &nbsp; <span class="answer">Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit.</span>
+                </label>
 
-            <p class="your-result">Du fick 4/10 antal rätt.</p>
-
-            <h3 class="right-answers-title">Rätt Svar</h3>
-
-            <div class="right-answers-1to5">
-              <p class="right-answers">1. -</p>
-              <p class="right-answers">2. -</p>
-              <p class="right-answers">3. -</p>
-              <p class="right-answers">4. -</p>
-              <p class="right-answers">5. -</p>
-            </div>
-            <div class="right-answers-6to10">
-              <p class="right-answers">6. -</p>
-              <p class="right-answers">7. -</p>
-              <p class="right-answers">8. -</p>
-              <p class="right-answers">9. -</p>
-              <p class="right-answers">10. -</p>
+                <label for="a3" class="answer-alternative">
+                  <input type="radio" class="answer-button" name="radio" id="a3">
+                  2. &nbsp;<span class="answer">dfsfsLorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+                </label>
+              </div>
             </div>
 
-            <input type="text" class="input-name" placeholder="Ange ditt namn">
+            <div class="result-text-container">
+
+              <div class="result-title-your-result">
+                <h2 class="result-title">Results</h2>
+                <p class="your-result">You got 4/10 correct answers</p>
+              </div>
+
+
+              <div class="answers-container">
+
+                <h3 class="answers-title">Your answers</h3>
+
+                <div class="answers-1to5">
+                  <p class="answer">1. -</p>
+                  <p class="answer">2. -</p>
+                  <p class="answer">3. -</p>
+                  <p class="answer">4. -</p>
+                  <p class="answer">5. -</p>
+                </div>
+
+                <div class="answers-6to10">
+                  <p class="answer">6. -</p>
+                  <p class="answer">7. -</p>
+                  <p class="answer">8. -</p>
+                  <p class="answer">9. -</p>
+                  <p class="answer">10. -</p>
+                </div>
+
+              </div>
+
+              <input type="text" class="input-name" placeholder="Your name here">
+            </div>
+
+            <input type="submit" class="next-button" value="Next">
+
           </div>
-
         </div>
-
       </section>
-
     </main>
 
     <footer>
-      &copy; 2023/2024 Caroline Vårsaga, Ellinor Friström, Jari Leminaho, Johan Forsling, Linda Leminaho, Victoria
-      Lundberg
+      &copy; 2023/2024 Caroline Vårsaga, Ellinor Friström, Jari Leminaho,
+      Johan Forsling, Linda Leminaho, Victoria Lundberg
     </footer>
   </div>
 </body>
 
 </html>
 
-
-<section class="score-container">
-
+<!-- <section class="score-container">
   <img src="" alt="" class="img-container">
   <div class="highscore-container">
     <div class="question"></div>
     <div class="answer"></div>
   </div>
-
-</section>
+</section> -->

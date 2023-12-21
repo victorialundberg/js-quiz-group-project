@@ -1,0 +1,84 @@
+.section-content-container {
+  min-height: 76svh;
+  background-color: color(primary);
+  @include flexCenter;
+
+  .wrapper-container {
+    padding: 0 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    min-height: 60svh;
+    justify-content: center;
+    display: flex;
+
+    .img-container {
+      min-height: 60svh;
+      width: 35%;
+      background-color: #fff;
+      border-radius: 12px 0px 0px 12px;
+      object-fit: cover;
+    }
+
+    .content-container {
+      position: relative;
+      background-color: color(purple-blue);
+      background: linear-gradient(
+        to top,
+        red 10%,
+        purple 35%,
+        color(purple-blue) 60%
+      );
+
+      border-radius: 0 12px 12px 0;
+      width: 60svw;
+      min-height: 60svh;
+      padding: 0 1.5rem;
+      @include flexCenter($fd: column, $jc: flex-start, $ai: flex-start);
+
+      .input-name {
+        //in quiz results
+        font-family: $font-grover;
+        position: absolute;
+        bottom: 1rem;
+        right: 14.3rem;
+        border-radius: 20px;
+        border: none;
+        height: 2.625rem;
+        width: 300px;
+        padding: 1rem;
+      }
+
+      .next-button {
+        position: absolute;
+        bottom: 1rem;
+        right: 0;
+        align-self: flex-end;
+        margin-right: 2rem;
+        background-color: color(header);
+        height: 2.625rem;
+        width: 9.375rem;
+        border: none;
+        border-radius: 1.25rem;
+        cursor: pointer;
+        font-family: $font-grover;
+        font-size: fontSize(sm) * 0.888;
+      }
+    }
+    .timer-color {
+      width: 100%;
+      background: linear-gradient(to top, red, #8d87d0);
+      background-size: 200% 300%; /* Double the height to accommodate the animation */
+      animation: colorChange 30s linear forwards;
+      //   animation-direction: alternate; /* Alternates the animation direction */
+    }
+
+    @keyframes colorChange {
+      0% {
+        background-position: 0% 0%; /* Start at the bottom */
+      }
+      100% {
+        background-position: 0% 100%; /* End at the top */
+      }
+    }
+  }
+}
