@@ -24,6 +24,24 @@ main {
     grid-column: 1 / 2;
     position: relative;
 
+    .game-rules-heading {
+      font-size: fontSize(xs);
+      margin-bottom: 0.5rem;
+    }
+    .game-rules-text {
+      font-family: $font-roboto;
+      font-size: fontSize(xs) * 0.68;
+      text-align: center;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+
+      span {
+        display: inline-block;
+        font-family: $font-grover;
+        font-size: fontSize(xs) * 0.75;
+      }
+    }
+
     .left-eye-container {
       position: absolute;
       bottom: 10px;
@@ -38,18 +56,37 @@ main {
     }
   }
   .game-rules,
-  .high-score {
-    align-self: end;
+  .highscore-landing {
     background-color: color(purple-blue);
-    height: 350px;
+    align-self: flex-end;
+    height: 380px;
     width: 300px;
     border-radius: 20px;
     padding-top: 0.5rem;
     margin-bottom: 9svh;
 
+    .highscore-heading {
+      font-size: fontSize(xs);
+      margin-bottom: 0.5rem;
+    }
+    .highscore-landing-text-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+
+      .highscore-landing-1to5 {
+        grid-column: 2 / 6;
+        margin-top: 0.3rem;
+        text-align: start;
+
+        span {
+          font-family: $font-roboto;
+        }
+      }
+    }
+
     .left-eye-container,
     .right-eye-container {
-      border-radius: 30px;
+      border-radius: 50px;
       background-color: white;
       height: 170px;
       width: 150px;
@@ -69,7 +106,7 @@ main {
     font-size: fontSize(xs);
   }
 
-  .high-score {
+  .highscore-landing {
     grid-column: 3 / 4;
     position: relative;
 

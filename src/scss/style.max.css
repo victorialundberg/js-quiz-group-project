@@ -98,6 +98,22 @@ main .game-rules {
   grid-column: 1/2;
   position: relative;
 }
+main .game-rules .game-rules-heading {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+main .game-rules .game-rules-text {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.088rem;
+  text-align: center;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+main .game-rules .game-rules-text span {
+  display: inline-block;
+  font-family: "Irish Grover", sans-serif;
+  font-size: 1.2rem;
+}
 main .game-rules .left-eye-container {
   position: absolute;
   bottom: 10px;
@@ -110,20 +126,40 @@ main .game-rules .left-eye-container .left-pupil {
   width: 80px;
 }
 main .game-rules,
-main .high-score {
-  align-self: end;
+main .highscore-landing {
   background-color: #bdb7ff;
-  height: 350px;
+  align-self: flex-end;
+  height: 380px;
   width: 300px;
   border-radius: 20px;
   padding-top: 0.5rem;
   margin-bottom: 9svh;
 }
+main .game-rules .highscore-heading,
+main .highscore-landing .highscore-heading {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+main .game-rules .highscore-landing-text-container,
+main .highscore-landing .highscore-landing-text-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+main .game-rules .highscore-landing-text-container .highscore-landing-1to5,
+main .highscore-landing .highscore-landing-text-container .highscore-landing-1to5 {
+  grid-column: 2/6;
+  margin-top: 0.3rem;
+  text-align: start;
+}
+main .game-rules .highscore-landing-text-container .highscore-landing-1to5 span,
+main .highscore-landing .highscore-landing-text-container .highscore-landing-1to5 span {
+  font-family: "Roboto Condensed", sans-serif;
+}
 main .game-rules .left-eye-container,
 main .game-rules .right-eye-container,
-main .high-score .left-eye-container,
-main .high-score .right-eye-container {
-  border-radius: 30px;
+main .highscore-landing .left-eye-container,
+main .highscore-landing .right-eye-container {
+  border-radius: 50px;
   background-color: white;
   height: 170px;
   width: 150px;
@@ -140,16 +176,16 @@ main .start-quiz-button {
   font-family: "Irish Grover", sans-serif;
   font-size: 1.6rem;
 }
-main .high-score {
+main .highscore-landing {
   grid-column: 3/4;
   position: relative;
 }
-main .high-score .right-eye-container {
+main .highscore-landing .right-eye-container {
   position: absolute;
   bottom: 10px;
   left: 10px;
 }
-main .high-score .right-eye-container .right-pupil {
+main .highscore-landing .right-eye-container .right-pupil {
   border-radius: 50px;
   background-color: black;
   height: 80px;
@@ -173,6 +209,7 @@ main .hidden {
   margin-top: 2rem;
   margin-bottom: 2rem;
   min-height: 60svh;
+  min-width: 80svw;
   justify-content: center;
   display: flex;
 }
@@ -224,11 +261,10 @@ main .hidden {
   font-family: "Irish Grover", sans-serif;
   font-size: 1.5984rem;
 }
-.section-content-container .wrapper-container .timer-color {
+.section-content-container .wrapper-container .notimer-color {
   width: 100%;
   background: linear-gradient(to top, red, #8d87d0);
   background-size: 200% 300%; /* Double the height to accommodate the animation */
-  animation: colorChange 30s linear forwards;
 }
 @keyframes colorChange {
   0% {
@@ -342,22 +378,58 @@ main .hidden {
   align-items: flex-start;
   margin-bottom: 1rem;
 }
-.result-text-container .answers-container .answers-1to5 {
+.result-text-container .answers-container .answers-1to5,
+.result-text-container .answers-container .answers-6to10 {
   width: 50%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   margin: 1rem 0rem;
 }
-.result-text-container .answers-container .answers-6to10 {
+.result-text-container .answers-container .answer {
+  padding: 0.5rem 0;
+}
+.result-text-container .answers-container .answer span {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.highscore-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+}
+
+.highscore-container {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+.highscore-container .highscore-1to5,
+.highscore-container .highscore-6to10 {
   width: 50%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   margin: 1rem 0;
 }
-.result-text-container .answers-container .answer {
+.highscore-container .highscore {
   padding: 0.5rem 0;
+}
+.highscore-container .highscore span {
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .hidden {

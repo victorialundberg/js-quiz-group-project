@@ -8,6 +8,7 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     min-height: 60svh;
+    min-width: 80svw;
     justify-content: center;
     display: flex;
 
@@ -64,11 +65,22 @@
         font-size: fontSize(sm) * 0.888;
       }
     }
-    .timer-color {
+
+    //! Question timer
+    // .timer-color {
+    //   width: 100%;
+    //   background: linear-gradient(to top, red, #8d87d0);
+    //   background-size: 200% 300%; /* Double the height to accommodate the animation */
+    //   animation: colorChange 30s linear forwards;
+    //   //   animation-direction: alternate; /* Alternates the animation direction */
+    // }
+
+    //! Other backgrounds
+    .notimer-color {
       width: 100%;
       background: linear-gradient(to top, red, #8d87d0);
       background-size: 200% 300%; /* Double the height to accommodate the animation */
-      animation: colorChange 30s linear forwards;
+      // animation: colorChange 30s linear forwards;
       //   animation-direction: alternate; /* Alternates the animation direction */
     }
 

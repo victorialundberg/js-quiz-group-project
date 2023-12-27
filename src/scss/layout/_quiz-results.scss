@@ -21,7 +21,6 @@
 
   .answers-container {
     width: 100%;
-    // background-color: #fff;
     flex-wrap: wrap;
     display: flex;
 
@@ -31,7 +30,8 @@
       align-items: flex-start;
       margin-bottom: 1rem;
     }
-    .answers-1to5 {
+    .answers-1to5,
+    .answers-6to10 {
       width: 50%;
       display: flex;
       align-items: flex-start;
@@ -39,15 +39,12 @@
       margin: 1rem 0rem;
     }
 
-    .answers-6to10 {
-      width: 50%;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      margin: 1rem 0;
-    }
     .answer {
       padding: 0.5rem 0;
+
+      span {
+        font-family: $font-roboto;
+      }
     }
   }
 
