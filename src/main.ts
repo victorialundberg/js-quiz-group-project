@@ -1,5 +1,5 @@
 import './scss/style.scss'; // Importera huvud-SCSS-filen
-import typescriptLogo from './assets/images/typescript.svg'; // Exempel på hur ni importerar bilder
+// import typescriptLogo from './assets/images/typescript.svg'; // Exempel på hur ni importerar bilder
 import { sortArrayByText } from './helpers'; // Exempel på hur ni importerar en funktion från en annan fil
 
 /**
@@ -37,6 +37,8 @@ console.table(sortArrayByText(myExampleArray, 'name'));
 // Använd samma funktion för att sortera på en annan egenskap
 console.table(sortArrayByText(myExampleArray, 'age'));
 
+/*
+
 // Hämta ett HTML-element från index.html
 const container: HTMLDivElement | null = document.querySelector('#app');
 
@@ -49,3 +51,4 @@ if (container !== null) { // Om HTML-elementet finns
     </div>
   `;
 }
+*/
