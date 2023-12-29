@@ -288,6 +288,12 @@ main a {
   font-family: "Irish Grover", sans-serif;
   font-size: 1.5984rem;
 }
+.section-content-container .wrapper-container .timer-color {
+  width: 100%;
+  background: linear-gradient(to top, red, #8d87d0);
+  background-size: 200% 300%; /* Double the height to accommodate the animation */
+  animation: colorChange 30s linear forwards;
+}
 .section-content-container .wrapper-container .notimer-color {
   width: 100%;
   background: linear-gradient(to top, red, #8d87d0);

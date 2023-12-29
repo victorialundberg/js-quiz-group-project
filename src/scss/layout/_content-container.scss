@@ -66,14 +66,13 @@
       }
     }
 
-    //! Question timer
-    // .timer-color {
-    //   width: 100%;
-    //   background: linear-gradient(to top, red, #8d87d0);
-    //   background-size: 200% 300%; /* Double the height to accommodate the animation */
-    //   animation: colorChange 30s linear forwards;
-    //   //   animation-direction: alternate; /* Alternates the animation direction */
-    // }
+    .timer-color {
+      width: 100%;
+      background: linear-gradient(to top, red, #8d87d0);
+      background-size: 200% 300%; /* Double the height to accommodate the animation */
+      animation: colorChange 30s linear forwards;
+      //   animation-direction: alternate; /* Alternates the animation direction */
+    }
 
     //! Other backgrounds
     .notimer-color {
