@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML Meta Tags -->
+    <title>Rubber duck quiz</title>
+    <meta name="description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url"
+        content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-kumquaterna/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rubber duck quiz">
+    <meta property="og:description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
+    <meta property="og:image" content="">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="medieinstitutet.github.io">
+    <meta property="twitter:url"
+        content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-kumquaterna/">
+    <meta name="twitter:title" content="Rubber duck quiz">
+    <meta name="twitter:description" content="A quiz made by and for rubber ducks. Easy but humourus questions.">
+    <meta name="twitter:image" content="">
+
+    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+    <link rel="stylesheet" href="../scss/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <script type="module" src="/src/main.ts"></script>
+</head>
+
+<body>
+    <div class="app" id="app">
+        <header class="header">
+            <a href="/index.html" class="abort-quiz-button"><button class="abort-quiz-button">Home</button></a>
+
+            <div class="timer">04:35</div>
+
+            <div class="points">
+                <p class="points-counter">Points: <span class="number">0</span></p>
+            </div>
+        </header>
+
+        <main>
+            <section class="section-content-container">
+                <div class="wrapper-container">
+                    <img src="/img/rubber-duck-bathtub-640x420.jpg" alt="rubber ducks on the edge of a swimming pool"
+                        class="img-container">
+
+                    <div class="content-container timer-color notimer-color">
+
+                        <!--            Renderas ut i js                -->
+
+                        <div class="question-text-container">
+                            <h2 class="question-counter">Fråga 1 / 10</h2>
+
+                            <p class="question-text">
+                                Hur många ankor ryms det i ett badkar?
+                            </p>
+
+                            <h3 class="answers">Svarsalternativ</h3>
+
+                            <div class="answer-container">
+                                <label for="a1" class="answer-alternative">
+                                    <input type="radio" class="answer-button" name="radio" id="a1">
+                                    1. &nbsp;<span class="answer">Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit.
+                                        Rem eaque!</span>
+                                </label>
+
+                                <label for="a2" class="answer-alternative">
+                                    <input type="radio" class="answer-button" name="radio" id="a2">
+                                    X. &nbsp; <span class="answer">Lorem ipsum dolor sit amet
+                                        consectetur adipisicing elit.</span>
+                                </label>
+
+                                <label for="a3" class="answer-alternative">
+                                    <input type="radio" class="answer-button" name="radio" id="a3">
+                                    2. &nbsp;<span class="answer">dfsfsLorem ipsum dolor sit amet consectetur
+                                        adipisicing elit.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <a href="./resultpage.html">
+                            <button class="next-button">
+                                Next
+                            </button></a>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            &copy; 2023/2024 Caroline Vårsaga, Ellinor Friström, Jari Leminaho, Linda Leminaho, Victoria Lundberg
+        </footer>
+    </div>
+</body>
+
+</html>

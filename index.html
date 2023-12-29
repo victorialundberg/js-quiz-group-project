@@ -41,157 +41,52 @@
       <!-- <div class="scrolltext">
         <h2>Welcome text</h2>
       </div> -->
-
-      <button class="abort-quiz-button">Abort quiz</button>
-
-      <!-- <div class="timer" hidden>04:35</div> -->
-      <div class="timer">04:35</div>
-
-      <div class="points">
-        <p class="points-counter">Points: <span class="number">0</span></p>
-      </div>
-    </header>
-
-    <main>
-      <div class="landing-page">
-        <h1 class="main-heading">Rubber duck quiz</h1>
-
-        <section class="game-rules">
-          <p class="game-rules-heading">Gamerules</p>
-          <p class="game-rules-text">
-            Answer 10 questions. The quicker your response, the more points you earn.
-            If you don't answer within 30 seconds, you'll be redirected to the next question,
-            forfeiting the points for the current question. <span>Good duck!</span>
-          </p>
-          <div class="left-eye-container">
-            <div class="left-pupil"></div>
-          </div>
-        </section>
-
-        <button class="start-quiz-button">Start your quiz</button>
-
-        <section class="highscore-landing">
-          <p class="highscore-heading">High Score</p>
-          <div class="highscore-landing-text-container">
-            <p class="highscore-landing-1to5">1. <span>Namn Bob Bobsson jomn</span></p>
-            <p class="highscore-landing-1to5">2. <span>Namn Bob again</span></p>
-            <p class="highscore-landing-1to5">3. <span>Namn Kurt</span></p>
-            <p class="highscore-landing-1to5">4. <span>Namn</span></p>
-            <p class="highscore-landing-1to5">5. <span>Namn</span></p>
-          </div>
-          <div class="right-eye-container">
-            <div class="right-pupil"></div>
-          </div>
-        </section>
-      </div>
-
-      <!--     question view       -->
-
-      <section class="section-content-container hidden">
-        <div class="wrapper-container">
-          <img src="./img/rubber-duck-bathtub-640x420.jpg" alt="rubber ducks on the edge of a swimming pool"
-            class="img-container">
-
-          <div class="content-container timer-color notimer-color">
-
-            <!--            Renderas ut i js                -->
-
-            <div class="question-text-container hidden">
-              <h2 class="question-counter">Fråga 1 / 10</h2>
-
-              <p class="question-text">
-                Hur många ankor ryms det i ett badkar?
-              </p>
-
-              <h3 class="answers">Svarsalternativ</h3>
-
-              <div class="answer-container">
-                <label for="a1" class="answer-alternative">
-                  <input type="radio" class="answer-button" name="radio" id="a1">
-                  1. &nbsp;<span class="answer">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Rem eaque!</span>
-                </label>
-
-                <label for="a2" class="answer-alternative">
-                  <input type="radio" class="answer-button" name="radio" id="a2">
-                  X. &nbsp; <span class="answer">Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit.</span>
-                </label>
-
-                <label for="a3" class="answer-alternative">
-                  <input type="radio" class="answer-button" name="radio" id="a3">
-                  2. &nbsp;<span class="answer">dfsfsLorem ipsum dolor sit amet consectetur adipisicing elit.</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="result-text-container hidden">
-
-              <div class="result-title-your-result">
-                <h2 class="result-title">Results</h2>
-                <p class="your-result">You got 4/10 correct answers</p>
-              </div>
+  </div>
 
 
-              <div class="answers-container">
+  </header>
 
-                <h3 class="answers-title">Your answers</h3>
+  <main>
+    <div class="landing-page">
+      <h1 class="main-heading">Rubber duck quiz</h1>
 
-                <div class="answers-1to5">
-                  <p class="answer">1. <span>-</span></p>
-                  <p class="answer">2. <span>-</span></p>
-                  <p class="answer">3. <span>-</span></p>
-                  <p class="answer">4. <span>-</span></p>
-                  <p class="answer">5. <span>-</span></p>
-                </div>
-
-                <div class="answers-6to10">
-                  <p class="answer">6. <span>-</span></p>
-                  <p class="answer">7. <span>eflknsdlfkn</span></p>
-                  <p class="answer">8. <span>-</span></p>
-                  <p class="answer">9. <span>-</span></p>
-                  <p class="answer">10. <span>-</span></p>
-                </div>
-
-              </div>
-
-              <input type="text" class="input-name" placeholder="Your name here">
-            </div>
-
-            <!--              Highscore page                 -->
-            <h2 class="highscore-title hidden">Highscore</h2>
-
-            <div class="highscore-container hidden">
-
-              <div class="highscore-1to5">
-                <p class="highscore">1. <span>eflknsdlfkn</span></p>
-                <p class="highscore">2. <span>-</span></p>
-                <p class="highscore">3. <span>-</span></p>
-                <p class="highscore">4. <span>-</span></p>
-                <p class="highscore">5. <span>-</span></p>
-              </div>
-
-              <div class="highscore-6to10">
-                <p class="highscore">6. <span>-</span></p>
-                <p class="highscore">7. <span>-</span></p>
-                <p class="highscore">8. <span>-</span></p>
-                <p class="highscore">9. <span>-</span></p>
-                <p class="highscore">10. <span>-</span></p>
-              </div>
-
-            </div>
-
-            <input type="submit" class="next-button" value="Next">
-
-          </div>
+      <section class="game-rules">
+        <p class="game-rules-heading">Gamerules</p>
+        <p class="game-rules-text">
+          Answer 10 questions. The quicker your response, the more points you earn.
+          If you don't answer within 30 seconds, you'll be redirected to the next question,
+          forfeiting the points for the current question. <span>Good duck!</span>
+        </p>
+        <div class="left-eye-container">
+          <div class="left-pupil"></div>
         </div>
       </section>
-    </main>
 
-    <footer>
-      &copy; 2023/2024 Caroline Vårsaga, Ellinor Friström, Jari Leminaho,
-      Johan Forsling, Linda Leminaho, Victoria Lundberg
-    </footer>
+      <a class="start-quiz-button" href="/src/views/questionpage.html"><button class="start-quiz-button">Start your
+          quiz</button></a>
+
+      <section class="highscore-landing">
+        <a href="/src/views/highscorepage.html">
+          <p class="highscore-heading">High Score</p>
+        </a>
+        <div class="highscore-landing-text-container">
+          <p class="highscore-landing-1to5">1. <span>Namn Bob Bobsson jomn</span></p>
+          <p class="highscore-landing-1to5">2. <span>Namn Bob again</span></p>
+          <p class="highscore-landing-1to5">3. <span>Namn Kurt</span></p>
+          <p class="highscore-landing-1to5">4. <span>Namn</span></p>
+          <p class="highscore-landing-1to5">5. <span>Namn</span></p>
+        </div>
+        <div class="right-eye-container">
+          <div class="right-pupil"></div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2023/2024 Caroline Vårsaga, Ellinor Friström, Jari Leminaho, Linda Leminaho, Victoria Lundberg
+  </footer>
   </div>
 </body>
 
