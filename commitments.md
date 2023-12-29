@@ -90,9 +90,9 @@ GitHub Projects
 
 #### Vecka 3 (1) (1/1 – 7/1)
 
-> Planering: Fyller i närmare
+> Planering: Börja med typescript.
 > <br>
-> Milstolpar: Fyller i närmare
+> Milstolpar: Fördela uppgifter.
 > <br>
 > Scrum master: Ellinor & Jari (mentor)
 
@@ -102,7 +102,7 @@ GitHub Projects
 > <br>
 > Milstolpar: Fyller i närmare
 > <br>
-> Scrum master: Johan & Jari (mentor)
+> Scrum master: Linda & Jari (mentor)
 
 ### Deadline fredag 12/1 – 24 kl. 23:59.
 
