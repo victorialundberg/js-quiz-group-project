@@ -250,8 +250,6 @@ main a {
 }
 .section-content-container .wrapper-container .content-container {
   position: relative;
-  background-color: #bdb7ff;
-  background: linear-gradient(to top, red 10%, purple 35%, #bdb7ff 60%);
   border-radius: 0 12px 12px 0;
   width: 60svw;
   min-height: 60svh;
