@@ -8,6 +8,10 @@ main {
     grid-template-rows: 15% 85%;
     padding-bottom: 8svh;
     padding-top: 1rem;
+
+    @include response(md) {
+      @include flexCenter($fd: column);
+    }
   }
 
   .main-heading {
@@ -21,6 +25,7 @@ main {
 
     @include response(sm) {
       font-size: fontSize(sm);
+      @include flexCenter(column);
     }
 
     @include response(md) {
@@ -111,6 +116,10 @@ main {
       height: 170px;
       width: 150px;
       box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 6);
+
+      @include response(md) {
+        display: none;
+      }
     }
   }
 

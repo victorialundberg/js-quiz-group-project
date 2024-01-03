@@ -12,12 +12,28 @@
     justify-content: center;
     display: flex;
 
+    @include response(md) {
+      font-size: fontSize(sm);
+      @include flexCenter($fd: column);
+    }
+
     .img-container {
-      min-height: 60svh;
+      height: 60svh;
       width: 35%;
       background-color: #fff;
       border-radius: 12px 0px 0px 12px;
       object-fit: cover;
+
+      img {
+        @extend %fullspace;
+        object-fit: cover;
+      }
+
+      @include response(md) {
+        height: 20svh;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+      }
     }
 
     .content-container {
@@ -31,11 +47,16 @@
       // );
 
       border-radius: 0 12px 12px 0;
-      width: 60svw;
+      width: 65%;
       min-height: 60svh;
       padding: 0 1.5rem;
       @include flexCenter($fd: column, $jc: flex-start, $ai: flex-start);
 
+      @include response(sm) {
+        height: 65%;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+      }
       .input-name {
         //in quiz results
         font-family: $font-grover;
