@@ -50,12 +50,30 @@ const renderQuestion = function (question: {
   questionTextContainer.innerHTML = html;
 };
 
-startButton.addEventListener('click', () => {
-  renderQuestion(QuizQuestions[0]);
-});
+// startButton.addEventListener('click', () => {
+//   renderQuestion(QuizQuestions[0]);
+// });
+
+if (startButton) {
+  startButton.addEventListener('click', () => {
+    renderQuestion(QuizQuestions[0]);
+  });
+} else {
+  console.error('Start button not found');
+}
 
 console.log('Hello world');
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const questionId = urlParams.get('questionId');
+
+if (questionId) {
+  const questionIndex = parseInt(questionId) - 1;
+  renderQuestion(QuizQuestions[questionIndex]);
+} else {
+  console.log('Question ID not found');
+}
 // startButton.addEventListener('click', renderQuestion);
 
 // renderQuestion(QuizQuestions[0]);
