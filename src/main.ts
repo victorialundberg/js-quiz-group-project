@@ -1,7 +1,7 @@
 /* eslint-disable */
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
-import HighscoreList from './models/HighscoreList';
+// import HighscoreList from './models/HighscoreList';
 import QuizQuestions from './models/Questions';
 
 const startButton: any = document.querySelector('.start-quiz-button button');
