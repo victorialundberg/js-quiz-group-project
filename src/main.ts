@@ -6,9 +6,11 @@ import QuizQuestions from './models/Questions';
 
 const startButton: any = document.querySelector('.start-quiz-button button');
 
+
 const questionTextContainer: any = document.querySelector(
   '.question-text-container'
 );
+
 
 const renderQuestion = function (question: {
   id?: number;
@@ -109,3 +111,38 @@ function getRandomObject<T>(array: T[]): T | undefined {
 // } else {
 //   console.log('QuizQuestions array is empty');
 // }
+
+/*
+const nextButton: any = document.querySelector('.next-button button');
+nextButton.addEventListener('click', () => {
+countQuestions;
+});
+*/
+
+
+// Array för frågor som ställts hittils
+
+let currentQuestionArray: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let questionCounter:number;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nextButton = document.querySelector('.next-button') as HTMLButtonElement;
+  console.log(nextButton);
+  if (nextButton) {
+    nextButton.addEventListener('click', countQuestions);
+  }
+});
+
+function countQuestions () {
+  questionCounter = currentQuestionArray.length;
+  if (questionCounter < 10) {
+    //Rendera ny fråga
+  }
+  else checkIfHighscore();
+}
+
+function checkIfHighscore () {
+//Kolla mot local storage
+}
+
+
