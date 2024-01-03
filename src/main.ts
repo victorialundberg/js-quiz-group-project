@@ -48,14 +48,64 @@ const renderQuestion = function (question: {
   `;
 
   questionTextContainer.innerHTML = html;
+  getRandomObject(QuizQuestions);
 };
 
-startButton.addEventListener('click', () => {
-  renderQuestion(QuizQuestions[0]);
-});
+// startButton.addEventListener('click', () => {
+//   renderQuestion(QuizQuestions[0]);
+// });
+
+if (startButton) {
+  startButton.addEventListener('click', () => {
+    renderQuestion(QuizQuestions[0]);
+  });
+} else {
+  console.error('Start button not found');
+}
 
 console.log('Hello world');
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const questionId = urlParams.get('questionId');
+
+if (questionId) {
+  const questionIndex = parseInt(questionId) - 1;
+  renderQuestion(QuizQuestions[questionIndex]);
+} else {
+  console.log('Question ID not found');
+}
 // startButton.addEventListener('click', renderQuestion);
 
 // renderQuestion(QuizQuestions[0]);
+
+/**
+ ** Random Generator
+ * @param array
+ * @returns a random object
+ */
+
+function getRandomObject<T>(array: T[]): T | undefined {
+  console.error('from random gen');
+  if (array.length === 0) {
+    return undefined;
+  }
+
+  const randomIndex = Math.floor(Math.random() * array.length);
+
+  return array[randomIndex];
+}
+
+// const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
+// console.log(getRandomObject(arr));
+
+// const randomQuestion = getRandomObject(QuizQuestions);
+
+// if (randomQuestion) {
+//   console.log('Random Question:', randomQuestion.question);
+//   console.log('Answer One:', randomQuestion.answerOne);
+//   console.log('Answer Two:', randomQuestion.answerTwo);
+//   console.log('Correct Answer:', randomQuestion.correctAnswer);
+// } else {
+//   console.log('QuizQuestions array is empty');
+// }
