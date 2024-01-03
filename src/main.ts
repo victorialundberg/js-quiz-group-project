@@ -1,54 +1,61 @@
+/* eslint-disable */
 import './scss/style.scss'; // Importera huvud-SCSS-filen
-// import typescriptLogo from './assets/images/typescript.svg'; // Exempel på hur ni importerar bilder
-import { sortArrayByText } from './helpers'; // Exempel på hur ni importerar en funktion från en annan fil
 
-/**
- * Här definierar vi en mall för hur vi vill att vår array ska se ut.
- * Ett så kallat "interface".
- * Den är för att garantera att ALLA objekt i vår array har samtliga egenskaper.
- * Prova t.ex. att lägga till en egenskap i interfacet, och notera hur arrayen nedanför
- * får rödmarkeringar där denna egenskap saknas.
- */
-interface IExampleArray {
-  name: string;
-  age: number;
-}
+import HighscoreList from './models/HighscoreList';
+import QuizQuestions from './models/Questions';
 
-// Här skriver vi att vår array med namnet myExampleArray ska följa reglerna (interfacet)
-// i IExampleArray och att det är en array genom att vi sätter [] efter
-const myExampleArray: IExampleArray[] = [
-  {
-    name: 'Hans',
-    age: 25,
-  },
-  {
-    name: 'Greta',
-    age: 30,
-  },
-  {
-    name: 'Häxan',
-    age: 87,
-  },
-];
+const startButton: any = document.querySelector('.start-quiz-button button');
 
-// Skriv ut den sorterade arrayen i konsolen, använd en importerad funktion
-console.table(sortArrayByText(myExampleArray, 'name'));
+const questionTextContainer: any = document.querySelector(
+  '.question-text-container'
+);
 
-// Använd samma funktion för att sortera på en annan egenskap
-console.table(sortArrayByText(myExampleArray, 'age'));
+const renderQuestion = function (question: {
+  id?: number;
+  question: any;
+  answerOne?: string;
+  answerTwo?: string;
+  correctAnswer?: string;
+}) {
+  console.log('Rendering question:', question);
+  const html = `
+  <h2 class="question-counter">Question ${question.id || 1} / 10</h2>
 
-/*
+  <p class="question-text">
+      ${question.question}
+  </p>
 
-// Hämta ett HTML-element från index.html
-const container: HTMLDivElement | null = document.querySelector('#app');
+  <h3 class="answers">Answer Options</h3>
 
-if (container !== null) { // Om HTML-elementet finns
-  container.innerHTML = `
-    <div>
-      <h1>Hello FED23D!</h1>
-      <img src="${typescriptLogo}" loading="lazy" width="32" height="32"
-        alt="Blå bakgrund, vita bokstäver ovanpå med texten TS">
-    </div>
+  <div class="answer-container">
+
+      <label for="a1" class="answer-alternative">
+          <input type="radio" class="answer-button" name="radio" id="a1">
+          1. &nbsp;<span class="answer">${question.answerOne}</span>  
+      </label>
+
+      <label for="a2" class="answer-alternative">
+          <input type="radio" class="answer-button" name="radio" id="a2">
+          X. &nbsp; <span class="answer">${question.answerTwo}</span>
+      </label>
+
+      <label for="a3" class="answer-alternative">
+          <input type="radio" class="answer-button" name="radio" id="a3">
+          2. &nbsp;<span class="answer">${question.correctAnswer}</span>
+      </label>
+
+  </div>
   `;
-}
-*/
+
+  questionTextContainer.innerHTML = html;
+};
+
+startButton.addEventListener('click', () => {
+  renderQuestion(QuizQuestions[0]);
+});
+
+console.log('Hello world');
+
+// startButton.addEventListener('click', renderQuestion);
+
+// renderQuestion(QuizQuestions[0]);
