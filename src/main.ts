@@ -120,8 +120,11 @@ countQuestions;
 */
 
 
-// Array för frågor som ställts hittils
+// -------------------------------------------------------------------------- \\
+//                             Question Counter                               \\
+// -------------------------------------------------------------------------- \\
 
+// Array för frågor som ställts hittils, mata in i denna
 let currentQuestionArray: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let questionCounter:number;
 
@@ -132,17 +135,17 @@ document.addEventListener('DOMContentLoaded', () => {
     nextButton.addEventListener('click', countQuestions);
   }
 });
-
+// Kolla antal ställda frågor
 function countQuestions () {
   questionCounter = currentQuestionArray.length;
   if (questionCounter < 10) {
-    //Rendera ny fråga
+    // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
   }
   else checkIfHighscore();
 }
 
 function checkIfHighscore () {
-//Kolla mot local storage
+// Kolla mot local storage
 }
 
 
