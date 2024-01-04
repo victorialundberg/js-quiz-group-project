@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==================================================================================================
 // Question page
 const startButton: any = document.querySelector('.start-quiz-button button');
+
 const questionTextContainer: any = document.querySelector('.question-text-container');
 
 const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
@@ -223,3 +224,31 @@ function getRandomObject<T>(array: T[]): T | undefined {
     } */
   }); 
 }); 
+
+// -------------------------------------------------------------------------- \\
+//                             Question Counter                               \\
+// -------------------------------------------------------------------------- \\
+
+// Array för frågor som ställts hittils, mata in i denna
+let currentQuestionArray: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let questionCounter:number;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nextButton = document.querySelector('.next-button') as HTMLButtonElement;
+  console.log(nextButton);
+  if (nextButton) {
+    nextButton.addEventListener('click', countQuestions);
+  }
+});
+// Kolla antal ställda frågor
+function countQuestions () {
+  questionCounter = currentQuestionArray.length;
+  if (questionCounter < 10) {
+    // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
+  }
+  else checkIfHighscore();
+}
+
+function checkIfHighscore () {
+// Kolla mot local storage
+}
