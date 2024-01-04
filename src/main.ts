@@ -13,7 +13,7 @@ const questionTextContainer: any = document.querySelector('.question-text-contai
 
 const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
 const abortQuizButton = document.querySelector('.abort-quiz-button') as HTMLButtonElement;
-const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
+//const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
 // ==================================================================================================
 // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
 // ==================================================================================================
