@@ -3,6 +3,7 @@ import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 // import HighscoreList from './models/HighscoreList';
 import QuizQuestions from './models/Questions';
+document.addEventListener('DOMContentLoaded', () => {
 // ==================================================================================================
 // ------------------------------------------   GLOBAL   --------------------------------------------
 // ==================================================================================================
@@ -10,6 +11,9 @@ import QuizQuestions from './models/Questions';
 const startButton: any = document.querySelector('.start-quiz-button button');
 const questionTextContainer: any = document.querySelector('.question-text-container');
 
+const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
+const abortQuizButton = document.querySelector('.abort-quiz-button') as HTMLButtonElement;
+const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
 // ==================================================================================================
 // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
 // ==================================================================================================
@@ -120,16 +124,13 @@ function getRandomObject<T>(array: T[]): T | undefined {
 //todo: 
 //pausa timern och visa tiden på resultatsidan 
 
-  document.addEventListener('DOMContentLoaded', () => {
+//document.addEventListener('DOMContentLoaded', () => {
   let timerValue = parseInt(localStorage.getItem('timerValue') || '0', 10);
   let intervalId: number | null = null;
   let paused = localStorage.getItem('paused') === 'true';
-
+  
   const timerElement = document.querySelector('.timer') as HTMLDivElement;
   const pausedTimeElement = document.querySelector('#pausedTimer') as HTMLDivElement;
-
-
-  console.log('Running code on result page');
 
   // get paused time from localstorage
   const pausedTime = localStorage.getItem('pausedTime');
@@ -150,6 +151,7 @@ function getRandomObject<T>(array: T[]): T | undefined {
   }
 
   function startTimer() {
+    resetTimer();
     intervalId = setInterval(() => {
       timerValue++;
       updateTimerDisplay();
@@ -160,8 +162,18 @@ function getRandomObject<T>(array: T[]): T | undefined {
 
     updateTimerDisplay();
   }
+  nextButton.addEventListener('click', pauseTimer);
 
   function pauseTimer() {
+    const currentTime = timerElement.innerText;
+    localStorage.setItem('pausedTime', currentTime);
+    const pausedTime = localStorage.getItem('pausedTime');
+    paused = true; 
+    if (pausedTime) {
+      pausedTimeElement.innerText = pausedTime;
+    }
+  }
+ /*  function pauseTimer() {
     if (intervalId !== null) {
       clearInterval(intervalId);
       intervalId = null;
@@ -169,36 +181,32 @@ function getRandomObject<T>(array: T[]): T | undefined {
       // save paused time to localstorage
       localStorage.setItem('pausedTime', timerElement.textContent || '0');
     }
-  }
+  } */
 
   function resumeTimer() {
     if (!intervalId && paused) {
       startTimer(); 
       paused = false; 
     }
-  }
+  } 
+  abortQuizButton.addEventListener('click', resetTimer);
 
   function resetTimer() {
     timerValue = 0;
     paused = false;
     updateTimerDisplay();
+    localStorage.removeItem('pausedTime');
     localStorage.setItem('timerValue', timerValue.toString());
     localStorage.setItem('paused', paused.toString());
+    console.log('reset gjort')
   }
-
+  
   const currentPage = window.location.pathname; 
 
   if (currentPage.includes('question')) {
     startTimer();
-  } else if (currentPage.includes('result')) {
-    pauseTimer();
   } else if (currentPage.includes('index')) {
-    timerValue = 0;
     resetTimer();
-    updateTimerDisplay();
-    
-    localStorage.setItem('timerValue', timerValue.toString());
-    localStorage.setItem('paused', paused.toString());
   }
 
     window.addEventListener('beforeunload', () => {
@@ -206,17 +214,12 @@ function getRandomObject<T>(array: T[]): T | undefined {
     localStorage.setItem('paused', paused.toString());
   }); 
 
-  if (currentPage.includes('index')) {
-    resetTimer();
-    localStorage.clear();
-  }
-
   window.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       paused = localStorage.getItem('paused') === 'true';
       resumeTimer();
-    } else {
+    } /* else {
       resetTimer();
-    }
-  });
+    } */
+  }); 
 }); 
