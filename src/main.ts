@@ -1,33 +1,77 @@
-/* eslint-disable */
+
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 // import HighscoreList from './models/HighscoreList';
 import QuizQuestions from './models/Questions';
 document.addEventListener('DOMContentLoaded', () => {
-// ==================================================================================================
-// ------------------------------------------   GLOBAL   --------------------------------------------
-// ==================================================================================================
-// Question page
-const startButton: any = document.querySelector('.start-quiz-button button');
 
-const questionTextContainer: any = document.querySelector('.question-text-container');
+    
 
-const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
-const abortQuizButton = document.querySelector('.abort-quiz-button') as HTMLButtonElement;
-//const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
-// ==================================================================================================
-// -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
-// ==================================================================================================
-const renderQuestion = function (question: {
+  // ==================================================================================================
+  // ------------------------------------------   GLOBAL   --------------------------------------------
+  // ==================================================================================================
+
+  // Question page
+  const startButton: any = document.querySelector('.start-quiz-button button');
+
+  const questionTextContainer: any = document.querySelector('.question-text-container');
+
+  const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
+  const abortQuizButton = document.querySelector('.abort-quiz-button') as HTMLButtonElement;
+  // const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
+
+  let questionCounter:number = 1;
+
+  // ==================================================================================================
+  // ------------------------------------------   NAVIGATION   ----------------------------------------
+  // ==================================================================================================
+  /*
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  if (startButton) {
+    startButton.addEventListener('click', goToQuestionPage);
+  }
+  function goToQuestionPage(event: any): void {
+    event.preventDefault();
+    console.log('Knappen klickades!'); 
+    window.location.href = 'src/views/questionpage.html';
+  } 
+*/
+
+
+
+  // ==================================================================================================
+  // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
+  // ==================================================================================================
+  const currentQuestionArray: object[] = []; // current Session Array
+  const usedQuestionsArray: object[] = [];  // used questions in this session
+
+  function addToCurrentQuestionArray(question: object): void {
+    currentQuestionArray.push(question);
+    console.log(currentQuestionArray);
+  };
+
+  function addToUsedQuestionArray(question: object): void {
+    usedQuestionsArray.push(question);
+    console.log(usedQuestionsArray);
+  };
+
+
+
+
+  // ==================================================================================================
+  // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
+  // ==================================================================================================
+
+  const renderQuestion = function (question: {
   id?: number;
   question: any;
   answerOne?: string;
   answerTwo?: string;
   correctAnswer?: string;
-}) {
-  console.log('Rendering question:', question);
-  const html = `
-  <h2 class="question-counter">Question ${question.id || 1} / 10</h2>
+}): void {
+    console.log('Rendering question:', question);
+    const html = `
+  <h2 class="question-counter">Question ${questionCounter} / 10</h2>
 
   <p class="question-text">
       ${question.question}
@@ -54,79 +98,83 @@ const renderQuestion = function (question: {
 
   </div>
   `;
-  questionTextContainer.innerHTML = html;
-  getRandomObject(QuizQuestions);
-};
+    questionTextContainer.innerHTML = html;
+    /*
+  let currentQuestionArray = [];
+  let availableQuestions = [...QuizQuestions];
+  */
+    getRandomObject(QuizQuestions);
+    addToCurrentQuestionArray(QuizQuestions);
+    addToUsedQuestionArray(QuizQuestions);
+  };
 
-// startButton.addEventListener('click', () => {
-//   renderQuestion(QuizQuestions[0]);
-// });
+  // startButton.addEventListener('click', () => {
+  //   renderQuestion(QuizQuestions[0]);
+  // });
 
-if (startButton) {
-  startButton.addEventListener('click', () => {
-    renderQuestion(QuizQuestions[0]);
-  });
-} else {
-  //console.error('Start button not found');
-}
+  
+  if (startButton !== null && startButton !== undefined) {
+    startButton.addEventListener('click', () => {
+      renderQuestion(QuizQuestions[0]);
+      window.location.href = 'src/views/questionpage.html';
 
-//console.log('Hello world');
+    });
+  }
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const questionId = urlParams.get('questionId');
+  // console.log('Hello world');
 
-if (questionId) {
-  const questionIndex = parseInt(questionId) - 1;
-  renderQuestion(QuizQuestions[questionIndex]);
-} else {
-  //console.log('Question ID not found');
-}
-// startButton.addEventListener('click', renderQuestion);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const questionId = urlParams.get('questionId');
 
-// renderQuestion(QuizQuestions[0]);
+  if (questionId !== null && questionId !== undefined) {
+    const questionIndex = parseInt(questionId) - 1;
+    renderQuestion(QuizQuestions[questionIndex]);
+  } 
+  // startButton.addEventListener('click', renderQuestion);
 
-/**
+  // renderQuestion(QuizQuestions[0]);
+
+  // ==================================================================================================
+  // -------------------------------------   RANDOM GENERATOR   ------------------ (Question page) ----
+  // ==================================================================================================
+  /**
  ** Random Generator
  * @param array
  * @returns a random object
  */
 
-function getRandomObject<T>(array: T[]): T | undefined {
-  console.error('from random gen');
-  if (array.length === 0) {
-    return undefined;
+  function getRandomObject<T>(array: T[]): T | undefined {
+    console.error('from random gen');
+    if (array.length === 0) {
+      return undefined;
+    }
+
+    const randomIndex = Math.floor(Math.random() * array.length);
+
+    return array[randomIndex];
   }
 
-  const randomIndex = Math.floor(Math.random() * array.length);
+  // const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
+  // console.log(getRandomObject(arr));
 
-  return array[randomIndex];
-}
+  // const randomQuestion = getRandomObject(QuizQuestions);
 
-// const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
-// console.log(getRandomObject(arr));
+  // if (randomQuestion) {
+  //   console.log('Random Question:', randomQuestion.question);
+  //   console.log('Answer One:', randomQuestion.answerOne);
+  //   console.log('Answer Two:', randomQuestion.answerTwo);
+  //   console.log('Correct Answer:', randomQuestion.correctAnswer);
+  // } else {
+  //   console.log('QuizQuestions array is empty');
+  // }
 
-// const randomQuestion = getRandomObject(QuizQuestions);
 
-// if (randomQuestion) {
-//   console.log('Random Question:', randomQuestion.question);
-//   console.log('Answer One:', randomQuestion.answerOne);
-//   console.log('Answer Two:', randomQuestion.answerTwo);
-//   console.log('Correct Answer:', randomQuestion.correctAnswer);
-// } else {
-//   console.log('QuizQuestions array is empty');
-// }
+  // ==================================================================================================
+  // ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
+  // ==================================================================================================
 
-// ==================================================================================================
-// ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
-// ==================================================================================================
-
-// in progress by Carro
-//todo: 
-//pausa timern och visa tiden på resultatsidan 
-
-//document.addEventListener('DOMContentLoaded', () => {
-  let timerValue = parseInt(localStorage.getItem('timerValue') || '0', 10);
+  let timerValue = parseInt(localStorage.getItem('timerValue') ?? '0', 10);
   let intervalId: number | null = null;
   let paused = localStorage.getItem('paused') === 'true';
   
@@ -141,7 +189,7 @@ function getRandomObject<T>(array: T[]): T | undefined {
     pausedTimeElement.textContent = pausedTime;
   }
 
-  function updateTimerDisplay() {
+  function updateTimerDisplay(): void {
     const minutes = Math.floor(timerValue / 60);
     const seconds = timerValue % 60;
 
@@ -151,10 +199,10 @@ function getRandomObject<T>(array: T[]): T | undefined {
     timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
   }
 
-  function startTimer() {
-    resetTimer();
+  function startTimer(): void {
+    
     intervalId = setInterval(() => {
-      timerValue++;
+      timerValue += 1; // ändrat från "++" pga eslint
       updateTimerDisplay();
       if (timerValue >= 300) { 
         pauseTimer(); 
@@ -163,54 +211,45 @@ function getRandomObject<T>(array: T[]): T | undefined {
 
     updateTimerDisplay();
   }
-  nextButton.addEventListener('click', pauseTimer);
-
-  function pauseTimer() {
+  if (nextButton !== null) {
+    nextButton.addEventListener('click', pauseTimer);
+  }
+  function pauseTimer(): void {
     const currentTime = timerElement.innerText;
     localStorage.setItem('pausedTime', currentTime);
     const pausedTime = localStorage.getItem('pausedTime');
     paused = true; 
-    if (pausedTime) {
+    if (pausedTime !== null && pausedTime !== undefined) {
       pausedTimeElement.innerText = pausedTime;
     }
   }
- /*  function pauseTimer() {
-    if (intervalId !== null) {
-      clearInterval(intervalId);
-      intervalId = null;
-      paused = true;
-      // save paused time to localstorage
-      localStorage.setItem('pausedTime', timerElement.textContent || '0');
-    }
-  } */
-
-  function resumeTimer() {
-    if (!intervalId && paused) {
+  
+  function resumeTimer(): void {
+    if (intervalId === null && paused) {
       startTimer(); 
       paused = false; 
     }
   } 
   abortQuizButton.addEventListener('click', resetTimer);
 
-  function resetTimer() {
+  function resetTimer(): void {
     timerValue = 0;
     paused = false;
     updateTimerDisplay();
     localStorage.removeItem('pausedTime');
     localStorage.setItem('timerValue', timerValue.toString());
     localStorage.setItem('paused', paused.toString());
-    console.log('reset gjort')
+    console.log('reset gjort');
+    window.location.href = '../../index.html';
   }
   
   const currentPage = window.location.pathname; 
 
   if (currentPage.includes('question')) {
     startTimer();
-  } else if (currentPage.includes('index')) {
-    resetTimer();
-  }
+  } 
 
-    window.addEventListener('beforeunload', () => {
+  window.addEventListener('beforeunload', () => {
     localStorage.setItem('timerValue', timerValue.toString());
     localStorage.setItem('paused', paused.toString());
   }); 
@@ -219,36 +258,32 @@ function getRandomObject<T>(array: T[]): T | undefined {
     if (document.visibilityState === 'visible') {
       paused = localStorage.getItem('paused') === 'true';
       resumeTimer();
-    } /* else {
-      resetTimer();
-    } */
+    }
   }); 
-}); 
 
-// -------------------------------------------------------------------------- \\
-//                             Question Counter                               \\
-// -------------------------------------------------------------------------- \\
-
-// Array för frågor som ställts hittils, mata in i denna
-let currentQuestionArray: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let questionCounter:number;
-
-document.addEventListener('DOMContentLoaded', () => {
-  const nextButton = document.querySelector('.next-button') as HTMLButtonElement;
-  console.log(nextButton);
+  // ==================================================================================================
+  // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
+  // ==================================================================================================
+  
+  
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (nextButton) {
     nextButton.addEventListener('click', countQuestions);
   }
-});
-// Kolla antal ställda frågor
-function countQuestions () {
-  questionCounter = currentQuestionArray.length;
-  if (questionCounter < 10) {
-    // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
+  
+  // Kolla antal ställda frågor
+  function countQuestions(): void {
+    questionCounter = currentQuestionArray.length;  // +1 ? 
+    console.log('klicketiklick');
+    
+    if (questionCounter < 10) {
+      // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
+    } else {
+      checkIfHighscore(); 
+    }
   }
-  else checkIfHighscore();
-}
 
-function checkIfHighscore () {
-// Kolla mot local storage
-}
+  function checkIfHighscore(): void {
+  // Kolla mot local storage
+  }
+}); // DOMContentLoaded
