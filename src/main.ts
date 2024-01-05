@@ -1,9 +1,12 @@
-/* eslint-disable comma-dangle */
+
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 // import HighscoreList from './models/HighscoreList';
 import QuizQuestions from './models/Questions';
 document.addEventListener('DOMContentLoaded', () => {
+
+    
+
   // ==================================================================================================
   // ------------------------------------------   GLOBAL   --------------------------------------------
   // ==================================================================================================
@@ -11,17 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Question page
   const startButton: any = document.querySelector('.start-quiz-button button');
 
-  const questionTextContainer: any = document.querySelector(
-    '.question-text-container'
-  );
+  const questionTextContainer: any = document.querySelector('.question-text-container');
 
   const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
-  const abortQuizButton = document.querySelector(
-    '.abort-quiz-button'
-  ) as HTMLButtonElement;
+  const abortQuizButton = document.querySelector('.abort-quiz-button') as HTMLButtonElement;
   // const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
 
-  let questionCounter: number = 1;
+  let questionCounter:number = 1;
 
   // ==================================================================================================
   // ------------------------------------------   NAVIGATION   ----------------------------------------
@@ -33,38 +32,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function goToQuestionPage(event: any): void {
     event.preventDefault();
-    console.log('Knappen klickades!');
+    console.log('Knappen klickades!'); 
     window.location.href = 'src/views/questionpage.html';
-  }
+  } 
 */
+
+
 
   // ==================================================================================================
   // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
   // ==================================================================================================
   const currentQuestionArray: object[] = []; // current Session Array
-  const usedQuestionsArray: object[] = []; // used questions in this session
+  const usedQuestionsArray: object[] = [];  // used questions in this session
 
   function addToCurrentQuestionArray(question: object): void {
     currentQuestionArray.push(question);
     console.log(currentQuestionArray);
-  }
+  };
 
   function addToUsedQuestionArray(question: object): void {
     usedQuestionsArray.push(question);
     console.log(usedQuestionsArray);
-  }
+  };
+
+
+
 
   // ==================================================================================================
   // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
   // ==================================================================================================
 
   const renderQuestion = function (question: {
-    id?: number;
-    question: any;
-    answerOne?: string;
-    answerTwo?: string;
-    correctAnswer?: string;
-  }): void {
+  id?: number;
+  question: any;
+  answerOne?: string;
+  answerTwo?: string;
+  correctAnswer?: string;
+}): void {
     console.log('Rendering question:', question);
     const html = `
   <h2 class="question-counter">Question ${questionCounter} / 10</h2>
@@ -79,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <label for="a1" class="answer-alternative">
           <input type="radio" class="answer-button" name="radio" id="a1">
-          1. &nbsp;<span class="answer">${question.answerOne}</span>
+          1. &nbsp;<span class="answer">${question.answerOne}</span>  
       </label>
 
       <label for="a2" class="answer-alternative">
@@ -108,14 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
   //   renderQuestion(QuizQuestions[0]);
   // });
 
+  
   if (startButton !== null && startButton !== undefined) {
     startButton.addEventListener('click', () => {
       renderQuestion(QuizQuestions[0]);
       window.location.href = 'src/views/questionpage.html';
+
     });
   }
 
-  console.log('Hello world');
+  // console.log('Hello world');
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -124,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (questionId !== null && questionId !== undefined) {
     const questionIndex = parseInt(questionId) - 1;
     renderQuestion(QuizQuestions[questionIndex]);
-  }
+  } 
   // startButton.addEventListener('click', renderQuestion);
 
   // renderQuestion(QuizQuestions[0]);
@@ -133,10 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // -------------------------------------   RANDOM GENERATOR   ------------------ (Question page) ----
   // ==================================================================================================
   /**
-   ** Random Generator
-   * @param array
-   * @returns a random object
-   */
+ ** Random Generator
+ * @param array
+ * @returns a random object
+ */
 
   function getRandomObject<T>(array: T[]): T | undefined {
     console.error('from random gen');
@@ -163,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   console.log('QuizQuestions array is empty');
   // }
 
+
   // ==================================================================================================
   // ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
   // ==================================================================================================
@@ -170,17 +177,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerValue = parseInt(localStorage.getItem('timerValue') ?? '0', 10);
   let intervalId: number | null = null;
   let paused = localStorage.getItem('paused') === 'true';
-
+  
   const timerElement = document.querySelector('.timer') as HTMLDivElement;
-  const pausedTimeElement = document.querySelector(
-    '#pausedTimer'
-  ) as HTMLDivElement;
+  const pausedTimeElement = document.querySelector('#pausedTimer') as HTMLDivElement;
 
   // get paused time from localstorage
   const pausedTime = localStorage.getItem('pausedTime');
 
   // showing paused time if any
-  if (pausedTime !== null) {
+  if (pausedTime !== null) {    
     pausedTimeElement.textContent = pausedTime;
   }
 
@@ -195,11 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function startTimer(): void {
+    
     intervalId = setInterval(() => {
       timerValue += 1; // ändrat från "++" pga eslint
       updateTimerDisplay();
-      if (timerValue >= 300) {
-        pauseTimer();
+      if (timerValue >= 300) { 
+        pauseTimer(); 
       }
     }, 1000);
 
@@ -212,18 +218,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentTime = timerElement.innerText;
     localStorage.setItem('pausedTime', currentTime);
     const pausedTime = localStorage.getItem('pausedTime');
-    paused = true;
+    paused = true; 
     if (pausedTime !== null && pausedTime !== undefined) {
       pausedTimeElement.innerText = pausedTime;
     }
   }
-
+  
   function resumeTimer(): void {
     if (intervalId === null && paused) {
-      startTimer();
-      paused = false;
+      startTimer(); 
+      paused = false; 
     }
-  }
+  } 
   abortQuizButton.addEventListener('click', resetTimer);
 
   function resetTimer(): void {
@@ -236,50 +242,48 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('reset gjort');
     window.location.href = '../../index.html';
   }
-
-  const currentPage = window.location.pathname;
+  
+  const currentPage = window.location.pathname; 
 
   if (currentPage.includes('question')) {
     startTimer();
-  }
+  } 
 
   window.addEventListener('beforeunload', () => {
     localStorage.setItem('timerValue', timerValue.toString());
     localStorage.setItem('paused', paused.toString());
-  });
+  }); 
 
   window.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       paused = localStorage.getItem('paused') === 'true';
       resumeTimer();
     }
-  });
+  }); 
 
   // ==================================================================================================
   // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
   // ==================================================================================================
-
+  
+  
   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (nextButton) {
     nextButton.addEventListener('click', countQuestions);
   }
-
+  
   // Kolla antal ställda frågor
   function countQuestions(): void {
-    questionCounter = currentQuestionArray.length; // +1 ?
+    questionCounter = currentQuestionArray.length;  // +1 ? 
     console.log('klicketiklick');
-
+    
     if (questionCounter < 10) {
       // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
     } else {
-      checkIfHighscore();
+      checkIfHighscore(); 
     }
   }
 
   function checkIfHighscore(): void {
-    // Kolla mot local storage
+  // Kolla mot local storage
   }
 }); // DOMContentLoaded
-
-console.log('Test index');
-console.log('Test index');
