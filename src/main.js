@@ -1,3 +1,4 @@
+"use strict";
 // /* eslint-disable comma-dangle */
 // import './scss/style.scss'; // Importera huvud-SCSS-filen
 // // import HighscoreList from './models/HighscoreList';
@@ -228,4 +229,5 @@
 //     // Kolla mot local storage
 //   }
 // }); // DOMContentLoaded
+console.log('Test index');
 console.log('Test index');

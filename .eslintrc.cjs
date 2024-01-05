@@ -10,9 +10,17 @@ module.exports = {
       env: {
         node: true,
       },
-      files: ['.eslintrc.{js,cjs}'],
+      files: ['.eslintrc.{js,cjs,ts}', 'src/**/*.js'],
       parserOptions: {
         sourceType: 'script',
+      },
+    },
+    {
+      files: ['**/*.js'], // Specify JavaScript files
+      extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+      // Add JavaScript-specific rules here if needed
+      rules: {
+        // Your JavaScript-specific rules here
       },
     },
   ],
