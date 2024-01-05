@@ -1,4 +1,6 @@
-const QuizQuestions = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var QuizQuestions = [
     {
         id: 1,
         question: 
@@ -144,4 +146,4 @@ const QuizQuestions = [
         correctAnswer: 'Rätt svar',
     },
 ];
-export default QuizQuestions;
+exports.default = QuizQuestions;
