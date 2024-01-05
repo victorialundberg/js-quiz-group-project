@@ -1,5 +1,5 @@
 /* eslint-disable comma-dangle */
-import './scss/style.scss'; // Importera huvud-SCSS-filen
+// import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 // import HighscoreList from './models/HighscoreList';
 import QuizQuestions from './models/Questions';

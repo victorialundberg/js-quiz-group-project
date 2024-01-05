@@ -1,7 +1,7 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable comma-dangle */
-require("./scss/style.scss"); // Importera huvud-SCSS-filen
+// import './scss/style.scss'; // Importera huvud-SCSS-filen
+Object.defineProperty(exports, "__esModule", { value: true });
 // import HighscoreList from './models/HighscoreList';
 var Questions_1 = require("./models/Questions");
 document.addEventListener('DOMContentLoaded', function () {
