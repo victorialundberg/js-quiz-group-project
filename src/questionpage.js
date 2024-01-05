@@ -1,18 +1,18 @@
 /* eslint-disable comma-dangle */
 // import QuizQuestions from './models/Questions.js';
-import QuizQuestions from './models/Questions';
+import QuizQuestions from './models/Questions.js';
 // document.addEventListener('DOMContentLoaded', () => {
 // ==================================================================================================
 // ------------------------------------------   GLOBAL   --------------------------------------------
 // ==================================================================================================
 //! ////////////////////////////////////////////////////////////////////
 function getRandomQuestion() {
-    if (QuizQuestions.length === 0) {
-        return null; // Return null if there are no questions in the array
-    }
-    const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
-    const randomQuestion = QuizQuestions[randomIndex];
-    return randomQuestion;
+  if (QuizQuestions.length === 0) {
+    return null; // Return null if there are no questions in the array
+  }
+  const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
+  const randomQuestion = QuizQuestions[randomIndex];
+  return randomQuestion;
 }
 // function getRandomQuestion() {
 //   if (QuizQuestions.length === 0) {
@@ -36,7 +36,9 @@ function getRandomQuestion() {
 // }
 // // // Question page
 // // const startButton: any = document.querySelector('.start-quiz-button button');
-const questionTextContainer = document.querySelector('.question-text-container');
+const questionTextContainer = document.querySelector(
+  '.question-text-container'
+);
 //! //////////////////////////////////////////////////////////////
 // const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
 // const abortQuizButton = document.querySelector(
@@ -75,8 +77,8 @@ const questionTextContainer = document.querySelector('.question-text-container')
 // // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
 // // ==================================================================================================
 const renderQuestion = function (question) {
-    console.log('Rendering question:', question);
-    const html = `
+  console.log('Rendering question:', question);
+  const html = `
   <h2 class="question-counter">Question 1 / 10</h2>
 
   <p class="question-text">
@@ -104,22 +106,21 @@ const renderQuestion = function (question) {
 
   </div>
   `;
-    questionTextContainer.innerHTML = html;
-    /*
+  questionTextContainer.innerHTML = html;
+  /*
     let currentQuestionArray = [];
     let availableQuestions = [...QuizQuestions];
     */
-    // getRandomObject(QuizQuestions);
-    // addToCurrentQuestionArray(QuizQuestions);
-    // addToUsedQuestionArray(QuizQuestions);
+  // getRandomObject(QuizQuestions);
+  // addToCurrentQuestionArray(QuizQuestions);
+  // addToUsedQuestionArray(QuizQuestions);
 };
 const randomQuestion = getRandomQuestion();
 // Render the random question
 if (randomQuestion) {
-    renderQuestion(randomQuestion);
-}
-else {
-    console.log('No questions available.');
+  renderQuestion(randomQuestion);
+} else {
+  console.log('No questions available.');
 }
 // // startButton.addEventListener('click', () => {
 // //   renderQuestion(QuizQuestions[0]);
