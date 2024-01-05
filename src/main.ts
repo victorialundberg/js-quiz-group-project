@@ -280,3 +280,5 @@
 //     // Kolla mot local storage
 //   }
 // }); // DOMContentLoaded
+
+console.log('Test index');
