@@ -42,21 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================================================================================================
   // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
   // ==================================================================================================
-  const currentQuestionArray: object[] = []; // current Session Array
-  const usedQuestionsArray: object[] = [];  // used questions in this session
+  let currentQuestionsArray: object[] = []; // Array for current session
+  let usedQuestionsArray: object[] = [];  // Array for questions used this and previous session
 
-  function addToCurrentQuestionArray(question: object): void {
-    currentQuestionArray.push(question);
-    console.log(currentQuestionArray);
+  // Push rendered question into array for current session
+  function addTocurrentQuestionsArray(question: object): void {
+    currentQuestionsArray.push(question);
   };
-
-  function addToUsedQuestionArray(question: object): void {
-    usedQuestionsArray.push(question);
-    console.log(usedQuestionsArray);
-  };
-
-
-
+  // Clone the array for current session to array for used questions
+  function addToUsedQuestionsArray(): void {
+    usedQuestionsArray = [...currentQuestionsArray];
+  }
+  // Stringify array for used questions and store in local storage
+  function saveToLocalStorage(): void {
+    const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
+    localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
+  }
+  // Clear current session (after 10 questions)
+  function clearcurrentQuestionsArray(): void {
+    currentQuestionsArray = [];
+  }
+  // Clear used questions (after 20 questions)
+  function clearusedQuestionsArray(): void {
+    localStorage.removeItem('usedQuestions');
+  }
 
   // ==================================================================================================
   // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
@@ -100,12 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
     questionTextContainer.innerHTML = html;
     /*
-  let currentQuestionArray = [];
+  let currentQuestionsArray = [];
   let availableQuestions = [...QuizQuestions];
   */
     getRandomObject(QuizQuestions);
-    addToCurrentQuestionArray(QuizQuestions);
-    addToUsedQuestionArray(QuizQuestions);
+    // Add rendered question to currentQuestionsArray
+    addTocurrentQuestionsArray(QuizQuestions);
+    // Update questionCounter
+    countQuestions();
   };
 
   // startButton.addEventListener('click', () => {
@@ -117,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', () => {
       renderQuestion(QuizQuestions[0]);
       window.location.href = 'src/views/questionpage.html';
-
     });
   }
 
@@ -181,12 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const timerElement = document.querySelector('.timer') as HTMLDivElement;
   const pausedTimeElement = document.querySelector('#pausedTimer') as HTMLDivElement;
 
+
   // get paused time from localstorage
   const pausedTime = localStorage.getItem('pausedTime');
 
   // showing paused time if any
   if (pausedTime !== null) {    
-    pausedTimeElement.textContent = pausedTime;
+    pausedTimeElement.innerHTML = pausedTime;
   }
 
   function updateTimerDisplay(): void {
@@ -204,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     intervalId = setInterval(() => {
       timerValue += 1; // ändrat från "++" pga eslint
       updateTimerDisplay();
-      if (timerValue >= 300) { 
+      if (timerValue >= 10) { 
         pauseTimer(); 
       }
     }, 1000);
@@ -265,25 +276,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
   // ==================================================================================================
   
-  
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (nextButton) {
-    nextButton.addEventListener('click', countQuestions);
-  }
-  
-  // Kolla antal ställda frågor
   function countQuestions(): void {
-    questionCounter = currentQuestionArray.length;  // +1 ? 
-    console.log('klicketiklick');
-    
+    // Calculate length and add 1 (for next question)
+    questionCounter = currentQuestionsArray.length + 1;
     if (questionCounter < 10) {
-      // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
+      // Check if used and renderQuestion()?
+      // ---- code ----
     } else {
-      checkIfHighscore(); 
+      // Push this sessions questions into array for used question
+      addToUsedQuestionsArray();
+      // Save array for used questions to local storage
+      saveToLocalStorage();
+      checkIfHighscore();
+      // Render result/use the array
+      // ---- code ----
+      // Clear current session
+      clearcurrentQuestionsArray();
+      // When used question array is at 20, clear
+      if (usedQuestionsArray.length > 19) {
+        clearusedQuestionsArray();
+      }
+
     }
   }
-
+  
   function checkIfHighscore(): void {
-  // Kolla mot local storage
+  // ---- code ----
   }
 }); // DOMContentLoaded
