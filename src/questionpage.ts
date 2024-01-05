@@ -1,73 +1,110 @@
 /* eslint-disable comma-dangle */
-// import './scss/style.scss'; // Importera huvud-SCSS-filen
-
-// import HighscoreList from './models/HighscoreList';
+// import QuizQuestions from './models/Questions.js';
 import QuizQuestions from './models/Questions';
-document.addEventListener('DOMContentLoaded', () => {
-  // ==================================================================================================
-  // ------------------------------------------   GLOBAL   --------------------------------------------
-  // ==================================================================================================
+// document.addEventListener('DOMContentLoaded', () => {
+// ==================================================================================================
+// ------------------------------------------   GLOBAL   --------------------------------------------
+// ==================================================================================================
 
-  // Question page
-  const startButton: any = document.querySelector('.start-quiz-button button');
+//! ////////////////////////////////////////////////////////////////////
 
-  const questionTextContainer: any = document.querySelector(
-    '.question-text-container'
-  );
-
-  const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
-  const abortQuizButton = document.querySelector(
-    '.abort-quiz-button'
-  ) as HTMLButtonElement;
-  // const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
-
-  let questionCounter: number = 1;
-
-  // ==================================================================================================
-  // ------------------------------------------   NAVIGATION   ----------------------------------------
-  // ==================================================================================================
-  /*
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (startButton) {
-    startButton.addEventListener('click', goToQuestionPage);
-  }
-  function goToQuestionPage(event: any): void {
-    event.preventDefault();
-    console.log('Knappen klickades!');
-    window.location.href = 'src/views/questionpage.html';
-  }
-*/
-
-  // ==================================================================================================
-  // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
-  // ==================================================================================================
-  const currentQuestionArray: object[] = []; // current Session Array
-  const usedQuestionsArray: object[] = []; // used questions in this session
-
-  function addToCurrentQuestionArray(question: object): void {
-    currentQuestionArray.push(question);
-    console.log(currentQuestionArray);
+function getRandomQuestion() {
+  if (QuizQuestions.length === 0) {
+    return null; // Return null if there are no questions in the array
   }
 
-  function addToUsedQuestionArray(question: object): void {
-    usedQuestionsArray.push(question);
-    console.log(usedQuestionsArray);
-  }
+  const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
+  const randomQuestion = QuizQuestions[randomIndex];
 
-  // ==================================================================================================
-  // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
-  // ==================================================================================================
+  return randomQuestion;
+}
 
-  const renderQuestion = function (question: {
-    id?: number;
-    question: any;
-    answerOne?: string;
-    answerTwo?: string;
-    correctAnswer?: string;
-  }): void {
-    console.log('Rendering question:', question);
-    const html = `
-  <h2 class="question-counter">Question ${questionCounter} / 10</h2>
+// function getRandomQuestion() {
+//   if (QuizQuestions.length === 0) {
+//     return null; // Return null if there are no questions in the array
+//   }
+
+//   const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
+//   const randomQuestion = QuizQuestions[randomIndex];
+
+//   return randomQuestion;
+// }
+
+// // Usage
+// const randomQuestion = getRandomQuestion();
+
+// if (randomQuestion) {
+//   console.log('Random Question:', randomQuestion.question);
+//   console.log('Possible answers:');
+//   console.log('1. ', randomQuestion.answerOne);
+//   console.log('2. ', randomQuestion.answerTwo);
+//   console.log('Correct answer:', randomQuestion.correctAnswer);
+//   console.log(randomQuestion.id);
+// } else {
+//   console.log('No questions available.');
+// }
+
+// // // Question page
+// // const startButton: any = document.querySelector('.start-quiz-button button');
+
+const questionTextContainer: any = document.querySelector(
+  '.question-text-container'
+);
+//! //////////////////////////////////////////////////////////////
+
+// const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
+// const abortQuizButton = document.querySelector(
+//   '.abort-quiz-button'
+// ) as HTMLButtonElement;
+// // const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
+
+// let questionCounter: number = 1;
+
+// // ==================================================================================================
+// // ------------------------------------------   NAVIGATION   ----------------------------------------
+// // ==================================================================================================
+// /*
+//   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+//   if (startButton) {
+//     startButton.addEventListener('click', goToQuestionPage);
+//   }
+//   function goToQuestionPage(event: any): void {
+//     event.preventDefault();
+//     console.log('Knappen klickades!');
+//     window.location.href = 'src/views/questionpage.html';
+//   }
+// */
+
+// // ==================================================================================================
+// // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
+// // ==================================================================================================
+// const currentQuestionArray: object[] = []; // current Session Array
+// const usedQuestionsArray: object[] = []; // used questions in this session
+
+// function addToCurrentQuestionArray(question: object): void {
+//   currentQuestionArray.push(question);
+//   console.log(currentQuestionArray);
+// }
+
+// function addToUsedQuestionArray(question: object): void {
+//   usedQuestionsArray.push(question);
+//   console.log(usedQuestionsArray);
+// }
+
+// // ==================================================================================================
+// // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
+// // ==================================================================================================
+
+const renderQuestion = function (question: {
+  id?: number;
+  question: any;
+  answerOne?: string;
+  answerTwo?: string;
+  correctAnswer?: string;
+}): void {
+  console.log('Rendering question:', question);
+  const html = `
+  <h2 class="question-counter">Question 1 / 10</h2>
 
   <p class="question-text">
       ${question.question}
@@ -94,192 +131,202 @@ document.addEventListener('DOMContentLoaded', () => {
 
   </div>
   `;
-    questionTextContainer.innerHTML = html;
-    /*
+  questionTextContainer.innerHTML = html;
+  /*
   let currentQuestionArray = [];
   let availableQuestions = [...QuizQuestions];
   */
-    getRandomObject(QuizQuestions);
-    addToCurrentQuestionArray(QuizQuestions);
-    addToUsedQuestionArray(QuizQuestions);
-  };
+  // getRandomObject(QuizQuestions);
+  // addToCurrentQuestionArray(QuizQuestions);
+  // addToUsedQuestionArray(QuizQuestions);
+};
 
-  // startButton.addEventListener('click', () => {
-  //   renderQuestion(QuizQuestions[0]);
-  // });
+const randomQuestion = getRandomQuestion();
 
-  if (startButton !== null && startButton !== undefined) {
-    startButton.addEventListener('click', () => {
-      renderQuestion(QuizQuestions[0]);
-      window.location.href = '../../src/views/questionpage.html';
-    });
-  }
+// Render the random question
+if (randomQuestion) {
+  renderQuestion(randomQuestion);
+} else {
+  console.log('No questions available.');
+}
 
-  console.log('Hello world');
+// // startButton.addEventListener('click', () => {
+// //   renderQuestion(QuizQuestions[0]);
+// // });
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const questionId = urlParams.get('questionId');
+// if (startButton !== null && startButton !== undefined) {
+//   startButton.addEventListener('click', () => {
+//     renderQuestion(QuizQuestions[0]);
+//     window.location.href = '../../src/views/questionpage.html';
+//   });
+// }
 
-  if (questionId !== null && questionId !== undefined) {
-    const questionIndex = parseInt(questionId) - 1;
-    renderQuestion(QuizQuestions[questionIndex]);
-  }
-  // startButton.addEventListener('click', renderQuestion);
+// console.log('Hello world');
 
-  // renderQuestion(QuizQuestions[0]);
+// const queryString = window.location.search;
+// const urlParams = new URLSearchParams(queryString);
+// const questionId = urlParams.get('questionId');
 
-  // ==================================================================================================
-  // -------------------------------------   RANDOM GENERATOR   ------------------ (Question page) ----
-  // ==================================================================================================
-  /**
-   ** Random Generator
-   * @param array
-   * @returns a random object
-   */
+// if (questionId !== null && questionId !== undefined) {
+//   const questionIndex = parseInt(questionId) - 1;
+//   renderQuestion(QuizQuestions[questionIndex]);
+// }
+// // startButton.addEventListener('click', renderQuestion);
 
-  function getRandomObject<T>(array: T[]): T | undefined {
-    console.error('from random gen');
-    if (array.length === 0) {
-      return undefined;
-    }
+// // renderQuestion(QuizQuestions[0]);
 
-    const randomIndex = Math.floor(Math.random() * array.length);
+// // ==================================================================================================
+// // -------------------------------------   RANDOM GENERATOR   ------------------ (Question page) ----
+// // ==================================================================================================
+// /**
+//  ** Random Generator
+//  * @param array
+//  * @returns a random object
+//  */
 
-    return array[randomIndex];
-  }
+// function getRandomObject<T>(array: T[]): T | undefined {
+//   console.error('from random gen');
+//   if (array.length === 0) {
+//     return undefined;
+//   }
 
-  // const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
-  // console.log(getRandomObject(arr));
+//   const randomIndex = Math.floor(Math.random() * array.length);
 
-  // const randomQuestion = getRandomObject(QuizQuestions);
+//   return array[randomIndex];
+// }
 
-  // if (randomQuestion) {
-  //   console.log('Random Question:', randomQuestion.question);
-  //   console.log('Answer One:', randomQuestion.answerOne);
-  //   console.log('Answer Two:', randomQuestion.answerTwo);
-  //   console.log('Correct Answer:', randomQuestion.correctAnswer);
-  // } else {
-  //   console.log('QuizQuestions array is empty');
-  // }
+// // const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
+// // console.log(getRandomObject(arr));
 
-  // ==================================================================================================
-  // ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
-  // ==================================================================================================
+// // const randomQuestion = getRandomObject(QuizQuestions);
 
-  let timerValue = parseInt(localStorage.getItem('timerValue') ?? '0', 10);
-  let intervalId: number | null = null;
-  let paused = localStorage.getItem('paused') === 'true';
+// // if (randomQuestion) {
+// //   console.log('Random Question:', randomQuestion.question);
+// //   console.log('Answer One:', randomQuestion.answerOne);
+// //   console.log('Answer Two:', randomQuestion.answerTwo);
+// //   console.log('Correct Answer:', randomQuestion.correctAnswer);
+// // } else {
+// //   console.log('QuizQuestions array is empty');
+// // }
 
-  const timerElement = document.querySelector('.timer') as HTMLDivElement;
-  const pausedTimeElement = document.querySelector(
-    '#pausedTimer'
-  ) as HTMLDivElement;
+// // ==================================================================================================
+// // ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
+// // ==================================================================================================
 
-  // get paused time from localstorage
-  //   const pausedTime = localStorage.getItem('pausedTime');
+// let timerValue = parseInt(localStorage.getItem('timerValue') ?? '0', 10);
+// let intervalId: number | null = null;
+// let paused = localStorage.getItem('paused') === 'true';
 
-  // showing paused time if any
-  //   if (pausedTime !== null) {
-  //     pausedTimeElement.textContent = 'pausedTime';
-  //   }
+// const timerElement = document.querySelector('.timer') as HTMLDivElement;
+// const pausedTimeElement = document.querySelector(
+//   '#pausedTimer'
+// ) as HTMLDivElement;
 
-  function updateTimerDisplay(): void {
-    const minutes = Math.floor(timerValue / 60);
-    const seconds = timerValue % 60;
+// // get paused time from localstorage
+// //   const pausedTime = localStorage.getItem('pausedTime');
 
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
+// // showing paused time if any
+// //   if (pausedTime !== null) {
+// //     pausedTimeElement.textContent = 'pausedTime';
+// //   }
 
-    timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
-  }
+// function updateTimerDisplay(): void {
+//   const minutes = Math.floor(timerValue / 60);
+//   const seconds = timerValue % 60;
 
-  function startTimer(): void {
-    intervalId = setInterval(() => {
-      timerValue += 1; // ändrat från "++" pga eslint
-      updateTimerDisplay();
-      if (timerValue >= 300) {
-        pauseTimer();
-      }
-    }, 1000);
+//   const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+//   const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
 
-    updateTimerDisplay();
-  }
-  if (nextButton !== null) {
-    nextButton.addEventListener('click', pauseTimer);
-  }
-  function pauseTimer(): void {
-    const currentTime = timerElement.innerText;
-    localStorage.setItem('pausedTime', currentTime);
-    const pausedTime = localStorage.getItem('pausedTime');
-    paused = true;
-    if (pausedTime !== null && pausedTime !== undefined) {
-      pausedTimeElement.innerText = pausedTime;
-    }
-  }
+//   timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+// }
 
-  function resumeTimer(): void {
-    if (intervalId === null && paused) {
-      startTimer();
-      paused = false;
-    }
-  }
-  abortQuizButton.addEventListener('click', resetTimer);
+// function startTimer(): void {
+//   intervalId = setInterval(() => {
+//     timerValue += 1; // ändrat från "++" pga eslint
+//     updateTimerDisplay();
+//     if (timerValue >= 300) {
+//       pauseTimer();
+//     }
+//   }, 1000);
 
-  function resetTimer(): void {
-    timerValue = 0;
-    paused = false;
-    updateTimerDisplay();
-    localStorage.removeItem('pausedTime');
-    localStorage.setItem('timerValue', timerValue.toString());
-    localStorage.setItem('paused', paused.toString());
-    console.log('reset gjort');
-    window.location.href = '../../index.html';
-  }
+//   updateTimerDisplay();
+// }
+// if (nextButton !== null) {
+//   nextButton.addEventListener('click', pauseTimer);
+// }
+// function pauseTimer(): void {
+//   const currentTime = timerElement.innerText;
+//   localStorage.setItem('pausedTime', currentTime);
+//   const pausedTime = localStorage.getItem('pausedTime');
+//   paused = true;
+//   if (pausedTime !== null && pausedTime !== undefined) {
+//     pausedTimeElement.innerText = pausedTime;
+//     console.log(pausedTime);
+//   }
+// }
 
-  const currentPage = window.location.pathname;
+// function resumeTimer(): void {
+//   if (intervalId === null && paused) {
+//     startTimer();
+//     paused = false;
+//   }
+// }
+// abortQuizButton.addEventListener('click', resetTimer);
 
-  if (currentPage.includes('question')) {
-    startTimer();
-  }
+// function resetTimer(): void {
+//   timerValue = 0;
+//   paused = false;
+//   updateTimerDisplay();
+//   localStorage.removeItem('pausedTime');
+//   localStorage.setItem('timerValue', timerValue.toString());
+//   localStorage.setItem('paused', paused.toString());
+//   console.log('reset gjort');
+//   window.location.href = '../../index.html';
+// }
 
-  window.addEventListener('beforeunload', () => {
-    localStorage.setItem('timerValue', timerValue.toString());
-    localStorage.setItem('paused', paused.toString());
-  });
+// const currentPage = window.location.pathname;
 
-  window.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      paused = localStorage.getItem('paused') === 'true';
-      resumeTimer();
-    }
-  });
+// if (currentPage.includes('question')) {
+//   startTimer();
+// }
 
-  // ==================================================================================================
-  // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
-  // ==================================================================================================
+// window.addEventListener('beforeunload', () => {
+//   localStorage.setItem('timerValue', timerValue.toString());
+//   localStorage.setItem('paused', paused.toString());
+// });
 
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (nextButton) {
-    nextButton.addEventListener('click', countQuestions);
-  }
+// window.addEventListener('visibilitychange', () => {
+//   if (document.visibilityState === 'visible') {
+//     paused = localStorage.getItem('paused') === 'true';
+//     resumeTimer();
+//   }
+// });
 
-  // Kolla antal ställda frågor
-  function countQuestions(): void {
-    questionCounter = currentQuestionArray.length; // +1 ?
-    console.log('klicketiklick');
+// // ==================================================================================================
+// // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
+// // ==================================================================================================
 
-    if (questionCounter < 10) {
-      // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
-    } else {
-      checkIfHighscore();
-    }
-  }
+// // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+// if (nextButton) {
+//   nextButton.addEventListener('click', countQuestions);
+// }
 
-  function checkIfHighscore(): void {
-    // Kolla mot local storage
-  }
-}); // DOMContentLoaded
+// // Kolla antal ställda frågor
+// function countQuestions(): void {
+//   questionCounter = currentQuestionArray.length; // +1 ?
+//   console.log('klicketiklick');
+
+//   if (questionCounter < 10) {
+//     // Kalla på funktionen som renderar ny fråga (som i sin tur randomiserar?)
+//   } else {
+//     checkIfHighscore();
+//   }
+// }
+
+// function checkIfHighscore(): void {
+//   // Kolla mot local storage
+// }
+// }); // DOMContentLoaded
 
 console.log('Test question');
 console.log('Test question');
