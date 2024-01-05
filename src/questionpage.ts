@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function goToQuestionPage(event: any): void {
     event.preventDefault();
-    console.log('Knappen klickades!'); 
+    console.log('Knappen klickades!');
     window.location.href = 'src/views/questionpage.html';
-  } 
+  }
 */
 
   // ==================================================================================================
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <label for="a1" class="answer-alternative">
           <input type="radio" class="answer-button" name="radio" id="a1">
-          1. &nbsp;<span class="answer">${question.answerOne}</span>  
+          1. &nbsp;<span class="answer">${question.answerOne}</span>
       </label>
 
       <label for="a2" class="answer-alternative">
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // console.log('Hello world');
+  console.log('Hello world');
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);

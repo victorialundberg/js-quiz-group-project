@@ -115,7 +115,7 @@
 //     });
 //   }
 
-//   // console.log('Hello world');
+//   console.log('Hello world');
 
 //   const queryString = window.location.search;
 //   const urlParams = new URLSearchParams(queryString);
