@@ -1,5 +1,5 @@
-import { HighscoreList } from './models/HighscoreList';
-import { ScoreItem } from './models/Score';
+import { HighscoreList } from './models/HighscoreList.js';
+import { ScoreItem } from './models/Score.js';
 // localStorage.clear();
 const score = new ScoreItem(1, 'Jari', 200, 120);
 const score2 = new ScoreItem(1, 'Linda', 200, 120);
@@ -29,7 +29,9 @@ highscoreList.save();
 const scores = highscoreList.list;
 console.log('High Scores:');
 scores.forEach((score) => {
-    console.log(`ID: ${score.id}, Name: ${score.name}, Points: ${score.totalPoints}, Time: ${score.totalTime}`);
+  console.log(
+    `ID: ${score.id}, Name: ${score.name}, Points: ${score.totalPoints}, Time: ${score.totalTime}`
+  );
 });
 // // import HighscoreList from './models/HighscoreList';
 // import QuizQuestions from './models/Questions';
