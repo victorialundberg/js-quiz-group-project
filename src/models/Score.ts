@@ -57,4 +57,5 @@ class ScoreItem implements Score {
   }
 }
 
-export default ScoreItem;
+export { ScoreItem };
+export type { Score };
