@@ -27,22 +27,22 @@ function addTocurrentQuestionsArray(question) {
     currentQuestionsArray.push(question);
 }
 // Clone the array for current session to array for used questions
-function addToUsedQuestionsArray() {
-    usedQuestionsArray = [...currentQuestionsArray];
-}
-// Stringify array for used questions and store in local storage
-function saveToLocalStorage() {
-    const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
-    localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
-}
-// Clear current session (after 10 questions)
-function clearcurrentQuestionsArray() {
-    currentQuestionsArray = [];
-}
-// Clear used questions (after 20 questions)
-function clearusedQuestionsArray() {
-    localStorage.removeItem('usedQuestions');
-}
+// function addToUsedQuestionsArray(): void {
+//   usedQuestionsArray = [...currentQuestionsArray];
+// }
+// // Stringify array for used questions and store in local storage
+// function saveToLocalStorage(): void {
+//   const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
+//   localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
+// }
+// // Clear current session (after 10 questions)
+// function clearcurrentQuestionsArray(): void {
+//   currentQuestionsArray = [];
+// }
+// // Clear used questions (after 20 questions)
+// function clearusedQuestionsArray(): void {
+//   localStorage.removeItem('usedQuestions');
+// }
 //! ////////////////////////////////////////////////////////////////////
 function getRandomQuestion() {
     if (QuizQuestions.length === 0) {

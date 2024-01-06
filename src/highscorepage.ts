@@ -1,6 +1,3 @@
-import { HighscoreList } from './models/HighscoreList';
-import { ScoreItem } from './models/Score';
-
 const renderHighscoreList = function (): void {
   let highscoreHTML = `
     <h2 class="highscore-title">Highscore</h2>
