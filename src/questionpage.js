@@ -1,4 +1,4 @@
-import QuizQuestions from './models/Questions';
+import QuizQuestions from './models/Questions.js';
 // import { HighscoreList } from './models/HighscoreList';
 // import { ScoreItem } from './models/Score';
 // const score = new ScoreItem(1, 'Jari', 200, 120);
@@ -24,7 +24,7 @@ let currentQuestionsArray = []; // Array for current session
 let usedQuestionsArray = []; // Array for questions used this and previous session
 // Push rendered question into array for current session
 function addTocurrentQuestionsArray(question) {
-    currentQuestionsArray.push(question);
+  currentQuestionsArray.push(question);
 }
 // Clone the array for current session to array for used questions
 // function addToUsedQuestionsArray(): void {
@@ -45,27 +45,29 @@ function addTocurrentQuestionsArray(question) {
 // }
 //! ////////////////////////////////////////////////////////////////////
 function getRandomQuestion() {
-    if (QuizQuestions.length === 0) {
-        return null;
+  if (QuizQuestions.length === 0) {
+    return null;
+  }
+  let randomQuestion = null;
+  let attempts = 0;
+  const maxAttempts = 3;
+  do {
+    const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
+    randomQuestion = QuizQuestions[randomIndex];
+    const isQuestionUsed = usedQuestionsArray.some((usedQuestion) => {
+      return usedQuestion.id === randomQuestion.id;
+    });
+    if (!isQuestionUsed) {
+      addTocurrentQuestionsArray(randomQuestion);
+      break;
     }
-    let randomQuestion = null;
-    let attempts = 0;
-    const maxAttempts = 3;
-    do {
-        const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
-        randomQuestion = QuizQuestions[randomIndex];
-        const isQuestionUsed = usedQuestionsArray.some((usedQuestion) => {
-            return usedQuestion.id === randomQuestion.id;
-        });
-        if (!isQuestionUsed) {
-            addTocurrentQuestionsArray(randomQuestion);
-            break;
-        }
-        attempts++;
-    } while (attempts < maxAttempts);
-    return randomQuestion;
+    attempts++;
+  } while (attempts < maxAttempts);
+  return randomQuestion;
 }
-const questionTextContainer = document.querySelector('.question-text-container');
+const questionTextContainer = document.querySelector(
+  '.question-text-container'
+);
 // function getRandomObject<T>(array: T[]): T | undefined {
 //   console.error('from random gen');
 //   let randomIndex = Math.floor(Math.random() * array.length);
@@ -79,8 +81,8 @@ const questionTextContainer = document.querySelector('.question-text-container')
 // }
 //! //////////////////////////////////////////////////////////////
 const renderQuestion = function (question) {
-    console.log('Rendering question:', question);
-    const html = `
+  console.log('Rendering question:', question);
+  const html = `
   <h2 class="question-counter">Question 1 / 10</h2>
 
   <p class="question-text">
@@ -108,13 +110,12 @@ const renderQuestion = function (question) {
 
   </div>
   `;
-    questionTextContainer.innerHTML = html;
+  questionTextContainer.innerHTML = html;
 };
 const randomQuestion = getRandomQuestion();
 // Render the random question
 if (randomQuestion) {
-    renderQuestion(randomQuestion);
-}
-else {
-    console.log('No questions available.');
+  renderQuestion(randomQuestion);
+} else {
+  console.log('No questions available.');
 }
