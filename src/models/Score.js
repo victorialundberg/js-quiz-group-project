@@ -58,4 +58,4 @@ class ScoreItem {
         this._totalTime = totalTime;
     }
 }
-export default ScoreItem;
+export { ScoreItem };

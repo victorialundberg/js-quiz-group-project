@@ -1,306 +1,340 @@
+import { HighscoreList } from './models/HighscoreList';
+import { ScoreItem } from './models/Score';
 
-import './scss/style.scss'; // Importera huvud-SCSS-filen
+// localStorage.clear();
 
-// import HighscoreList from './models/HighscoreList';
-import QuizQuestions from './models/Questions';
-document.addEventListener('DOMContentLoaded', () => {
+const score = new ScoreItem(1, 'Jari', 200, 120);
+const score2 = new ScoreItem(1, 'Linda', 200, 120);
+const score3 = new ScoreItem(1, 'Jenni', 200, 120);
+const score4 = new ScoreItem(1, 'Caroline', 200, 120);
+const score5 = new ScoreItem(1, 'Victoria', 200, 120);
+const score6 = new ScoreItem(1, 'Elinor', 200, 120);
+const score7 = new ScoreItem(1, 'Jari', 200, 120);
+const score8 = new ScoreItem(1, 'Karl', 200, 120);
+const score9 = new ScoreItem(1, 'Sture', 200, 120);
+const score10 = new ScoreItem(1, 'Klas', 200, 120);
 
-    
+const highscoreList = HighscoreList.instance;
+// highscoreList.load();
+highscoreList.addScore(score);
+highscoreList.addScore(score2);
+highscoreList.addScore(score3);
+highscoreList.addScore(score4);
+highscoreList.addScore(score5);
+highscoreList.addScore(score6);
+highscoreList.addScore(score7);
+highscoreList.addScore(score8);
+highscoreList.addScore(score9);
+highscoreList.addScore(score10);
+highscoreList.save();
+// console.log(highscoreList);
+// console.log(highscoreList.load());
 
-  // ==================================================================================================
-  // ------------------------------------------   GLOBAL   --------------------------------------------
-  // ==================================================================================================
+const scores = highscoreList.list;
 
-  // Question page
-  const startButton: any = document.querySelector('.start-quiz-button button');
+console.log('High Scores:');
+scores.forEach((score) => {
+  console.log(
+    `ID: ${score.id}, Name: ${score.name}, Points: ${score.totalPoints}, Time: ${score.totalTime}`
+  );
+});
 
-  const questionTextContainer: any = document.querySelector('.question-text-container');
+// // import HighscoreList from './models/HighscoreList';
+// import QuizQuestions from './models/Questions';
+// document.addEventListener('DOMContentLoaded', () => {
+//   // ==================================================================================================
+//   // ------------------------------------------   GLOBAL   --------------------------------------------
+//   // ==================================================================================================
 
-  const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
-  const abortQuizButton = document.querySelector('.abort-quiz-button') as HTMLButtonElement;
-  // const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
+//   // Question page
+//   const startButton: any = document.querySelector('.start-quiz-button button');
 
-  let questionCounter:number = 1;
+//   const questionTextContainer: any = document.querySelector(
+//     '.question-text-container'
+//   );
 
-  // ==================================================================================================
-  // ------------------------------------------   NAVIGATION   ----------------------------------------
-  // ==================================================================================================
-  /*
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (startButton) {
-    startButton.addEventListener('click', goToQuestionPage);
-  }
-  function goToQuestionPage(event: any): void {
-    event.preventDefault();
-    console.log('Knappen klickades!'); 
-    window.location.href = 'src/views/questionpage.html';
-  } 
-*/
+//   const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
+//   const abortQuizButton = document.querySelector(
+//     '.abort-quiz-button'
+//   ) as HTMLButtonElement;
+//   // const playAgainButton = document.querySelector('#playAgainButton') as HTMLButtonElement;
 
+//   let questionCounter: number = 1;
 
+//   // ==================================================================================================
+//   // ------------------------------------------   NAVIGATION   ----------------------------------------
+//   // ==================================================================================================
+//   /*
+//   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+//   if (startButton) {
+//     startButton.addEventListener('click', goToQuestionPage);
+//   }
+//   function goToQuestionPage(event: any): void {
+//     event.preventDefault();
+//     console.log('Knappen klickades!');
+//     window.location.href = 'src/views/questionpage.html';
+//   }
+// */
 
-  // ==================================================================================================
-  // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
-  // ==================================================================================================
-  let currentQuestionsArray: object[] = []; // Array for current session
-  let usedQuestionsArray: object[] = [];  // Array for questions used this and previous session
+//   // ==================================================================================================
+//   // -------------------------------------   QUESTION ARRAYS   ------------------- (Question page) ----
+//   // ==================================================================================================
+//   let currentQuestionsArray: object[] = []; // Array for current session
+//   let usedQuestionsArray: object[] = []; // Array for questions used this and previous session
 
-  // Push rendered question into array for current session
-  function addTocurrentQuestionsArray(question: object): void {
-    currentQuestionsArray.push(question);
-  };
-  // Clone the array for current session to array for used questions
-  function addToUsedQuestionsArray(): void {
-    usedQuestionsArray = [...currentQuestionsArray];
-  }
-  // Stringify array for used questions and store in local storage
-  function saveToLocalStorage(): void {
-    const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
-    localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
-  }
-  // Clear current session (after 10 questions)
-  function clearcurrentQuestionsArray(): void {
-    currentQuestionsArray = [];
-  }
-  // Clear used questions (after 20 questions)
-  function clearusedQuestionsArray(): void {
-    localStorage.removeItem('usedQuestions');
-  }
+//   // Push rendered question into array for current session
+//   function addTocurrentQuestionsArray(question: object): void {
+//     currentQuestionsArray.push(question);
+//   }
+//   // Clone the array for current session to array for used questions
+//   function addToUsedQuestionsArray(): void {
+//     usedQuestionsArray = [...currentQuestionsArray];
+//   }
+//   // Stringify array for used questions and store in local storage
+//   function saveToLocalStorage(): void {
+//     const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
+//     localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
+//   }
+//   // Clear current session (after 10 questions)
+//   function clearcurrentQuestionsArray(): void {
+//     currentQuestionsArray = [];
+//   }
+//   // Clear used questions (after 20 questions)
+//   function clearusedQuestionsArray(): void {
+//     localStorage.removeItem('usedQuestions');
+//   }
 
-  // ==================================================================================================
-  // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
-  // ==================================================================================================
+//   // ==================================================================================================
+//   // -------------------------------------   RENDER QUESTION   ------------------- (Question page) ----
+//   // ==================================================================================================
 
-  const renderQuestion = function (question: {
-  id?: number;
-  question: any;
-  answerOne?: string;
-  answerTwo?: string;
-  correctAnswer?: string;
-}): void {
-    console.log('Rendering question:', question);
-    const html = `
-  <h2 class="question-counter">Question ${questionCounter} / 10</h2>
+//   const renderQuestion = function (question: {
+//     id?: number;
+//     question: any;
+//     answerOne?: string;
+//     answerTwo?: string;
+//     correctAnswer?: string;
+//   }): void {
+//     console.log('Rendering question:', question);
+//     const html = `
+//   <h2 class="question-counter">Question ${questionCounter} / 10</h2>
 
-  <p class="question-text">
-      ${question.question}
-  </p>
+//   <p class="question-text">
+//       ${question.question}
+//   </p>
 
-  <h3 class="answers">Answer Options</h3>
+//   <h3 class="answers">Answer Options</h3>
 
-  <div class="answer-container">
+//   <div class="answer-container">
 
-      <label for="a1" class="answer-alternative">
-          <input type="radio" class="answer-button" name="radio" id="a1">
-          1. &nbsp;<span class="answer">${question.answerOne}</span>  
-      </label>
+//       <label for="a1" class="answer-alternative">
+//           <input type="radio" class="answer-button" name="radio" id="a1">
+//           1. &nbsp;<span class="answer">${question.answerOne}</span>
+//       </label>
 
-      <label for="a2" class="answer-alternative">
-          <input type="radio" class="answer-button" name="radio" id="a2">
-          X. &nbsp; <span class="answer">${question.answerTwo}</span>
-      </label>
+//       <label for="a2" class="answer-alternative">
+//           <input type="radio" class="answer-button" name="radio" id="a2">
+//           X. &nbsp; <span class="answer">${question.answerTwo}</span>
+//       </label>
 
-      <label for="a3" class="answer-alternative">
-          <input type="radio" class="answer-button" name="radio" id="a3">
-          2. &nbsp;<span class="answer">${question.correctAnswer}</span>
-      </label>
+//       <label for="a3" class="answer-alternative">
+//           <input type="radio" class="answer-button" name="radio" id="a3">
+//           2. &nbsp;<span class="answer">${question.correctAnswer}</span>
+//       </label>
 
-  </div>
-  `;
-    questionTextContainer.innerHTML = html;
-    /*
-  let currentQuestionsArray = [];
-  let availableQuestions = [...QuizQuestions];
-  */
-    getRandomObject(QuizQuestions);
-    // Add rendered question to currentQuestionsArray
-    addTocurrentQuestionsArray(QuizQuestions);
-    // Update questionCounter
-    countQuestions();
-  };
+//   </div>
+//   `;
+//     questionTextContainer.innerHTML = html;
+//     /*
+//   let currentQuestionsArray = [];
+//   let availableQuestions = [...QuizQuestions];
+//   */
+//     getRandomObject(QuizQuestions);
+//     // Add rendered question to currentQuestionsArray
+//     addTocurrentQuestionsArray(QuizQuestions);
+//     // Update questionCounter
+//     countQuestions();
+//   };
 
-  // startButton.addEventListener('click', () => {
-  //   renderQuestion(QuizQuestions[0]);
-  // });
+//   // startButton.addEventListener('click', () => {
+//   //   renderQuestion(QuizQuestions[0]);
+//   // });
 
-  
-  if (startButton !== null && startButton !== undefined) {
-    startButton.addEventListener('click', () => {
-      renderQuestion(QuizQuestions[0]);
-      window.location.href = 'src/views/questionpage.html';
-    });
-  }
+//   if (startButton !== null && startButton !== undefined) {
+//     startButton.addEventListener('click', () => {
+//       renderQuestion(QuizQuestions[0]);
+//       window.location.href = 'src/views/questionpage.html';
+//     });
+//   }
 
-  // console.log('Hello world');
+//   // console.log('Hello world');
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const questionId = urlParams.get('questionId');
+//   const queryString = window.location.search;
+//   const urlParams = new URLSearchParams(queryString);
+//   const questionId = urlParams.get('questionId');
 
-  if (questionId !== null && questionId !== undefined) {
-    const questionIndex = parseInt(questionId) - 1;
-    renderQuestion(QuizQuestions[questionIndex]);
-  } 
-  // startButton.addEventListener('click', renderQuestion);
+//   if (questionId !== null && questionId !== undefined) {
+//     const questionIndex = parseInt(questionId) - 1;
+//     renderQuestion(QuizQuestions[questionIndex]);
+//   }
+//   // startButton.addEventListener('click', renderQuestion);
 
-  // renderQuestion(QuizQuestions[0]);
+//   // renderQuestion(QuizQuestions[0]);
 
-  // ==================================================================================================
-  // -------------------------------------   RANDOM GENERATOR   ------------------ (Question page) ----
-  // ==================================================================================================
-  /**
- ** Random Generator
- * @param array
- * @returns a random object
- */
+//   // ==================================================================================================
+//   // -------------------------------------   RANDOM GENERATOR   ------------------ (Question page) ----
+//   // ==================================================================================================
+//   /**
+//    ** Random Generator
+//    * @param array
+//    * @returns a random object
+//    */
 
-  function getRandomObject<T>(array: T[]): T | undefined {
-    console.error('from random gen');
-    if (array.length === 0) {
-      return undefined;
-    }
+//   function getRandomObject<T>(array: T[]): T | undefined {
+//     console.error('from random gen');
+//     if (array.length === 0) {
+//       return undefined;
+//     }
 
-    const randomIndex = Math.floor(Math.random() * array.length);
+//     const randomIndex = Math.floor(Math.random() * array.length);
 
-    return array[randomIndex];
-  }
+//     return array[randomIndex];
+//   }
 
-  // const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
-  // console.log(getRandomObject(arr));
+//   // const arr = ['cykel', 'bil', 'moped', 'boat', 'buss', 5, 52, 12];
+//   // console.log(getRandomObject(arr));
 
-  // const randomQuestion = getRandomObject(QuizQuestions);
+//   // const randomQuestion = getRandomObject(QuizQuestions);
 
-  // if (randomQuestion) {
-  //   console.log('Random Question:', randomQuestion.question);
-  //   console.log('Answer One:', randomQuestion.answerOne);
-  //   console.log('Answer Two:', randomQuestion.answerTwo);
-  //   console.log('Correct Answer:', randomQuestion.correctAnswer);
-  // } else {
-  //   console.log('QuizQuestions array is empty');
-  // }
+//   // if (randomQuestion) {
+//   //   console.log('Random Question:', randomQuestion.question);
+//   //   console.log('Answer One:', randomQuestion.answerOne);
+//   //   console.log('Answer Two:', randomQuestion.answerTwo);
+//   //   console.log('Correct Answer:', randomQuestion.correctAnswer);
+//   // } else {
+//   //   console.log('QuizQuestions array is empty');
+//   // }
 
+//   // ==================================================================================================
+//   // ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
+//   // ==================================================================================================
 
-  // ==================================================================================================
-  // ------------------------------------   TOTAL TIME TIMER --------------------- (Question page) ----
-  // ==================================================================================================
+//   let timerValue = parseInt(localStorage.getItem('timerValue') ?? '0', 10);
+//   let intervalId: number | null = null;
+//   let paused = localStorage.getItem('paused') === 'true';
 
-  let timerValue = parseInt(localStorage.getItem('timerValue') ?? '0', 10);
-  let intervalId: number | null = null;
-  let paused = localStorage.getItem('paused') === 'true';
-  
-  const timerElement = document.querySelector('.timer') as HTMLDivElement;
-  const pausedTimeElement = document.querySelector('#pausedTimer') as HTMLDivElement;
+//   const timerElement = document.querySelector('.timer') as HTMLDivElement;
+//   const pausedTimeElement = document.querySelector(
+//     '#pausedTimer'
+//   ) as HTMLDivElement;
 
+//   // get paused time from localstorage
+//   const pausedTime = localStorage.getItem('pausedTime');
 
-  // get paused time from localstorage
-  const pausedTime = localStorage.getItem('pausedTime');
+//   // showing paused time if any
+//   if (pausedTime !== null) {
+//     pausedTimeElement.innerHTML = pausedTime;
+//   }
 
-  // showing paused time if any
-  if (pausedTime !== null) {    
-    pausedTimeElement.innerHTML = pausedTime;
-  }
+//   function updateTimerDisplay(): void {
+//     const minutes = Math.floor(timerValue / 60);
+//     const seconds = timerValue % 60;
 
-  function updateTimerDisplay(): void {
-    const minutes = Math.floor(timerValue / 60);
-    const seconds = timerValue % 60;
+//     const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+//     const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
 
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
+//     timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+//   }
 
-    timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
-  }
+//   function startTimer(): void {
+//     intervalId = setInterval(() => {
+//       timerValue += 1; // ändrat från "++" pga eslint
+//       updateTimerDisplay();
+//       if (timerValue >= 10) {
+//         pauseTimer();
+//       }
+//     }, 1000);
 
-  function startTimer(): void {
-    
-    intervalId = setInterval(() => {
-      timerValue += 1; // ändrat från "++" pga eslint
-      updateTimerDisplay();
-      if (timerValue >= 10) { 
-        pauseTimer(); 
-      }
-    }, 1000);
+//     updateTimerDisplay();
+//   }
+//   if (nextButton !== null) {
+//     nextButton.addEventListener('click', pauseTimer);
+//   }
+//   function pauseTimer(): void {
+//     const currentTime = timerElement.innerText;
+//     localStorage.setItem('pausedTime', currentTime);
+//     const pausedTime = localStorage.getItem('pausedTime');
+//     paused = true;
+//     if (pausedTime !== null && pausedTime !== undefined) {
+//       pausedTimeElement.innerText = pausedTime;
+//     }
+//   }
 
-    updateTimerDisplay();
-  }
-  if (nextButton !== null) {
-    nextButton.addEventListener('click', pauseTimer);
-  }
-  function pauseTimer(): void {
-    const currentTime = timerElement.innerText;
-    localStorage.setItem('pausedTime', currentTime);
-    const pausedTime = localStorage.getItem('pausedTime');
-    paused = true; 
-    if (pausedTime !== null && pausedTime !== undefined) {
-      pausedTimeElement.innerText = pausedTime;
-    }
-  }
-  
-  function resumeTimer(): void {
-    if (intervalId === null && paused) {
-      startTimer(); 
-      paused = false; 
-    }
-  } 
-  abortQuizButton.addEventListener('click', resetTimer);
+//   function resumeTimer(): void {
+//     if (intervalId === null && paused) {
+//       startTimer();
+//       paused = false;
+//     }
+//   }
+//   abortQuizButton.addEventListener('click', resetTimer);
 
-  function resetTimer(): void {
-    timerValue = 0;
-    paused = false;
-    updateTimerDisplay();
-    localStorage.removeItem('pausedTime');
-    localStorage.setItem('timerValue', timerValue.toString());
-    localStorage.setItem('paused', paused.toString());
-    console.log('reset gjort');
-    window.location.href = '../../index.html';
-  }
-  
-  const currentPage = window.location.pathname; 
+//   function resetTimer(): void {
+//     timerValue = 0;
+//     paused = false;
+//     updateTimerDisplay();
+//     localStorage.removeItem('pausedTime');
+//     localStorage.setItem('timerValue', timerValue.toString());
+//     localStorage.setItem('paused', paused.toString());
+//     console.log('reset gjort');
+//     window.location.href = '../../index.html';
+//   }
 
-  if (currentPage.includes('question')) {
-    startTimer();
-  } 
+//   const currentPage = window.location.pathname;
 
-  window.addEventListener('beforeunload', () => {
-    localStorage.setItem('timerValue', timerValue.toString());
-    localStorage.setItem('paused', paused.toString());
-  }); 
+//   if (currentPage.includes('question')) {
+//     startTimer();
+//   }
 
-  window.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      paused = localStorage.getItem('paused') === 'true';
-      resumeTimer();
-    }
-  }); 
+//   window.addEventListener('beforeunload', () => {
+//     localStorage.setItem('timerValue', timerValue.toString());
+//     localStorage.setItem('paused', paused.toString());
+//   });
 
-  // ==================================================================================================
-  // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
-  // ==================================================================================================
-  
-  function countQuestions(): void {
-    // Calculate length and add 1 (for next question)
-    questionCounter = currentQuestionsArray.length + 1;
-    if (questionCounter < 10) {
-      // Check if used and renderQuestion()?
-      // ---- code ----
-    } else {
-      // Push this sessions questions into array for used question
-      addToUsedQuestionsArray();
-      // Save array for used questions to local storage
-      saveToLocalStorage();
-      checkIfHighscore();
-      // Render result/use the array
-      // ---- code ----
-      // Clear current session
-      clearcurrentQuestionsArray();
-      // When used question array is at 20, clear
-      if (usedQuestionsArray.length > 19) {
-        clearusedQuestionsArray();
-      }
+//   window.addEventListener('visibilitychange', () => {
+//     if (document.visibilityState === 'visible') {
+//       paused = localStorage.getItem('paused') === 'true';
+//       resumeTimer();
+//     }
+//   });
 
-    }
-  }
-  
-  function checkIfHighscore(): void {
-  // ---- code ----
-  }
-}); // DOMContentLoaded
+//   // ==================================================================================================
+//   // ----------------------------------   QUESTION COUNTER   --------------------- (Question page) ----
+//   // ==================================================================================================
+
+//   function countQuestions(): void {
+//     // Calculate length and add 1 (for next question)
+//     questionCounter = currentQuestionsArray.length + 1;
+//     if (questionCounter < 10) {
+//       // Check if used and renderQuestion()?
+//       // ---- code ----
+//     } else {
+//       // Push this sessions questions into array for used question
+//       addToUsedQuestionsArray();
+//       // Save array for used questions to local storage
+//       saveToLocalStorage();
+//       checkIfHighscore();
+//       // Render result/use the array
+//       // ---- code ----
+//       // Clear current session
+//       clearcurrentQuestionsArray();
+//       // When used question array is at 20, clear
+//       if (usedQuestionsArray.length > 19) {
+//         clearusedQuestionsArray();
+//       }
+//     }
+//   }
+
+//   function checkIfHighscore(): void {
+//     // ---- code ----
+//   }
+// }); // DOMContentLoaded
