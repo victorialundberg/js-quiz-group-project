@@ -1,3 +1,4 @@
+"use strict";
 const renderHighscoreList = function () {
     let highscoreHTML = `
     <h2 class="highscore-title">Highscore</h2>
@@ -41,4 +42,3 @@ const renderHighscoreList = function () {
     highscoreListContainer.innerHTML = highscoreHTML;
 };
 renderHighscoreList();
-export {};
