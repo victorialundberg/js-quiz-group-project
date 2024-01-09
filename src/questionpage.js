@@ -1,4 +1,5 @@
 import QuizQuestions from './models/Questions';
+import QuizQuestions from './models/Questions';
 // import { HighscoreList } from './models/HighscoreList';
 // import { ScoreItem } from './models/Score';
 // const score = new ScoreItem(1, 'Jari', 200, 120);
@@ -27,24 +28,24 @@ let currentQuestionsArray = []; // Array for current session
 let usedQuestionsArray = []; // Array for questions used this and previous session
 // Push rendered question into array for current session
 function addTocurrentQuestionsArray(question) {
-    currentQuestionsArray.push(question);
+  currentQuestionsArray.push(question);
 }
 // Clone the array for current session to array for used questions
 function addToUsedQuestionsArray() {
-    usedQuestionsArray = [...currentQuestionsArray];
+  usedQuestionsArray = [...currentQuestionsArray];
 }
 // Stringify array for used questions and store in local storage
 function saveToLocalStorage() {
-    const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
-    localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
+  const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
+  localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
 }
 // Clear current session (after 10 questions)
 function clearcurrentQuestionsArray() {
-    currentQuestionsArray = [];
+  currentQuestionsArray = [];
 }
 // Clear used questions (after 20 questions)
 function clearusedQuestionsArray() {
-    localStorage.removeItem('usedQuestions');
+  localStorage.removeItem('usedQuestions');
 }
 // ==================================================================================================
 // ------------------------------------   TOTAL TIME TIMER ------------------------------------------
@@ -143,27 +144,29 @@ window.addEventListener('visibilitychange', () => {
 // -----------------------------------   RANDOM QUESTIONS   -----------------------------------------
 // ==================================================================================================
 function getRandomQuestion() {
-    if (QuizQuestions.length === 0) {
-        return null;
+  if (QuizQuestions.length === 0) {
+    return null;
+  }
+  let randomQuestion = null;
+  let attempts = 0;
+  const maxAttempts = 3;
+  do {
+    const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
+    randomQuestion = QuizQuestions[randomIndex];
+    const isQuestionUsed = usedQuestionsArray.some((usedQuestion) => {
+      return usedQuestion.id === randomQuestion.id;
+    });
+    if (!isQuestionUsed) {
+      addTocurrentQuestionsArray(randomQuestion);
+      break;
     }
-    let randomQuestion = null;
-    let attempts = 0;
-    const maxAttempts = 3;
-    do {
-        const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
-        randomQuestion = QuizQuestions[randomIndex];
-        const isQuestionUsed = usedQuestionsArray.some((usedQuestion) => {
-            return usedQuestion.id === randomQuestion.id;
-        });
-        if (!isQuestionUsed) {
-            addTocurrentQuestionsArray(randomQuestion);
-            break;
-        }
-        attempts++;
-    } while (attempts < maxAttempts);
-    return randomQuestion;
+    attempts++;
+  } while (attempts < maxAttempts);
+  return randomQuestion;
 }
-const questionTextContainer = document.querySelector('.question-text-container');
+const questionTextContainer = document.querySelector(
+  '.question-text-container'
+);
 // function getRandomObject<T>(array: T[]): T | undefined {
 //   console.error('from random gen');
 //   let randomIndex = Math.floor(Math.random() * array.length);
@@ -179,8 +182,8 @@ const questionTextContainer = document.querySelector('.question-text-container')
 // -------------------------------------   RENDER QUESTIONS   ---------------------------------------
 // ==================================================================================================
 const renderQuestion = function (question) {
-    console.log('Rendering question:', question);
-    const html = `
+  console.log('Rendering question:', question);
+  const html = `
   <h2 class="question-counter">Question 1 / 10</h2>
 
   <p class="question-text">
@@ -208,51 +211,12 @@ const renderQuestion = function (question) {
 
   </div>
   `;
-    questionTextContainer.innerHTML = html;
-    addTocurrentQuestionsArray(QuizQuestions);
-    countQuestions();
+  questionTextContainer.innerHTML = html;
 };
 const randomQuestion = getRandomQuestion();
 // Render the random question
-const newQuestion = function () {
-    if (randomQuestion) {
-        renderQuestion(randomQuestion);
-    }
-    else {
-        console.log('No questions available.');
-    }
-};
-nextButton.addEventListener('click', newQuestion);
-// Add rendered question to currentQuestionsArray
-// addTocurrentQuestionsArray(QuizQuestions);
-// Update questionCounter
-// countQuestions();
-// ==================================================================================================
-// ----------------------------------   QUESTION COUNTER   ------------------------------------------
-// ==================================================================================================
-function countQuestions() {
-    // Calculate length and add 1 (for next question)
-    questionCounter = currentQuestionsArray.length + 1;
-    if (questionCounter < 10) {
-        // Check if used and renderQuestion()?
-        // ---- code ----
-    }
-    else {
-        // Push this sessions questions into array for used question
-        addToUsedQuestionsArray();
-        // Save array for used questions to local storage
-        saveToLocalStorage();
-        checkIfHighscore();
-        // Render result/use the array
-        // ---- code ----
-        // Clear current session
-        clearcurrentQuestionsArray();
-        // When used question array is at 20, clear
-        if (usedQuestionsArray.length > 19) {
-            clearusedQuestionsArray();
-        }
-    }
-}
-function checkIfHighscore() {
-    // ---- code ----
+if (randomQuestion) {
+  renderQuestion(randomQuestion);
+} else {
+  console.log('No questions available.');
 }
