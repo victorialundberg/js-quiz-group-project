@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ScoreItem } from './Score';
+import { ScoreItem } from './Score.js';
 
 interface IScore {
   list: ScoreItem[];
