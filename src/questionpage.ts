@@ -5,9 +5,9 @@ import QuizQuestions from './models/Questions';
 // ==================================================================================================
 
 const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
-const abortQuizButton = document.querySelector(
-  '.abort-quiz-button'
-) as HTMLAnchorElement;
+// const abortQuizButton = document.querySelector(
+//   '.abort-quiz-button'
+// ) as HTMLAnchorElement;
 
 let questionCounter: number = 1;
 
@@ -43,15 +43,15 @@ function clearusedQuestionsArray(): void {
 
 // ====================================== TOTAL TIME TIMER ==========================================
 
-let countUpTimerValue = parseInt(
-  localStorage.getItem('countUpTimerValue') ?? '0',
-  10
-);
+// let countUpTimerValue = parseInt(
+//   localStorage.getItem('countUpTimerValue') ?? '0',
+//   10
+// );
 
-let intervalId: number | undefined = undefined;
-let timerStopped = localStorage.getItem('timerStopped') === 'true';
+// let intervalId: number | undefined = undefined;
+// let timerStopped = localStorage.getItem('timerStopped') === 'true';
 
-const timerElement = document.querySelector('.timer') as HTMLDivElement;
+// const timerElement = document.querySelector('.timer') as HTMLDivElement;
 // const stoppedTimeElement = document.querySelector('#stoppedTimer') as HTMLDivElement;
 
 // get stopped time from localstorage
@@ -91,19 +91,19 @@ const timerElement = document.querySelector('.timer') as HTMLDivElement;
 
 // const stopTimeBtn: any = document.querySelector('.testTimer');
 
-function stopTimer(): void {
-  clearInterval(intervalId);
-  const currentTime = timerElement.innerText;
+// function stopTimer(): void {
+//   clearInterval(intervalId);
+//   const currentTime = timerElement.innerText;
 
-  localStorage.setItem('stoppedTime', currentTime);
-  console.log('Value in localStorage:', localStorage.getItem('stoppedTime'));
+//   localStorage.setItem('stoppedTime', currentTime);
+//   console.log('Value in localStorage:', localStorage.getItem('stoppedTime'));
 
-  // const stoppedTime = localStorage.getItem('stoppedTime');
-  timerStopped = true;
-  /* if (stoppedTime !== null && stoppedTime !== undefined) {
-    stoppedTimeElement.innerText = stoppedTime;
-  }  */
-}
+//   // const stoppedTime = localStorage.getItem('stoppedTime');
+//   timerStopped = true;
+//   /* if (stoppedTime !== null && stoppedTime !== undefined) {
+//     stoppedTimeElement.innerText = stoppedTime;
+//   }  */
+// }
 
 // stopTimeBtn.addEventListener('click', stopTimer);
 
