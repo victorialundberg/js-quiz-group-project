@@ -39,9 +39,9 @@ function saveToLocalStorage(): void {
   localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
 }
 // Clear current session (after 10 questions)
-function clearcurrentSessionArray(): void {
-  currentSessionArray = [];
-}
+// function clearcurrentSessionArray(): void {
+//   currentSessionArray = [];
+// }
 // Clear used questions (after 20 questions)
 function clearusedQuestionsArray(): void {
   localStorage.removeItem('usedQuestions');
