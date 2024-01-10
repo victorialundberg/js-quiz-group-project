@@ -27,13 +27,86 @@ const renderResults = function () {
             </div>
         </div>
 
-        <input type="text" class="input-name" placeholder="Your name here">
-        <a href="./highscorepage.html"><button class="next-button">Submit</button></a>
+        <div class="input-wrapper">HALLOJ</div>
         
     </div>
+    
   `;
     const resultsList = document.querySelector('.content-container');
     resultsList.innerHTML = resultHTML;
 };
 renderResults();
 console.log();
+// ==================================================================================================
+// -----------------------------------   HIGHSCORE CHECK   ------------------------------------------
+// ==================================================================================================
+// Funktion som tar in currentScore
+// Kollar highscore i local storage
+// function checkIfHighscore(): void {
+//   let highscoreListArrayString = localStorage.getItem('highScores');
+//   let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
+//   let lowestScore: number = highscoreListArray[9];
+//   if (currentScore > lowestScore) {
+//     renderInputField();
+//   } else {
+//     renderNextButton();
+//   }
+//   // if > index 9 run functions for
+//   // render input, from input:
+//   // add name
+//   // set highscore
+//   // store to local
+//   // else render next button
+//   // currentSession, set name
+// }
+function renderInputField() {
+    let currentScore = 750;
+    let lowestScore = 800;
+    let inputHTML = `
+  <input type="text" class="input-name" placeholder="Your name here">
+  <button class="submit-button">Next</button>
+  <button class="next-button">Next</button>
+  `;
+    // const resultsList: any = document.querySelector('.input-wrapper');
+    const resultsList = document.querySelector('.input-wrapper');
+    let highscoreListArrayString = localStorage.getItem('highScores');
+    let highscoreListArray = JSON.parse(highscoreListArrayString || '[]');
+    // let lowestScore: number = highscoreListArray[9];
+    if (currentScore > lowestScore) {
+        resultsList.innerHTML = inputHTML;
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.addEventListener('click', saveInputName);
+    }
+    else {
+        // const nextButton: any = document.querySelector('.next-button');
+        // navigateToHighscorePage();
+        console.log('Where is my ducking button');
+    }
+    // resultsList.innerHTML = inputHTML;
+}
+// function renderNextButton() {
+//   let inputHTML = `
+//     <button class="next-button">Next</button>`;
+//   const resultsList: any = document.querySelector('.input-wrapper');
+//   resultsList.innerHTML = inputHTML;
+// }
+function saveInputName() {
+    let nameInput = document.querySelector('.input-name');
+    if (nameInput) {
+        let name = nameInput.value;
+        localStorage.setItem('userName', name);
+        console.log(name);
+    }
+    else {
+        console.log('DUCK IT RIGHT');
+    }
+}
+// const navigateToHighscorePage = () => {
+//   // localStorage.setItem('startQuiz', 'true');
+//   window.location.href = './src/views/highscorepage.html';
+//   /* const currentPage = window.location.pathname;
+//   if (currentPage.includes('result')) {
+//   } */
+// };
+renderInputField();
+console.log('Hej');
