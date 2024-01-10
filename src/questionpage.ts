@@ -1,4 +1,5 @@
-import QuizQuestions from './models/Questions';
+import { images } from './models/Images';
+import { IQuizQuestion, QuizQuestions } from './models/Questions';
 
 // ==================================================================================================
 // ------------------------------------------   GLOBAL   --------------------------------------------
@@ -9,20 +10,29 @@ const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
 //   '.abort-quiz-button'
 // ) as HTMLAnchorElement;
 
-let questionCounter: number = 1;
+let questionCounter: number;
 
-let currentSessionArray: object[] = []; // Array for current session
-let usedQuestionsArray: object[] = []; // Array for questions used this and previous session
+let currentSessionArray: number[] = []; // Array for current session
+let usedQuestionsArray: IQuizQuestion[] = []; // Array for questions used this and previous session
 
 // Push rendered question into array for current session
-function addTocurrentSessionArray(question: object): void {
-  currentSessionArray.push(question);
+function addTocurrentSessionArray(id: number): void {
+  currentSessionArray.push(id);
 }
 
+// QuizQuestions.forEach((question) => {
+//   addTocurrentSessionArray(question.id);
+// });
+
+// QuizQuestions.forEach((question) => {
+//   addTocurrentSessionArray(question.id); // Pass the ID directly instead of the entire object
+// });
+
 // Clone the array for current session to array for used questions
-function addToUsedQuestionsArray(): void {
-  usedQuestionsArray = [...currentSessionArray];
-}
+// function addToUsedQuestionsArray(): void {
+// usedQuestionsArray.push(...currentSessionArray);
+// }
+
 // Stringify array for used questions and store in local storage
 function saveToLocalStorage(): void {
   const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
@@ -43,15 +53,15 @@ function clearusedQuestionsArray(): void {
 
 // ====================================== TOTAL TIME TIMER ==========================================
 
-// let countUpTimerValue = parseInt(
-//   localStorage.getItem('countUpTimerValue') ?? '0',
-//   10
-// );
+let countUpTimerValue = parseInt(
+  localStorage.getItem('countUpTimerValue') ?? '0',
+  10
+);
 
-// let intervalId: number | undefined = undefined;
+let intervalId: ReturnType<typeof setInterval>;
 // let timerStopped = localStorage.getItem('timerStopped') === 'true';
 
-// const timerElement = document.querySelector('.timer') as HTMLDivElement;
+const timerElement = document.querySelector('.timer') as HTMLDivElement;
 // const stoppedTimeElement = document.querySelector('#stoppedTimer') as HTMLDivElement;
 
 // get stopped time from localstorage
@@ -62,28 +72,28 @@ function clearusedQuestionsArray(): void {
   stoppedTimeElement.innerHTML = stoppedTime;
 }  */
 
-// function updateTimerDisplay(): void {
-//   const minutes = Math.floor(countUpTimerValue / 60);
-//   const seconds = countUpTimerValue % 60;
+function updateTimerDisplay(): void {
+  const minutes = Math.floor(countUpTimerValue / 60);
+  const seconds = countUpTimerValue % 60;
 
-//   const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-//   const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
+  const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+  const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
 
-//   timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
-// }
+  timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+}
 
-// function startTimer(): void {
-//   console.log('start timer');
-//   intervalId = setInterval(() => {
-//     countUpTimerValue += 1;
-//     updateTimerDisplay();
-//     if (countUpTimerValue >= 300) {
-//       stopTimer();
-//     }
-//   }, 1000);
+function startTimer(): void {
+  console.log('start timer');
+  intervalId = setInterval(() => {
+    countUpTimerValue += 1;
+    updateTimerDisplay();
+    if (countUpTimerValue >= 300) {
+      stopTimer();
+    }
+  }, 1000);
 
-//   updateTimerDisplay();
-// }
+  updateTimerDisplay();
+}
 
 /* if (nextButton !== null) {
   nextButton.addEventListener('click', stopTimer);
@@ -91,19 +101,19 @@ function clearusedQuestionsArray(): void {
 
 // const stopTimeBtn: any = document.querySelector('.testTimer');
 
-// function stopTimer(): void {
-//   clearInterval(intervalId);
-//   const currentTime = timerElement.innerText;
+function stopTimer(): void {
+  clearInterval(intervalId);
+  const currentTime = timerElement.innerText;
 
-//   localStorage.setItem('stoppedTime', currentTime);
-//   console.log('Value in localStorage:', localStorage.getItem('stoppedTime'));
+  localStorage.setItem('stoppedTime', currentTime);
+  console.log('Value in localStorage:', localStorage.getItem('stoppedTime'));
 
-//   // const stoppedTime = localStorage.getItem('stoppedTime');
-//   timerStopped = true;
-//   /* if (stoppedTime !== null && stoppedTime !== undefined) {
-//     stoppedTimeElement.innerText = stoppedTime;
-//   }  */
-// }
+  // const stoppedTime = localStorage.getItem('stoppedTime');
+  // timerStopped = true;
+  /* if (stoppedTime !== null && stoppedTime !== undefined) {
+    stoppedTimeElement.innerText = stoppedTime;
+  }  */
+}
 
 // stopTimeBtn.addEventListener('click', stopTimer);
 
@@ -123,40 +133,74 @@ function clearusedQuestionsArray(): void {
   localStorage.setItem('timerStopped', timerStopped.toString());
 } */
 
-// const currentPage = window.location.pathname;
+const currentPage = window.location.pathname;
 
-// if (currentPage.includes('question')) {
-//   startTimer();
-// }
+if (currentPage.includes('question')) {
+  startTimer();
+}
 
-// window.addEventListener('beforeunload', () => {
-//   localStorage.setItem('countUpTimerValue', countUpTimerValue.toString());
-//   localStorage.setItem('timerStopped', timerStopped.toString());
-// });
+/* window.addEventListener('beforeunload', () => {
+  localStorage.setItem('countUpTimerValue', countUpTimerValue.toString());
+  localStorage.setItem('timerStopped', timerStopped.toString());
+});
 
-// window.addEventListener('visibilitychange', () => {
-//   if (document.visibilityState === 'visible') {
-//     timerStopped = localStorage.getItem('timerStopped') === 'true';
-//     resumeTimer();
-//   }
-// });
+window.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    timerStopped = localStorage.getItem('timerStopped') === 'true';
+    resumeTimer();
+  }
+}); */
 
 // ====================================== COUNT DOWN TIMER ==========================================
+// let intervalId: ReturnType<typeof setInterval>;
 
-export function startCountdownTimer(): void {
+let timeLeft = 0;
+
+export function startCountdownTimer(
+  callback?: (timeLeft: number) => void
+): void {
   console.log('start count down 30sec');
-  let seconds = 5;
+  let seconds = 30;
 
-  const intervalId = setInterval(() => {
-    console.log(seconds);
-
+  intervalId = setInterval(() => {
     if (seconds === 0) {
-      clearInterval(intervalId);
-      console.log('GAME OVER');
+      stopCountDownTimer();
+      if (callback) {
+        callback(timeLeft);
+      }
     } else {
+      timeLeft = seconds;
       seconds--;
+      console.log(seconds);
+      if (callback) {
+        callback(timeLeft);
+      }
     }
   }, 1000);
+}
+
+function stopCountDownTimer(): number {
+  clearInterval(intervalId);
+  console.log('Time left:', timeLeft);
+
+  // Retrieve the current value from local storage and parse it as a number
+  const currentPoints = parseInt(
+    localStorage.getItem('timeToPoints') || '0',
+    10
+  );
+
+  // Add the current value of timeLeft to the existing points
+  const updatedPoints = currentPoints + timeLeft;
+
+  // Set the updated value in local storage
+  localStorage.setItem('timeToPoints', updatedPoints.toString());
+
+  return timeLeft;
+
+  // clearInterval(intervalId);
+  // console.log('Time left:', timeLeft);
+  // localStorage.setItem('timeToPoints:', timeLeft.toString());
+  // return timeLeft;
 }
 
 // ==================================================================================================
@@ -180,16 +224,17 @@ function resetQuestions(): void {
 // ==================================================================================================
 // -----------------------------------   RANDOM QUESTIONS   -----------------------------------------
 // ==================================================================================================
+
 const questionTextContainer: any = document.querySelector(
   '.question-text-container'
 );
 
-export function getRandomQuestion(): object | null {
+export function getRandomQuestion(): IQuizQuestion | null {
   if (QuizQuestions.length === 0) {
     return null;
   }
 
-  let randomQuestion: object | null = null;
+  let randomQuestion: IQuizQuestion | null = null;
   let attempts = 0;
   const maxAttempts = 3;
 
@@ -198,93 +243,79 @@ export function getRandomQuestion(): object | null {
     randomQuestion = QuizQuestions[randomIndex];
 
     const isQuestionUsed = usedQuestionsArray.some((usedQuestion) => {
-      return (usedQuestion as any).id === (randomQuestion as any).id;
+      return usedQuestion.id === randomQuestion!.id;
     });
 
     if (!isQuestionUsed) {
-      addTocurrentSessionArray(randomQuestion);
-      break;
+      usedQuestionsArray.push(randomQuestion); // Push the entire question object
+      return randomQuestion; // Return the whole question object
     }
 
     attempts++;
   } while (attempts < maxAttempts);
 
-  return randomQuestion;
+  return null; // Return null if no unique question found within attempts
 }
-
-// function getRandomObject<T>(array: T[]): T | undefined {
-//   console.error('from random gen');
-
-//   let randomIndex = Math.floor(Math.random() * array.length);
-//   let selectedQuestion = array[randomIndex];
-
-//   while (usedQuestionsArray.some((q) => q.id === selectedQuestion.id)) {
-//     randomIndex = Math.floor(Math.random() * array.length);
-//     selectedQuestion = array[randomIndex];
-//   }
-
-//   addToUsedQuestionsArray(selectedQuestion);
-
-//   return selectedQuestion;
-// }
 
 // ==================================================================================================
 // -------------------------------------   RENDER QUESTIONS   ---------------------------------------
 // ==================================================================================================
 
-export const renderQuestion = function (question: {
-  id?: number;
-  question: any;
-  answerOne?: string;
-  answerTwo?: string;
-  correctAnswer?: string;
-}): void {
+export const renderQuestion = function (question: IQuizQuestion | null): void {
   console.log('Rendering question:', question);
-  const html = `
-        <h2 class="question-counter">Question 1 / 10</h2>
-        
-        <p class="question-text">
-        ${question.question}
-        </p>
-        
-        <h3 class="answers">Answer Options</h3>
-        
-        <div class="answer-container">
-        
-        <label for="a1" class="answer-alternative">
-        <input type="radio" class="answer-button" name="radio" id="a1">
-        1. &nbsp;<span class="answer">${question.answerOne}</span>
-        </label>
-        
-        <label for="a2" class="answer-alternative">
-        <input type="radio" class="answer-button" name="radio" id="a2">
-        X. &nbsp; <span class="answer">${question.answerTwo}</span>
-        </label>
-        
-        <label for="a3" class="answer-alternative">
-        <input type="radio" class="answer-button" name="radio" id="a3">
-        2. &nbsp;<span class="answer">${question.correctAnswer}</span>
-        </label>
-        
-        </div>
-        `;
-  if (questionTextContainer) {
-    questionTextContainer.innerHTML = html;
+  if (question && question.id !== undefined) {
+    const html = `
+          <h2 class="question-counter">Question ${questionCounter + 1} / 10</h2>
+
+          <p class="question-text">
+          ${question.question}
+          </p>
+
+          <h3 class="answers">Answer Options</h3>
+
+          <div class="answer-container">
+
+          <label for="a1" class="answer-alternative">
+          <input type="radio" class="answer-button" name="radio" id="a1">
+          1. &nbsp;<span class="answer">${question.answerOne}</span>
+          </label>
+
+          <label for="a2" class="answer-alternative">
+          <input type="radio" class="answer-button" name="radio" id="a2">
+          X. &nbsp; <span class="answer">${question.answerTwo}</span>
+          </label>
+
+          <label for="a3" class="answer-alternative">
+          <input type="radio" class="answer-button" name="radio" id="a3">
+          2. &nbsp;<span class="answer">${question.correctAnswer}</span>
+          </label>
+
+          </div>
+          `;
+    if (questionTextContainer) {
+      questionTextContainer.innerHTML = html;
+    } else {
+      console.log('QT not found');
+    }
+    addTocurrentSessionArray(question.id);
+    countQuestions();
+    startTimer();
+    // startCountdownTimer();
   } else {
-    console.log('QT not found');
+    console.log('No ducking question found');
   }
-  addTocurrentSessionArray(QuizQuestions);
-  countQuestions();
-  startCountdownTimer();
 };
 
-// Render the random question
 export const newQuestion = function () {
+  countQuestions();
+  // const stoppedTime = stopCountDownTimer();
+  stopCountDownTimer();
+  startCountdownTimer();
   const randomQuestion = getRandomQuestion();
   if (randomQuestion) {
     renderQuestion(randomQuestion as any);
   } else {
-    console.log('No questions available.');
+    console.log('No ducking questions available.');
   }
 };
 
@@ -292,52 +323,46 @@ const startQuizFromStorage = localStorage.getItem('startQuiz');
 
 if (startQuizFromStorage === 'true') {
   newQuestion();
-
   localStorage.removeItem('startQuiz');
 }
 
 nextButton.addEventListener('click', newQuestion);
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   // Your code that accesses the DOM elements goes here
-//   const nextButton = document.querySelector('#nextButton');
-//   if (nextButton) {
-//     nextButton.addEventListener('click', newQuestion);
-//   } else {
-//     console.error('Next button not found.');
-//   }
-// });
-
-// Add rendered question to currentSessionArray
-// addTocurrentSessionArray(QuizQuestions);
-// Update questionCounter
-// countQuestions();
-
 // ==================================================================================================
 // ----------------------------------   QUESTION COUNTER   ------------------------------------------
 // ==================================================================================================
 
+const navigateToResultPage = () => {
+  window.location.href = 'resultpage.html';
+};
+
 function countQuestions(): void {
   // Calculate length and add 1 (for next question)
-  questionCounter = currentSessionArray.length + 1;
-  if (questionCounter < 10) {
+  // questionCounter = currentSessionArray.length + 1;
+  questionCounter = currentSessionArray.length;
+  if (currentSessionArray.length <= 10) {
     // Check if used and renderQuestion()?
+    console.log('Length num Q', questionCounter);
+
     // ---- code ----
-  } else {
-    // Push this sessions questions into array for used question
-    addToUsedQuestionsArray();
+  }
+
+  if (currentSessionArray.length === 10) {
+    // alert('YOU ARE DONE');
+    nextButton.addEventListener('click', navigateToResultPage);
     // Save array for used questions to local storage
     saveToLocalStorage();
     // checkIfHighscore();
-    // Render result/use the array
+    // Use the array
     // ---- code ----
     // Clear current session
-    clearcurrentSessionArray();
+    // clearcurrentSessionArray();
     // When used question array is at 20, clear
-    if (usedQuestionsArray.length > 19) {
+    if (usedQuestionsArray.length > 20) {
       clearusedQuestionsArray();
     }
   }
+  console.log('current session:', currentSessionArray);
 }
 
 // ==================================================================================================
@@ -347,18 +372,63 @@ function countQuestions(): void {
 // function checkAnswer() {
 //   const selectedAnswer = document.querySelector(
 //     'input[name="radio"]:checked'
-//   ) as HTMLInputElement; //??
+//   ) as HTMLInputElement;
 
 //   if (selectedAnswer) {
 //     const userAnswer = selectedAnswer.value;
-//     const correctAnswer = QuizQuestions.correctAnswer;
+//     //const correctAnswer = {}; //! connect this to quizquestions array
+//     const correctAnswer = QuizQuestions[currentQuestion].correctAnswer;
 
 //     if (userAnswer === correctAnswer) {
+//       calculateScore();
 //       console.log('correct answer selected!');
 //     } else {
+//       score = 0;
 //       console.log('incorrect answer selected!');
 //     }
+//     console.log('Points:', score);
 //   }
 // }
-//! Adjust to make it work..
+
+// checkAnswer();
 //? Save answer to localStorage? currentSession?
+// ==================================================================================================
+// -----------------------------------   CALCULATE POINTS   -----------------------------------------
+// ==================================================================================================
+// let score = 0;
+
+// function calculateScore(): void {
+//   score = Math.max(0, 30 - startCountdownTimer());
+//   console.log('Points:', score);
+// }
+// ==================================================================================================
+// --------------------------------------   RENDER IMAGE   ------------------------------------------
+// ==================================================================================================
+
+function renderImage(): void {
+  for (let i: number = 0; i < 20; i++) {
+    let imageSrc: string = images[i].src;
+    let imageAlt: string = images[i].alt;
+
+    let imageHTML = `
+
+    <img
+      src="${imageSrc}"
+      alt="${imageAlt}"
+      width = 640
+      heigth = 420>
+    `;
+
+    const imageContainer: any = document.querySelector('.img-container');
+    imageContainer.innerHTML = imageHTML;
+
+    if (i > 19) {
+      i = 0;
+    }
+  }
+}
+// call function in right place - when rendering a question?
+const renderImageBool: boolean = false;
+if (renderImageBool) {
+  renderImage();
+}

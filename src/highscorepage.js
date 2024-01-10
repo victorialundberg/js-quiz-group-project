@@ -33,12 +33,21 @@ const renderHighscoreList = function () {
     highscoreHTML += `
         </div>
     </div>
-    <a href="../../src/views/questionpage.html?questionId=1">
+    
       <button class="next-button" id="playAgainButton">Play again</button>
-    </a>
-  `;
+    
+      `;
     //!
     const highscoreListContainer = document.querySelector('.content-container');
     highscoreListContainer.innerHTML = highscoreHTML;
+    const playAgainButton = document.querySelector('#playAgainButton');
+    playAgainButton.addEventListener('click', startQuiz);
+};
+const navigateToQuestionPage = () => {
+    localStorage.setItem('startQuiz', 'true');
+    window.location.href = 'questionpage.html';
+};
+const startQuiz = function () {
+    navigateToQuestionPage();
 };
 renderHighscoreList();

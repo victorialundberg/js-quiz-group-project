@@ -474,6 +474,21 @@ main a {
 .result-text-container .answers-container .answer span {
   font-family: "Roboto Condensed", sans-serif;
 }
+.result-text-container .submit-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+  align-self: flex-end;
+  margin-right: 2rem;
+  background-color: #fff500;
+  height: 2.625rem;
+  width: 9.375rem;
+  border: none;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  font-family: "Irish Grover", sans-serif;
+  font-size: 1.5984rem;
+}
 
 .highscore-title {
   width: 100%;

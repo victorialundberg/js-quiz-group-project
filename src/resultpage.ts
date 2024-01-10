@@ -1,36 +1,51 @@
 const renderResults = function (): void {
+  const storedQuestions = localStorage.getItem('usedQuestions');
+  const result = storedQuestions ? JSON.parse(storedQuestions) : [];
+
   let resultHTML = `
-    <div class="result-text-container">
-        <div class="result-title-your-result">
-            <h2 class="result-title">Results</h2>
-            <p class="your-result">You got 4/10 correct answers</p>
-        </div>
-
-        <div class="answers-container">
-            <h3 class="answers-title">Your answers</h3>
-
-            <div class="answers-1to5">
-                <p class="answer">1. <span>-</span></p>
-                <p class="answer">2. <span>-</span></p>
-                <p class="answer">3. <span>-</span></p>
-                <p class="answer">4. <span>-</span></p>
-                <p class="answer">5. <span>-</span></p>
-            </div>
-
-            <div class="answers-6to10">
-                <p class="answer">6. <span>-</span></p>
-                <p class="answer">7. <span>eflknsdlfkn</span></p>
-                <p class="answer">8. <span>-</span></p>
-                <p class="answer">9. <span>-</span></p>
-                <p class="answer">10. <span>-</span></p>
-            </div>
-        </div>
-
-        <div class="input-wrapper">HALLOJ</div>
-        
+  <div class="result-text-container">
+  <div class="result-title-your-result">
+  <h2 class="result-title">Results</h2>
+  <p class="your-result">You got 4/10 correct answers</p>
+  </div>
+  
+  <div class="answers-container">
+  <h3 class="answers-title">Your answers</h3>
+  
+  <div class="answers-1to5">
+      ${result
+        .slice(0, 5)
+        .map(
+          (questionObj: any, index: number) => `
+              <p class="answer">${index + 1}. <span>${
+                questionObj.correctAnswer
+              }</span></p>
+            `
+        )
+        .join('')}
     </div>
-    
+  
+  <div class="answers-6to10">
+  ${result
+    .slice(5, 10)
+    .map(
+      (questionObj: any, index: number) => `
+              <p class="answer">${index + 6}. <span>${
+                questionObj.correctAnswer
+              }</span></p>
+            `
+    )
+    .join('')}
+  </div>
+  </div>
+  
+  <div class="input-wrapper">HALLOJ</div>
+  
+  </div>
+  
   `;
+
+  console.log(result);
 
   const resultsList: any = document.querySelector('.content-container');
 
@@ -70,21 +85,25 @@ console.log();
 // }
 
 function renderInputField() {
-  let currentScore: number = 750;
-  let lowestScore: number = 800;
+  let currentScore: number = 100;
+  // let lowestScore: number = 500;
 
   let inputHTML = `
   <input type="text" class="input-name" placeholder="Your name here">
-  <button class="submit-button">Next</button>
+  <button class="submit-button">Submit</button>
+  `;
+
+  let inputNotHighscoreHTML = `
   <button class="next-button">Next</button>
+
   `;
 
   // const resultsList: any = document.querySelector('.input-wrapper');
   const resultsList: any = document.querySelector('.input-wrapper');
 
-  // let highscoreListArrayString = localStorage.getItem('highScores');
-  // let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
-  // let lowestScore: number = highscoreListArray[9];
+  let highscoreListArrayString = localStorage.getItem('highScores');
+  let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
+  let lowestScore: number = highscoreListArray[9]._totalPoints;
 
   if (currentScore > lowestScore) {
     resultsList.innerHTML = inputHTML;
@@ -94,6 +113,10 @@ function renderInputField() {
     ) as HTMLButtonElement | null;
     submitButton.addEventListener('click', saveInputName);
   } else {
+    resultsList.innerHTML = inputNotHighscoreHTML;
+
+    const navigateToHighscoreBtn: any = document.querySelector('.next-button');
+    navigateToHighscoreBtn.addEventListener('click', navigateToHighscorePage);
     // const nextButton: any = document.querySelector('.next-button');
     // navigateToHighscorePage();
     console.log('Where is my ducking button');
@@ -114,23 +137,17 @@ function saveInputName() {
     '.input-name'
   ) as HTMLInputElement | null;
   if (nameInput) {
-    let name = nameInput.value;
-    localStorage.setItem('userName', name);
-    console.log(name);
+    let _name = nameInput.value;
+    localStorage.setItem('userName', _name);
+    console.log(_name);
   } else {
     console.log('DUCK IT RIGHT');
   }
 }
 
-// const navigateToHighscorePage = () => {
-//   // localStorage.setItem('startQuiz', 'true');
-//   window.location.href = './src/views/highscorepage.html';
-
-//   /* const currentPage = window.location.pathname;
-
-//   if (currentPage.includes('result')) {
-//   } */
-// };
+const navigateToHighscorePage = () => {
+  window.location.href = 'highscorepage.html';
+};
 
 renderInputField();
 console.log('Hej');

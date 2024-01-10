@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { ScoreItem } from './Score';
 
-interface Score {
+interface IScore {
   list: ScoreItem[];
   load(): void;
   save(): void;
@@ -10,7 +10,7 @@ interface Score {
   sort(): void;
 }
 
-class HighscoreList implements Score {
+class HighscoreList implements IScore {
   static instance: HighscoreList = new HighscoreList();
 
   private constructor(private _list: ScoreItem[] = []) {}

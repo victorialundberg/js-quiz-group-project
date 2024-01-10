@@ -1,4 +1,12 @@
-const QuizQuestions = [
+export interface IQuizQuestion {
+  id: number;
+  question: string;
+  answerOne: string;
+  answerTwo: string;
+  correctAnswer: string;
+}
+
+export const QuizQuestions: IQuizQuestion[] = [
   {
     id: 1,
     question:
@@ -209,5 +217,3 @@ const QuizQuestions = [
     correctAnswer: 'Quack Essence',
   },
 ];
-
-export default QuizQuestions;

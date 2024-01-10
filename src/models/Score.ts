@@ -1,5 +1,5 @@
 /* eslint-disable comma-dangle */
-interface Score {
+interface IScore {
   id: number;
   name: string;
   //   countDownToPoints: number;
@@ -7,7 +7,7 @@ interface Score {
   totalTime: number;
 }
 
-class ScoreItem implements Score {
+class ScoreItem implements IScore {
   constructor(
     private _id: number,
     private _name: string,
@@ -58,4 +58,4 @@ class ScoreItem implements Score {
 }
 
 export { ScoreItem };
-export type { Score };
+export type { IScore };

@@ -47,6 +47,21 @@
       }
     }
   }
+  .submit-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 0;
+    align-self: flex-end;
+    margin-right: 2rem;
+    background-color: color(header);
+    height: 2.625rem;
+    width: 9.375rem;
+    border: none;
+    border-radius: 1.25rem;
+    cursor: pointer;
+    font-family: $font-grover;
+    font-size: fontSize(sm) * 0.888;
+  }
 
   /* .input-name {
     font-family: $font-grover;
