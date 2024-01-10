@@ -58,7 +58,7 @@ const renderHighscoreList = function (): void {
 
 const navigateToQuestionPage = () => {
   localStorage.setItem('startQuiz', 'true');
-  window.location.href = 'questionpage.html';
+  window.location.href = './questionpage.html';
 };
 
 const startQuiz = function () {

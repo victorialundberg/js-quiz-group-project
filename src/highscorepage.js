@@ -45,7 +45,7 @@ const renderHighscoreList = function () {
 };
 const navigateToQuestionPage = () => {
     localStorage.setItem('startQuiz', 'true');
-    window.location.href = 'questionpage.html';
+    window.location.href = './questionpage.html';
 };
 const startQuiz = function () {
     navigateToQuestionPage();

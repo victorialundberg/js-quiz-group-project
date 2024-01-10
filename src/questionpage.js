@@ -265,7 +265,7 @@ nextButton.addEventListener('click', newQuestion);
 // ----------------------------------   QUESTION COUNTER   ------------------------------------------
 // ==================================================================================================
 const navigateToResultPage = () => {
-    window.location.href = 'resultpage.html';
+    window.location.href = './resultpage.html';
 };
 function countQuestions() {
     // Calculate length and add 1 (for next question)

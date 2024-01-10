@@ -113,7 +113,7 @@ function saveInputName() {
     }
 }
 const navigateToHighscorePage = () => {
-    window.location.href = 'highscorepage.html';
+    window.location.href = './highscorepage.html';
 };
 renderInputField();
 console.log('Hej');

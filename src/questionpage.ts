@@ -333,7 +333,7 @@ nextButton.addEventListener('click', newQuestion);
 // ==================================================================================================
 
 const navigateToResultPage = () => {
-  window.location.href = 'resultpage.html';
+  window.location.href = './resultpage.html';
 };
 
 function countQuestions(): void {
