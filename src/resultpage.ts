@@ -82,8 +82,8 @@ function renderInputField() {
   // const resultsList: any = document.querySelector('.input-wrapper');
   const resultsList: any = document.querySelector('.input-wrapper');
 
-  let highscoreListArrayString = localStorage.getItem('highScores');
-  let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
+  // let highscoreListArrayString = localStorage.getItem('highScores');
+  // let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
   // let lowestScore: number = highscoreListArray[9];
 
   if (currentScore > lowestScore) {
