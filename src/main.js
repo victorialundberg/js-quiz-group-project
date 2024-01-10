@@ -1,5 +1,5 @@
-import { HighscoreList } from './models/HighscoreList';
-import { ScoreItem } from './models/Score';
+import { HighscoreList } from './models/HighscoreList.js';
+import { ScoreItem } from './models/Score.js';
 // import { startCountdownTimer } from './questionpage';
 // import { getRandomQuestion, renderQuestion, newQuestion } from './questionpage';
 // localStorage.clear();
@@ -32,16 +32,18 @@ highscoreList.save();
 const scores = highscoreList.list;
 console.log('High Scores:');
 scores.forEach((score) => {
-    console.log(`ID: ${score.id}, Name: ${score.name}, Points: ${score.totalPoints}, Time: ${score.totalTime}`);
+  console.log(
+    `ID: ${score.id}, Name: ${score.name}, Points: ${score.totalPoints}, Time: ${score.totalTime}`
+  );
 });
 const navigateToQuestionPage = () => {
-    localStorage.setItem('startQuiz', 'true');
-    window.location.href = './src/views/questionpage.html';
+  localStorage.setItem('startQuiz', 'true');
+  window.location.href = './src/views/questionpage.html';
 };
 const startBtn = document.querySelector('.start-quiz-button');
 const startQuiz = function () {
-    navigateToQuestionPage();
-    // startCountdownTimer();
+  navigateToQuestionPage();
+  // startCountdownTimer();
 };
 startBtn.addEventListener('click', startQuiz);
 // // import HighscoreList from './models/HighscoreList';
