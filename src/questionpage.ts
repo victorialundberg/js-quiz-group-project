@@ -1,5 +1,5 @@
-import { images } from './models/Images';
-import { IQuizQuestion, QuizQuestions } from './models/Questions';
+import { images } from './models/Images.js';
+import { IQuizQuestion, QuizQuestions } from './models/Questions.js';
 
 // ==================================================================================================
 // ------------------------------------------   GLOBAL   --------------------------------------------

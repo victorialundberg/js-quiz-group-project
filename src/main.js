@@ -1,5 +1,5 @@
-import { HighscoreList } from './models/HighscoreList';
-import { ScoreItem } from './models/Score';
+import { HighscoreList } from './models/HighscoreList.js';
+import { ScoreItem } from './models/Score.js';
 const score = new ScoreItem(1, 'Jari', 200, 120);
 const score2 = new ScoreItem(1, 'Linda', 200, 120);
 const score3 = new ScoreItem(1, 'Jenni', 200, 120);
