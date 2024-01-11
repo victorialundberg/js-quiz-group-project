@@ -34,7 +34,8 @@ const renderHighscoreList = function () {
         </div>
     </div>
     
-      <button class="next-button" id="playAgainButton">Play again</button>
+      <button class="next-button" id="playAgainButton" aria-label="next-button"><img src="../assets/images/ducks-with-signs/PlayAgainDuck.webp"
+      alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
     
       `;
     //!

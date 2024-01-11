@@ -1,47 +1,64 @@
+const printTime = localStorage.getItem('stoppedTime');
+const abortQuizButton = document.querySelector(
+  '.abort-quiz-button'
+) as HTMLAnchorElement;
+
+const clearStorage = function () {
+  localStorage.removeItem('answers');
+  localStorage.removeItem('timeToPoints');
+  localStorage.removeItem('stoppedTime');
+  localStorage.removeItem('correctAnswersCount');
+};
+
+abortQuizButton.addEventListener('click', clearStorage);
+
 const renderResults = function (): void {
-  const storedQuestions = localStorage.getItem('usedQuestions');
+  const storedQuestions = localStorage.getItem('answers');
   const result = storedQuestions ? JSON.parse(storedQuestions) : [];
+  const correctAnswersCount = localStorage.getItem('correctAnswersCount');
 
   let resultHTML = `
-  <div class="result-text-container">
-  <div class="result-title-your-result">
-  <h2 class="result-title">Results</h2>
-  <p class="your-result">You got 4/10 correct answers</p>
-  </div>
+   <div class="result-text-container">
+   <div class="result-title-your-result">
+   <h2 class="result-title">Results</h2>
+   <p class="your-result">You got ${
+     correctAnswersCount || 0
+   }/10 correct answers</p>
+   </div>
   
-  <div class="answers-container">
-  <h3 class="answers-title">Your answers</h3>
+   <div class="answers-container">
+   <h3 class="answers-title">Your answers</h3>
   
-  <div class="answers-1to5">
+   <div class="answers-1to5">
       ${result
         .slice(0, 5)
         .map(
           (questionObj: any, index: number) => `
               <p class="answer">${index + 1}. <span>${
-                questionObj.correctAnswer
+                questionObj.answer
               }</span></p>
             `
         )
         .join('')}
     </div>
   
-  <div class="answers-6to10">
-  ${result
-    .slice(5, 10)
-    .map(
-      (questionObj: any, index: number) => `
+   <div class="answers-6to10">
+   ${result
+     .slice(5, 10)
+     .map(
+       (questionObj: any, index: number) => `
               <p class="answer">${index + 6}. <span>${
-                questionObj.correctAnswer
+                questionObj.answer
               }</span></p>
             `
-    )
-    .join('')}
-  </div>
-  </div>
+     )
+     .join('')}
+   </div>
+   </div>
   
-  <div class="input-wrapper">HALLOJ</div>
+   <div class="input-wrapper">HALLOJ</div>
   
-  </div>
+   </div>
   
   `;
 
@@ -52,7 +69,29 @@ const renderResults = function (): void {
   resultsList.innerHTML = resultHTML;
 };
 
+const pointsCounter = document.querySelector('.points');
+const renderPoints: any = function () {
+  const storedPoints = localStorage.getItem('timeToPoints') || 0;
+
+  if (pointsCounter) {
+    const pointsHTML = `
+    <p class="points-counter">Points: <span class="number">${storedPoints}</span></p>
+    `;
+    pointsCounter.innerHTML = pointsHTML;
+  }
+};
+
+const renderTimer: any = function () {
+  const timerElement = document.querySelector('.timer') as HTMLDivElement;
+
+  if (timerElement) {
+    timerElement.innerText = `${printTime}`;
+  }
+};
+
 renderResults();
+renderPoints();
+renderTimer();
 console.log();
 
 // ==================================================================================================
@@ -85,16 +124,18 @@ console.log();
 // }
 
 function renderInputField() {
-  let currentScore: number = 100;
+  let currentScore: number = 500;
   // let lowestScore: number = 500;
 
   let inputHTML = `
   <input type="text" class="input-name" placeholder="Your name here">
-  <button class="submit-button">Submit</button>
+  <button class="submit-button" aria-label="submit-button"><img src="../assets/images/ducks-with-signs/SubmitDuck.webp"
+  alt="Duck with sign saying 'submit'" width="130" height="100" loading="lazy"></button>
   `;
 
   let inputNotHighscoreHTML = `
-  <button class="next-button">Next</button>
+  <button class="next-button" aria-label="next-button"><img src="../assets/images/ducks-with-signs/NextDuck.webp"
+  alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
 
   `;
 
@@ -112,6 +153,7 @@ function renderInputField() {
       '.submit-button'
     ) as HTMLButtonElement | null;
     submitButton.addEventListener('click', saveInputName);
+    submitButton.addEventListener('click', navigateToHighscorePage);
   } else {
     resultsList.innerHTML = inputNotHighscoreHTML;
 
@@ -147,6 +189,10 @@ function saveInputName() {
 
 const navigateToHighscorePage = () => {
   window.location.href = './highscorepage.html';
+  localStorage.removeItem('answers');
+  localStorage.removeItem('timeToPoints');
+  localStorage.removeItem('stoppedTime');
+  localStorage.removeItem('correctAnswersCount');
 };
 
 renderInputField();

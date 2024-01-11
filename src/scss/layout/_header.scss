@@ -14,15 +14,16 @@
     @include flexCenter;
     grid-area: 1 / 1 / 2 / 2;
     border: none;
-    min-width: fontSize(xl) * 3;
-    //width: 18svw;
-    height: 7svh;
-    border-radius: 20px;
-    font-size: fontSize(xs);
+    // min-width: fontSize(xl) * 3;
+    width: 125px;
+    height: 100px;
+    // border-radius: 20px;
+    // font-size: fontSize(xs);
     cursor: pointer;
-    background-color: color(abort);
-    font-family: $font-grover;
-    color: white;
+    // background-color: color(abort);
+    background-color: transparent;
+    // font-family: $font-grover;
+    // color: white;
     align-self: center;
     justify-self: center;
   }

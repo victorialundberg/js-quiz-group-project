@@ -7,6 +7,8 @@ export const QuizQuestions = [
         answerOne: '12 meters, of course',
         answerTwo: 'Depends on the direction of the wind',
         correctAnswer: '8 meters; you haven´t picked it up yet',
+        alt: 'black rubber duck with text saying "system failure" and random numbers displayed vertically',
+        src: '../assets/images/system-failure-duck.webp',
     },
     {
         id: 2,
@@ -14,15 +16,19 @@ export const QuizQuestions = [
         answerOne: 'Sink',
         answerTwo: 'Be chewed on',
         correctAnswer: 'Float',
+        alt: 'rubber duck sitting by a computer',
+        src: '../assets/images/programmer-duck.webp',
     },
     {
         id: 3,
         question: 
         // eslint-disable-next-line max-len
         'Lizzy the duck was faster than Bob the duck at swimming. Bob was faster than Lizzy at flying. Lizzy was yellower than Bob. What color is Bob?',
-        answerOne: 'Yellow',
-        answerTwo: 'Orange',
-        correctAnswer: 'Red',
+        answerOne: 'Red',
+        answerTwo: 'Yellow',
+        correctAnswer: 'Orange',
+        alt: 'cute rubber duck with big eyes, having a red text in front of it, saying "Ready, set, go!"',
+        src: '../assets/images/ready-set-go.webp',
     },
     {
         id: 4,
@@ -30,6 +36,8 @@ export const QuizQuestions = [
         answerOne: 'Ducking responsibilities',
         answerTwo: 'Quacking jokes at a comedy club',
         correctAnswer: 'Taking a relaxing bubble bath',
+        alt: 'relaxed rubber duck taking a bubble bath',
+        src: '../assets/images/bubble-bath.webp',
     },
     {
         id: 5,
@@ -37,6 +45,8 @@ export const QuizQuestions = [
         answerOne: 'Rubber ducks have been employed to study the migratory patterns of deep-sea creatures.',
         answerTwo: 'Rubber ducks have been utilized to map underwater geological features and topography.',
         correctAnswer: 'Rubber ducks have been used to measure ocean currents.',
+        alt: 'rubber duck in clear water with a group of blurry rubber ducks behind it',
+        src: '../assets/images/duckrace.webp',
     },
     {
         id: 6,
@@ -44,6 +54,8 @@ export const QuizQuestions = [
         answerOne: 'The Nobel Quackson Prize',
         answerTwo: 'The Ducky Distinguished Award',
         correctAnswer: 'The Golden Quacker Prize',
+        alt: 'yellow rubber duck with blue eyes, wearing a colorful sombrero',
+        src: '../assets/images/sombrero.webp',
     },
     {
         id: 7,
@@ -51,6 +63,8 @@ export const QuizQuestions = [
         answerOne: 'Maybe 20?',
         answerTwo: '500 sounds reasonable',
         correctAnswer: 'As many as you put in',
+        alt: 'lots of rubber ducks in a pile',
+        src: '../assets/images/rubberduckies.webp',
     },
     {
         id: 8,
@@ -58,6 +72,8 @@ export const QuizQuestions = [
         answerOne: 'Anti-slip bottoms for bathtub stability',
         answerTwo: 'Buoyancy control to prevent tipping',
         correctAnswer: 'Non-toxic materials for safe chewing',
+        alt: 'rubber duck wearing a red t-shirt that says "Game Over", holding a gamepad',
+        src: '../assets/images/game-over.webp',
     },
     {
         id: 9,
@@ -65,6 +81,8 @@ export const QuizQuestions = [
         answerOne: 'Latex',
         answerTwo: 'Silicone',
         correctAnswer: 'Vinyl',
+        alt: 'an ordinary yellow and happy rubber duck',
+        src: '../assets/images/happy-duck.webp',
     },
     {
         id: 10,
@@ -72,6 +90,8 @@ export const QuizQuestions = [
         answerOne: 'Temperature resistance',
         answerTwo: 'Phthalate-free composition',
         correctAnswer: 'Flotation efficiency',
+        alt: 'rubber duck wearing a cap that says "bye bye", holding a napkin and has a teardrop from it´s eye',
+        src: '../assets/images/sad-duck-bye.webp',
     },
     {
         id: 11,
@@ -79,6 +99,8 @@ export const QuizQuestions = [
         answerOne: 'Finding Nemo',
         answerTwo: 'The Little Mermaid',
         correctAnswer: 'Toy Story',
+        alt: 'four rubber ducks in swimwear, holding surfboards',
+        src: '../assets/images/surfer-ducks.webp',
     },
     {
         id: 12,
@@ -86,6 +108,8 @@ export const QuizQuestions = [
         answerOne: 'Helsinki',
         answerTwo: 'Tokyo',
         correctAnswer: 'Amsterdam',
+        alt: 'one superlarge rubber duck',
+        src: '../assets/images/large-duckie.webp',
     },
     {
         id: 13,
@@ -93,6 +117,8 @@ export const QuizQuestions = [
         answerOne: 'Ducky Drift',
         answerTwo: 'Aqua Migration',
         correctAnswer: 'Oceanic Quackflow',
+        alt: 'lots of colorful rubber ducks washed up on shore',
+        src: '../assets/images/at-the-lake.webp',
     },
     {
         id: 14,
@@ -100,6 +126,8 @@ export const QuizQuestions = [
         answerOne: 'Quackers United',
         answerTwo: 'The Rubber Alliance',
         correctAnswer: 'Illumiquacki',
+        alt: 'purple rubber duck with hair and a horn like a unicorn',
+        src: '../assets/images/unicorn-rubber-duck.webp',
     },
     {
         id: 15,
@@ -107,6 +135,8 @@ export const QuizQuestions = [
         answerOne: 'Duckling Diving',
         answerTwo: 'Waddle Marathon',
         correctAnswer: 'Synchronized Quacking',
+        alt: 'rubber duck dressed in blue cheerleading outfit holding pom-poms',
+        src: '../assets/images/blue-cheer-duck.webp',
     },
     {
         id: 16,
@@ -114,6 +144,8 @@ export const QuizQuestions = [
         answerOne: 'Jazz Ducktette',
         answerTwo: 'Hip-Hop Quackadelic',
         correctAnswer: 'Classical Quackphony',
+        alt: 'rubber duck wearing sunglasses, floating in clear water',
+        src: '../assets/images/cool-duck.webp',
     },
     {
         id: 17,
@@ -121,6 +153,8 @@ export const QuizQuestions = [
         answerOne: 'Duckbeard the Plunderer',
         answerTwo: 'Black Beak the Buccaneer',
         correctAnswer: 'Captain Quack Sparrow',
+        alt: 'rubber duck in pirate outfit with a hook on the left wing, and holding a sword with the other',
+        src: '../assets/images/pirate-duck.webp',
     },
     {
         id: 18,
@@ -128,6 +162,8 @@ export const QuizQuestions = [
         answerOne: 'Yoga Duckpose',
         answerTwo: 'Tranquil Waddling',
         correctAnswer: 'Zen Quacktation',
+        alt: 'clear pool water with a curious-looking rubber duck in the lower right corner',
+        src: '../assets/images/pool-duck.webp',
     },
     {
         id: 19,
@@ -135,6 +171,8 @@ export const QuizQuestions = [
         answerOne: 'Solo Duckist',
         answerTwo: 'Quacktet',
         correctAnswer: 'Duckharmonic Ensemble',
+        alt: 'lots of rubber ducks in rows',
+        src: '../assets/images/rows-of-ducks.webp',
     },
     {
         id: 20,
@@ -142,6 +180,8 @@ export const QuizQuestions = [
         answerOne: 'Aqua Agility Challenge',
         answerTwo: 'Tubstacle Trials',
         correctAnswer: 'Slippery Slide Sprint',
+        alt: 'rubber duck dressed in red cheerleading outfit holding pom-poms',
+        src: '../assets/images/cheerleader.webp',
     },
     {
         id: 21,
@@ -149,6 +189,8 @@ export const QuizQuestions = [
         answerOne: 'The Noble Quackson Laureate',
         answerTwo: 'Duckovation Prize',
         correctAnswer: 'Quackademic Excellence Award',
+        alt: 'rubber duck holding a star shaped sign saying congratulations, and three balloons',
+        src: '../assets/images/congratulations.webp',
     },
     {
         id: 22,
@@ -156,6 +198,8 @@ export const QuizQuestions = [
         answerOne: 'Waddle Code',
         answerTwo: 'Floatation Chatter',
         correctAnswer: 'Quackmunication',
+        alt: 'four rubber ducks floating in a line',
+        src: '../assets/images/ducks-in-line.webp',
     },
     {
         id: 23,
@@ -163,6 +207,8 @@ export const QuizQuestions = [
         answerOne: 'Duckish Fairy Quacks',
         answerTwo: 'Quacktion Adventures',
         correctAnswer: 'Bedtime Quacktales',
+        alt: 'an angry-looking rubber duck disguised as batman',
+        src: '../assets/images/angry-batman.webp',
     },
     {
         id: 24,
@@ -170,6 +216,8 @@ export const QuizQuestions = [
         answerOne: 'Waddlecakes with Syrup',
         answerTwo: 'Duckling Dumplings',
         correctAnswer: 'Quackaroni and Cheese',
+        alt: 'rubber duck wearing chef´s outfit holding a cookbook and a covered plate',
+        src: '../assets/images/chef-duck.webp',
     },
     {
         id: 25,
@@ -177,6 +225,8 @@ export const QuizQuestions = [
         answerOne: 'Quack Couture',
         answerTwo: 'Feathery Fashionista',
         correctAnswer: 'Dapper Duck Ensemble',
+        alt: 'rubber ducks in wedding attire',
+        src: '../assets/images/wedding-ducks.webp',
     },
     {
         id: 26,
@@ -184,5 +234,7 @@ export const QuizQuestions = [
         answerOne: 'Paddle Spice',
         answerTwo: 'Waddle Wonder Herb',
         correctAnswer: 'Quack Essence',
+        alt: 'four rubber ducks wearing partyhats and holding gifts',
+        src: '../assets/images/party-ducks.webp',
     },
 ];

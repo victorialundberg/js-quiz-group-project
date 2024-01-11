@@ -1,19 +1,31 @@
-import { images } from './models/Images.js';
+// import { images } from './models/Images.js';
 import { QuizQuestions } from './models/Questions.js';
 // ==================================================================================================
 // ------------------------------------------   GLOBAL   --------------------------------------------
 // ==================================================================================================
 const nextButton = document.querySelector('#nextButton');
-// const abortQuizButton = document.querySelector(
-//   '.abort-quiz-button'
-// ) as HTMLAnchorElement;
-let questionCounter;
-let currentSessionArray = []; // Array for current session
-let usedQuestionsArray = []; // Array for questions used this and previous session
-// Push rendered question into array for current session
-function addTocurrentSessionArray(id) {
-    currentSessionArray.push(id);
-}
+const pointsCounter = document.querySelector('.points');
+const abortQuizButton = document.querySelector('.abort-quiz-button');
+const clearStorage = function () {
+    localStorage.removeItem('answers');
+    localStorage.removeItem('timeToPoints');
+    localStorage.removeItem('stoppedTime');
+    localStorage.removeItem('correctAnswersCount');
+};
+abortQuizButton.addEventListener('click', clearStorage);
+const renderPoints = function () {
+    // const storedPoints = parseInt(localStorage.getItem('timeToPoints')) || 0;
+    const storedPoints = localStorage.getItem('timeToPoints') || 0;
+    if (pointsCounter) {
+        const pointsHTML = `
+    <p class="points-counter">Points: <span class="number">${storedPoints}</span></p>
+    `;
+        pointsCounter.innerHTML = pointsHTML;
+    }
+    else {
+        console.log('Element not found');
+    }
+};
 // QuizQuestions.forEach((question) => {
 //   addTocurrentSessionArray(question.id);
 // });
@@ -42,7 +54,8 @@ function clearusedQuestionsArray() {
 // ==================================================================================================
 // ====================================== TOTAL TIME TIMER ==========================================
 let countUpTimerValue = parseInt(localStorage.getItem('countUpTimerValue') ?? '0', 10);
-let intervalId;
+let countUpIntervalId;
+let countDownIntervalId;
 // let timerStopped = localStorage.getItem('timerStopped') === 'true';
 const timerElement = document.querySelector('.timer');
 // const stoppedTimeElement = document.querySelector('#stoppedTimer') as HTMLDivElement;
@@ -61,7 +74,7 @@ function updateTimerDisplay() {
 }
 function startTimer() {
     console.log('start timer');
-    intervalId = setInterval(() => {
+    countUpIntervalId = setInterval(() => {
         countUpTimerValue += 1;
         updateTimerDisplay();
         if (countUpTimerValue >= 300) {
@@ -70,12 +83,8 @@ function startTimer() {
     }, 1000);
     updateTimerDisplay();
 }
-/* if (nextButton !== null) {
-  nextButton.addEventListener('click', stopTimer);
-} */
-// const stopTimeBtn: any = document.querySelector('.testTimer');
 function stopTimer() {
-    clearInterval(intervalId);
+    clearInterval(countUpIntervalId);
     const currentTime = timerElement.innerText;
     localStorage.setItem('stoppedTime', currentTime);
     console.log('Value in localStorage:', localStorage.getItem('stoppedTime'));
@@ -87,7 +96,7 @@ function stopTimer() {
 }
 // stopTimeBtn.addEventListener('click', stopTimer);
 // function resumeTimer(): void {
-//   if (intervalId === null && timerStopped) {
+//   if (countUpIntervalId === null && timerStopped) {
 //     startTimer();
 //     timerStopped = false;
 //   }
@@ -100,10 +109,10 @@ function stopTimer() {
   localStorage.setItem('countUpTimerValue', countUpTimerValue.toString());
   localStorage.setItem('timerStopped', timerStopped.toString());
 } */
-const currentPage = window.location.pathname;
-if (currentPage.includes('question')) {
-    startTimer();
-}
+// const currentPage = window.location.pathname;
+// if (currentPage.includes('question')) {
+//   startTimer();
+// }
 /* window.addEventListener('beforeunload', () => {
   localStorage.setItem('countUpTimerValue', countUpTimerValue.toString());
   localStorage.setItem('timerStopped', timerStopped.toString());
@@ -116,14 +125,33 @@ window.addEventListener('visibilitychange', () => {
   }
 }); */
 // ====================================== COUNT DOWN TIMER ==========================================
-// let intervalId: ReturnType<typeof setInterval>;
+const contentContainer = document.querySelector('.content-container');
+function startTimerColorAnimation() {
+    contentContainer.classList.remove('timer-color');
+    void contentContainer.offsetWidth;
+    contentContainer.classList.add('timer-color');
+}
+const updatePoints = function (newPoints) {
+    localStorage.setItem('timeToPoints', newPoints.toString());
+    renderPoints();
+};
+let questionCounter;
+let currentSessionArray = []; // Array for current session
+let usedQuestionsArray = []; // Array for questions used this and previous session
+// Push rendered question into array for current session
+function addTocurrentSessionArray(id) {
+    currentSessionArray.push(id);
+}
 let timeLeft = 0;
 export function startCountdownTimer(callback) {
-    console.log('start count down 30sec');
-    let seconds = 30;
-    intervalId = setInterval(() => {
+    let seconds = 5;
+    startTimerColorAnimation();
+    countDownIntervalId = setInterval(() => {
+        timeLeft = seconds;
         if (seconds === 0) {
             stopCountDownTimer();
+            newQuestion();
+            console.warn('TIME OUT');
             if (callback) {
                 callback(timeLeft);
             }
@@ -131,7 +159,6 @@ export function startCountdownTimer(callback) {
         else {
             timeLeft = seconds;
             seconds--;
-            console.log(seconds);
             if (callback) {
                 callback(timeLeft);
             }
@@ -139,7 +166,7 @@ export function startCountdownTimer(callback) {
     }, 1000);
 }
 function stopCountDownTimer() {
-    clearInterval(intervalId);
+    clearInterval(countDownIntervalId);
     console.log('Time left:', timeLeft);
     // Retrieve the current value from local storage and parse it as a number
     const currentPoints = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
@@ -147,11 +174,8 @@ function stopCountDownTimer() {
     const updatedPoints = currentPoints + timeLeft;
     // Set the updated value in local storage
     localStorage.setItem('timeToPoints', updatedPoints.toString());
-    return timeLeft;
-    // clearInterval(intervalId);
-    // console.log('Time left:', timeLeft);
-    // localStorage.setItem('timeToPoints:', timeLeft.toString());
-    // return timeLeft;
+    updatePoints(updatedPoints);
+    return updatedPoints;
 }
 // ==================================================================================================
 // --------------------------------------   CLEAR QUIZ   --------------------------------------------
@@ -172,6 +196,8 @@ function resetQuestions(): void {
 // -----------------------------------   RANDOM QUESTIONS   -----------------------------------------
 // ==================================================================================================
 const questionTextContainer = document.querySelector('.question-text-container');
+contentContainer.classList.add('timer-color');
+const imageContainer = document.querySelector('.img-container');
 export function getRandomQuestion() {
     if (QuizQuestions.length === 0) {
         return null;
@@ -197,8 +223,13 @@ export function getRandomQuestion() {
 // -------------------------------------   RENDER QUESTIONS   ---------------------------------------
 // ==================================================================================================
 export const renderQuestion = function (question) {
-    console.log('Rendering question:', question);
     if (question && question.id !== undefined) {
+        const answerOptions = [
+            question.answerOne,
+            question.answerTwo,
+            question.correctAnswer,
+        ];
+        const { shuffledArray } = shuffleArray(answerOptions);
         const html = `
           <h2 class="question-counter">Question ${questionCounter + 1} / 10</h2>
 
@@ -211,21 +242,28 @@ export const renderQuestion = function (question) {
           <div class="answer-container">
 
           <label for="a1" class="answer-alternative">
-          <input type="radio" class="answer-button" name="radio" id="a1">
-          1. &nbsp;<span class="answer">${question.answerOne}</span>
+          <input type="radio" class="answer-button" name="radio" id="a1" value="${shuffledArray[0]}">
+          1. &nbsp;<span class="answer">${shuffledArray[0]}</span>
           </label>
 
           <label for="a2" class="answer-alternative">
-          <input type="radio" class="answer-button" name="radio" id="a2">
-          X. &nbsp; <span class="answer">${question.answerTwo}</span>
+          <input type="radio" class="answer-button" name="radio" id="a2" value="${shuffledArray[1]}">
+          X. &nbsp; <span class="answer">${shuffledArray[1]}</span>
           </label>
 
           <label for="a3" class="answer-alternative">
-          <input type="radio" class="answer-button" name="radio" id="a3">
-          2. &nbsp;<span class="answer">${question.correctAnswer}</span>
+          <input type="radio" class="answer-button" name="radio" id="a3" value="${shuffledArray[2]}">
+          2. &nbsp;<span class="answer">${shuffledArray[2]}</span>
           </label>
 
           </div>
+          `;
+        let imageHTML = `
+          <img
+            src="${question.src}"
+            alt="${question.alt}"
+            width = 640
+            heigth = 500>
           `;
         if (questionTextContainer) {
             questionTextContainer.innerHTML = html;
@@ -233,54 +271,93 @@ export const renderQuestion = function (question) {
         else {
             console.log('QT not found');
         }
+        if (imageContainer) {
+            imageContainer.innerHTML = imageHTML;
+        }
+        else {
+            console.log('IMG not found');
+        }
         addTocurrentSessionArray(question.id);
-        countQuestions();
-        startTimer();
-        // startCountdownTimer();
+        // countQuestions();
     }
     else {
         console.log('No ducking question found');
     }
 };
+function shuffleArray(array) {
+    const shuffledArray = array.slice(); // Create a shallow copy of the array to avoid modifying the original
+    let correctAnswerIndex = -1;
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        // Update the correctAnswerIndex when the correct answer is moved
+        if (shuffledArray[i] === array[array.length - 1]) {
+            correctAnswerIndex = i;
+        }
+    }
+    return { shuffledArray, correctAnswerIndex };
+}
+function shuffleAnswerOptions(question) {
+    const answerOptions = [
+        question.answerOne,
+        question.answerTwo,
+        question.correctAnswer,
+    ];
+    shuffleArray(answerOptions);
+    [question.answerOne, question.answerTwo, question.correctAnswer] =
+        answerOptions;
+}
+let currentQuestion = null;
+function getCurrentQuestion() {
+    console.log('THIS IS NEW', currentQuestion);
+    return currentQuestion;
+}
 export const newQuestion = function () {
     countQuestions();
     // const stoppedTime = stopCountDownTimer();
-    stopCountDownTimer();
-    startCountdownTimer();
-    const randomQuestion = getRandomQuestion();
-    if (randomQuestion) {
-        renderQuestion(randomQuestion);
+    if (questionCounter < 10) {
+        stopCountDownTimer();
+        startCountdownTimer();
+        const randomQuestion = getRandomQuestion();
+        if (randomQuestion) {
+            renderQuestion(randomQuestion);
+            shuffleAnswerOptions(randomQuestion);
+            currentQuestion = randomQuestion;
+            nextButton.addEventListener('click', checkIfCorrectAnswer);
+            console.warn('Render and stopCountdown');
+        }
+        else {
+            console.log('No ducking questions available.');
+        }
     }
     else {
-        console.log('No ducking questions available.');
+        console.log('Q 10');
+        navigateToResultPage();
     }
+    getCurrentQuestion();
 };
 const startQuizFromStorage = localStorage.getItem('startQuiz');
 if (startQuizFromStorage === 'true') {
+    startTimer();
     newQuestion();
     localStorage.removeItem('startQuiz');
 }
-nextButton.addEventListener('click', newQuestion);
 // ==================================================================================================
 // ----------------------------------   QUESTION COUNTER   ------------------------------------------
 // ==================================================================================================
 const navigateToResultPage = () => {
+    stopCountDownTimer();
+    stopTimer();
     window.location.href = './resultpage.html';
 };
 function countQuestions() {
-    // Calculate length and add 1 (for next question)
-    // questionCounter = currentSessionArray.length + 1;
     questionCounter = currentSessionArray.length;
     if (currentSessionArray.length <= 10) {
-        // Check if used and renderQuestion()?
         console.log('Length num Q', questionCounter);
-        // ---- code ----
-    }
-    if (currentSessionArray.length === 10) {
-        // alert('YOU ARE DONE');
-        nextButton.addEventListener('click', navigateToResultPage);
-        // Save array for used questions to local storage
         saveToLocalStorage();
+    }
+    else if (questionCounter === 10) {
+        nextButton.addEventListener('click', navigateToResultPage);
         // checkIfHighscore();
         // Use the array
         // ---- code ----
@@ -296,16 +373,53 @@ function countQuestions() {
 // ==================================================================================================
 // ------------------------------   CHECK IF CORRECT ANSWER   ---------------------------------------
 // ==================================================================================================
+const userAnswerChoices = [];
+function checkIfCorrectAnswer() {
+    const selectedAnswer = document.querySelector('input[name="radio"]:checked');
+    if (!selectedAnswer) {
+        alert('Quack a question');
+        return;
+    }
+    const userAnswer = selectedAnswer.value;
+    const currentQuestion = getCurrentQuestion();
+    if (currentQuestion && userAnswer === currentQuestion.correctAnswer) {
+        console.log('YAY');
+        const correctAnswersCount = parseInt(localStorage.getItem('correctAnswersCount') || '0', 10);
+        localStorage.setItem('correctAnswersCount', (correctAnswersCount + 1).toString());
+        const answerObject = {
+            id: userAnswerChoices.length + 1,
+            answer: userAnswer,
+        };
+        userAnswerChoices.push(answerObject);
+        localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
+        stopCountDownTimer();
+    }
+    else if (currentQuestion) {
+        console.log('NAY');
+        const answerObject = {
+            id: userAnswerChoices.length + 1,
+            answer: userAnswer,
+        };
+        userAnswerChoices.push(answerObject);
+        localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
+    }
+    newQuestion();
+}
+// const pointsDispencer = function () {};
 // function checkAnswer() {
 //   const selectedAnswer = document.querySelector(
 //     'input[name="radio"]:checked'
 //   ) as HTMLInputElement;
+//   if (!selectedAnswer) {
+//      console.log('PICK AN ANSWER, DUCKER');
+//      return;
+//   }
 //   if (selectedAnswer) {
 //     const userAnswer = selectedAnswer.value;
 //     //const correctAnswer = {}; //! connect this to quizquestions array
-//     const correctAnswer = QuizQuestions[currentQuestion].correctAnswer;
+//     const correctAnswer = IQuizQuestions[currentQuestion].correctAnswer;
 //     if (userAnswer === correctAnswer) {
-//       calculateScore();
+//       ti();
 //       console.log('correct answer selected!');
 //     } else {
 //       score = 0;
@@ -315,7 +429,6 @@ function countQuestions() {
 //   }
 // }
 // checkAnswer();
-//? Save answer to localStorage? currentSession?
 // ==================================================================================================
 // -----------------------------------   CALCULATE POINTS   -----------------------------------------
 // ==================================================================================================
@@ -324,30 +437,3 @@ function countQuestions() {
 //   score = Math.max(0, 30 - startCountdownTimer());
 //   console.log('Points:', score);
 // }
-// ==================================================================================================
-// --------------------------------------   RENDER IMAGE   ------------------------------------------
-// ==================================================================================================
-function renderImage() {
-    for (let i = 0; i < 20; i++) {
-        let imageSrc = images[i].src;
-        let imageAlt = images[i].alt;
-        let imageHTML = `
-
-    <img
-      src="${imageSrc}"
-      alt="${imageAlt}"
-      width = 640
-      heigth = 420>
-    `;
-        const imageContainer = document.querySelector('.img-container');
-        imageContainer.innerHTML = imageHTML;
-        if (i > 19) {
-            i = 0;
-        }
-    }
-}
-// call function in right place - when rendering a question?
-const renderImageBool = false;
-if (renderImageBool) {
-    renderImage();
-}
