@@ -1,7 +1,7 @@
 import { userAnswerChoices } from './questionpage.js';
 import { HighscoreList } from './models/HighscoreList.js';
 import { ScoreItem } from './models/Score.js';
-const highscoreList = HighscoreList.instance;
+// const highscoreList = HighscoreList.instance;
 const printTime = localStorage.getItem('stoppedTime');
 const abortQuizButton = document.querySelector('.abort-quiz-button');
 const clearStorage = function () {
@@ -99,7 +99,7 @@ function renderInputField() {
     // let currentScore: number = 500;
     // let lowestScore: number = 500
     const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
-    const time = localStorage.getItem('stoppedTime');
+    // const time = localStorage.getItem('stoppedTime');
     console.log('INPUT POINTS', points);
     let inputHTML = `
   <input type="text" class="input-name" placeholder="Your name here">
