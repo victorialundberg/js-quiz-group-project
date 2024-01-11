@@ -11,9 +11,17 @@ interface IScore {
 }
 
 class HighscoreList implements IScore {
-  static instance: HighscoreList = new HighscoreList();
+  private static _instance: HighscoreList | null = null;
+  private _list: ScoreItem[] = [];
 
-  private constructor(private _list: ScoreItem[] = []) {}
+  private constructor() {}
+
+  public static get instance(): HighscoreList {
+    if (!HighscoreList._instance) {
+      HighscoreList._instance = new HighscoreList();
+    }
+    return HighscoreList._instance;
+  }
 
   get list(): ScoreItem[] {
     return this._list;
@@ -28,16 +36,13 @@ class HighscoreList implements IScore {
     const parsedList: {
       _id: number;
       _name: string;
-      //   _countDownToPoints: number;
       _totalPoints: number;
       _totalTime: number;
     }[] = JSON.parse(storedList);
 
     parsedList.forEach((itemObj) => {
       const newHighScore = new ScoreItem(
-        itemObj._id,
         itemObj._name,
-        // itemObj._countDownToPoints,
         itemObj._totalPoints,
         itemObj._totalTime
       );
@@ -50,7 +55,17 @@ class HighscoreList implements IScore {
   }
 
   addScore(itemObj: ScoreItem): void {
-    this._list.push(itemObj);
+    const existingIndex = this._list.findIndex(
+      (score) => score.id === itemObj.id
+    );
+
+    if (existingIndex !== -1) {
+      this._list[existingIndex] = itemObj;
+    } else {
+      this._list.push(itemObj);
+    }
+
+    this.sort();
     this.save();
   }
 
@@ -60,7 +75,7 @@ class HighscoreList implements IScore {
   }
 
   sort() {
-    this._list.sort((a, b) => a.totalPoints - b.totalPoints);
+    this._list.sort((a, b) => b.totalPoints - a.totalPoints);
   }
 }
 

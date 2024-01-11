@@ -1,13 +1,19 @@
 /* eslint-disable */
 import { ScoreItem } from './Score.js';
 class HighscoreList {
-    constructor(_list = []) {
+    constructor() {
         Object.defineProperty(this, "_list", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: _list
+            value: []
         });
+    }
+    static get instance() {
+        if (!HighscoreList._instance) {
+            HighscoreList._instance = new HighscoreList();
+        }
+        return HighscoreList._instance;
     }
     get list() {
         return this._list;
@@ -19,9 +25,7 @@ class HighscoreList {
         }
         const parsedList = JSON.parse(storedList);
         parsedList.forEach((itemObj) => {
-            const newHighScore = new ScoreItem(itemObj._id, itemObj._name, 
-            // itemObj._countDownToPoints,
-            itemObj._totalPoints, itemObj._totalTime);
+            const newHighScore = new ScoreItem(itemObj._name, itemObj._totalPoints, itemObj._totalTime);
             HighscoreList.instance.addScore(newHighScore);
         });
     }
@@ -29,7 +33,14 @@ class HighscoreList {
         localStorage.setItem('highScores', JSON.stringify(this._list));
     }
     addScore(itemObj) {
-        this._list.push(itemObj);
+        const existingIndex = this._list.findIndex((score) => score.id === itemObj.id);
+        if (existingIndex !== -1) {
+            this._list[existingIndex] = itemObj;
+        }
+        else {
+            this._list.push(itemObj);
+        }
+        this.sort();
         this.save();
     }
     removeScore(id) {
@@ -37,13 +48,13 @@ class HighscoreList {
         this.save();
     }
     sort() {
-        this._list.sort((a, b) => a.totalPoints - b.totalPoints);
+        this._list.sort((a, b) => b.totalPoints - a.totalPoints);
     }
 }
-Object.defineProperty(HighscoreList, "instance", {
+Object.defineProperty(HighscoreList, "_instance", {
     enumerable: true,
     configurable: true,
     writable: true,
-    value: new HighscoreList()
+    value: null
 });
 export { HighscoreList };

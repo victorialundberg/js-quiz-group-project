@@ -144,7 +144,8 @@ function addTocurrentSessionArray(id) {
 }
 let timeLeft = 0;
 export function startCountdownTimer(callback) {
-    let seconds = 5;
+    clearInterval(countDownIntervalId);
+    let seconds = 60;
     startTimerColorAnimation();
     countDownIntervalId = setInterval(() => {
         timeLeft = seconds;
@@ -159,6 +160,7 @@ export function startCountdownTimer(callback) {
         else {
             timeLeft = seconds;
             seconds--;
+            console.warn(seconds);
             if (callback) {
                 callback(timeLeft);
             }
@@ -316,7 +318,7 @@ export const newQuestion = function () {
     countQuestions();
     // const stoppedTime = stopCountDownTimer();
     if (questionCounter < 10) {
-        stopCountDownTimer();
+        // stopCountDownTimer();
         startCountdownTimer();
         const randomQuestion = getRandomQuestion();
         if (randomQuestion) {
@@ -346,7 +348,6 @@ if (startQuizFromStorage === 'true') {
 // ----------------------------------   QUESTION COUNTER   ------------------------------------------
 // ==================================================================================================
 const navigateToResultPage = () => {
-    stopCountDownTimer();
     stopTimer();
     window.location.href = './resultpage.html';
 };
@@ -373,8 +374,8 @@ function countQuestions() {
 // ==================================================================================================
 // ------------------------------   CHECK IF CORRECT ANSWER   ---------------------------------------
 // ==================================================================================================
-const userAnswerChoices = [];
-function checkIfCorrectAnswer() {
+export const userAnswerChoices = [];
+export function checkIfCorrectAnswer() {
     const selectedAnswer = document.querySelector('input[name="radio"]:checked');
     if (!selectedAnswer) {
         alert('Quack a question');
@@ -382,27 +383,30 @@ function checkIfCorrectAnswer() {
     }
     const userAnswer = selectedAnswer.value;
     const currentQuestion = getCurrentQuestion();
+    let isCorrect = false;
     if (currentQuestion && userAnswer === currentQuestion.correctAnswer) {
         console.log('YAY');
+        isCorrect = true;
         const correctAnswersCount = parseInt(localStorage.getItem('correctAnswersCount') || '0', 10);
         localStorage.setItem('correctAnswersCount', (correctAnswersCount + 1).toString());
-        const answerObject = {
-            id: userAnswerChoices.length + 1,
-            answer: userAnswer,
-        };
-        userAnswerChoices.push(answerObject);
-        localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
+        // const answerObject = {
+        //   id: userAnswerChoices.length + 1,
+        //   answer: userAnswer,
+        // };
+        // userAnswerChoices.push(answerObject);
+        // localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
         stopCountDownTimer();
     }
     else if (currentQuestion) {
         console.log('NAY');
-        const answerObject = {
-            id: userAnswerChoices.length + 1,
-            answer: userAnswer,
-        };
-        userAnswerChoices.push(answerObject);
-        localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
     }
+    const answerObject = {
+        id: userAnswerChoices.length + 1,
+        answer: userAnswer,
+        isCorrect: isCorrect,
+    };
+    userAnswerChoices.push(answerObject);
+    localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
     newQuestion();
 }
 // const pointsDispencer = function () {};

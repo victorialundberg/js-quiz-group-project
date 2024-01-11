@@ -14,7 +14,7 @@ const renderHighscoreList = function () {
     if (scores.length > 0) {
         scores.slice(0, 5).forEach((score, index) => {
             highscoreHTML += `
-        <p class="highscore">${index + 1}. <span>${score._name}, ${score._totalPoints}p, ${score._totalTime}m</span></p>
+        <p class="highscore">${index + 1}. <span>${score._name}, ${score._totalPoints}p, ${score._totalTime} minutes</span></p>
       `;
         });
         highscoreHTML += `
@@ -42,13 +42,13 @@ const renderHighscoreList = function () {
     const highscoreListContainer = document.querySelector('.content-container');
     highscoreListContainer.innerHTML = highscoreHTML;
     const playAgainButton = document.querySelector('#playAgainButton');
-    playAgainButton.addEventListener('click', startQuiz);
+    playAgainButton.addEventListener('click', startQuizFromHighscore);
 };
-const navigateToQuestionPage = () => {
+const navigateToQuestionPageFromHighscore = () => {
     localStorage.setItem('startQuiz', 'true');
     window.location.href = './questionpage.html';
 };
-const startQuiz = function () {
-    navigateToQuestionPage();
+const startQuizFromHighscore = function () {
+    navigateToQuestionPageFromHighscore();
 };
 renderHighscoreList();

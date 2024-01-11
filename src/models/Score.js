@@ -1,13 +1,7 @@
 class ScoreItem {
-    constructor(_id, _name, 
+    constructor(_name, 
     // private _countDownToPoints: number,
-    _totalPoints, _totalTime) {
-        Object.defineProperty(this, "_id", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: _id
-        });
+    _totalPoints, _totalTime, id) {
         Object.defineProperty(this, "_name", {
             enumerable: true,
             configurable: true,
@@ -26,13 +20,20 @@ class ScoreItem {
             writable: true,
             value: _totalTime
         });
+        Object.defineProperty(this, "_id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this._id = id || Date.now();
     }
     get id() {
         return this._id;
     }
-    set id(id) {
-        this._id = id;
-    }
+    // set id(id: number) {
+    //   this._id = id;
+    // }
     get name() {
         return this._name;
     }

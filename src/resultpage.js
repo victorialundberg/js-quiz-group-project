@@ -1,4 +1,7 @@
-"use strict";
+import { userAnswerChoices } from './questionpage.js';
+import { HighscoreList } from './models/HighscoreList.js';
+import { ScoreItem } from './models/Score.js';
+const highscoreList = HighscoreList.instance;
 const printTime = localStorage.getItem('stoppedTime');
 const abortQuizButton = document.querySelector('.abort-quiz-button');
 const clearStorage = function () {
@@ -26,7 +29,7 @@ const renderResults = function () {
       ${result
         .slice(0, 5)
         .map((questionObj, index) => `
-              <p class="answer">${index + 1}. <span>${questionObj.answer}</span></p>
+              <p class="answer">${index + 1}. <span>${questionObj.answer}</span> - ${questionObj.isCorrect}</p>
             `)
         .join('')}
     </div>
@@ -35,7 +38,7 @@ const renderResults = function () {
    ${result
         .slice(5, 10)
         .map((questionObj, index) => `
-              <p class="answer">${index + 6}. <span>${questionObj.answer}</span></p>
+              <p class="answer">${index + 6}. <span>${questionObj.answer}</span> - ${questionObj.isCorrect}</p>
             `)
         .join('')}
    </div>
@@ -93,8 +96,11 @@ console.log();
 //   // currentSession, set name
 // }
 function renderInputField() {
-    let currentScore = 500;
-    // let lowestScore: number = 500;
+    // let currentScore: number = 500;
+    // let lowestScore: number = 500
+    const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
+    const time = localStorage.getItem('stoppedTime');
+    console.log('INPUT POINTS', points);
     let inputHTML = `
   <input type="text" class="input-name" placeholder="Your name here">
   <button class="submit-button" aria-label="submit-button"><img src="../assets/images/ducks-with-signs/SubmitDuck.webp"
@@ -109,23 +115,39 @@ function renderInputField() {
     const resultsList = document.querySelector('.input-wrapper');
     let highscoreListArrayString = localStorage.getItem('highScores');
     let highscoreListArray = JSON.parse(highscoreListArrayString || '[]');
-    let lowestScore = highscoreListArray[9]._totalPoints;
-    if (currentScore > lowestScore) {
+    if (highscoreListArray.length <= 10 ||
+        points > highscoreListArray[9]._totalPoints) {
         resultsList.innerHTML = inputHTML;
         const submitButton = document.querySelector('.submit-button');
-        submitButton.addEventListener('click', saveInputName);
-        submitButton.addEventListener('click', navigateToHighscorePage);
+        submitButton.addEventListener('click', () => {
+            saveInputName();
+            navigateToHighscorePage();
+        });
     }
     else {
         resultsList.innerHTML = inputNotHighscoreHTML;
         const navigateToHighscoreBtn = document.querySelector('.next-button');
         navigateToHighscoreBtn.addEventListener('click', navigateToHighscorePage);
-        // const nextButton: any = document.querySelector('.next-button');
-        // navigateToHighscorePage();
         console.log('Where is my ducking button');
     }
-    // resultsList.innerHTML = inputHTML;
 }
+// if (points > lowestScore || 0) {
+//   resultsList.innerHTML = inputHTML;
+//   const submitButton: any = document.querySelector(
+//     '.submit-button'
+//   ) as HTMLButtonElement | null;
+//   submitButton.addEventListener('click', saveInputName);
+//   submitButton.addEventListener('click', navigateToHighscorePage);
+// } else {
+//   resultsList.innerHTML = inputNotHighscoreHTML;
+//   const navigateToHighscoreBtn: any = document.querySelector('.next-button');
+//   navigateToHighscoreBtn.addEventListener('click', navigateToHighscorePage);
+//   // const nextButton: any = document.querySelector('.next-button');
+//   // navigateToHighscorePage();
+//   console.log('Where is my ducking button');
+// }
+// resultsList.innerHTML = inputHTML;
+// }
 // function renderNextButton() {
 //   let inputHTML = `
 //     <button class="next-button">Next</button>`;
@@ -135,20 +157,29 @@ function renderInputField() {
 function saveInputName() {
     let nameInput = document.querySelector('.input-name');
     if (nameInput) {
-        let _name = nameInput.value;
-        localStorage.setItem('userName', _name);
-        console.log(_name);
+        let playerName = nameInput.value;
+        const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
+        const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
+        console.log('Player Name:', playerName);
+        console.log('Points:', points);
+        console.log('Time:', time);
+        console.log('Parsed Time:', new Date(time));
+        let newScore = new ScoreItem(playerName, points, time);
+        HighscoreList.instance.addScore(newScore);
+        // Clear the input field after saving the name
+        nameInput.value = '';
     }
     else {
-        console.log('DUCK IT RIGHT');
+        console.log('Name input field not found');
     }
 }
 const navigateToHighscorePage = () => {
     window.location.href = './highscorepage.html';
-    localStorage.removeItem('answers');
-    localStorage.removeItem('timeToPoints');
-    localStorage.removeItem('stoppedTime');
-    localStorage.removeItem('correctAnswersCount');
+    // localStorage.removeItem('answers');
+    // localStorage.removeItem('timeToPoints');
+    // localStorage.removeItem('stoppedTime');
+    // localStorage.removeItem('correctAnswersCount');
 };
 renderInputField();
 console.log('Hej');
+console.log(userAnswerChoices);

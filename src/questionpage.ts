@@ -191,7 +191,8 @@ let timeLeft = 0;
 export function startCountdownTimer(
   callback?: (timeLeft: number) => void
 ): void {
-  let seconds = 5;
+  clearInterval(countDownIntervalId);
+  let seconds = 60;
 
   startTimerColorAnimation();
   countDownIntervalId = setInterval(() => {
@@ -207,6 +208,7 @@ export function startCountdownTimer(
     } else {
       timeLeft = seconds;
       seconds--;
+      console.warn(seconds);
       if (callback) {
         callback(timeLeft);
       }
@@ -411,7 +413,7 @@ export const newQuestion = function () {
   countQuestions();
   // const stoppedTime = stopCountDownTimer();
   if (questionCounter < 10) {
-    stopCountDownTimer();
+    // stopCountDownTimer();
 
     startCountdownTimer();
 
@@ -447,7 +449,6 @@ if (startQuizFromStorage === 'true') {
 // ==================================================================================================
 
 const navigateToResultPage = () => {
-  stopCountDownTimer();
   stopTimer();
   window.location.href = './resultpage.html';
 };
@@ -476,9 +477,13 @@ function countQuestions(): void {
 // ------------------------------   CHECK IF CORRECT ANSWER   ---------------------------------------
 // ==================================================================================================
 
-const userAnswerChoices: { id: number; answer: string }[] = [];
+export const userAnswerChoices: {
+  id: number;
+  answer: string;
+  isCorrect: boolean;
+}[] = [];
 
-function checkIfCorrectAnswer() {
+export function checkIfCorrectAnswer() {
   const selectedAnswer = document.querySelector(
     'input[name="radio"]:checked'
   ) as HTMLInputElement;
@@ -491,8 +496,11 @@ function checkIfCorrectAnswer() {
   const userAnswer = selectedAnswer.value;
   const currentQuestion = getCurrentQuestion();
 
+  let isCorrect = false;
+
   if (currentQuestion && userAnswer === currentQuestion.correctAnswer) {
     console.log('YAY');
+    isCorrect = true;
 
     const correctAnswersCount = parseInt(
       localStorage.getItem('correctAnswersCount') || '0',
@@ -503,22 +511,23 @@ function checkIfCorrectAnswer() {
       (correctAnswersCount + 1).toString()
     );
 
-    const answerObject = {
-      id: userAnswerChoices.length + 1,
-      answer: userAnswer,
-    };
-    userAnswerChoices.push(answerObject);
-    localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
+    // const answerObject = {
+    //   id: userAnswerChoices.length + 1,
+    //   answer: userAnswer,
+    // };
+    // userAnswerChoices.push(answerObject);
+    // localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
     stopCountDownTimer();
   } else if (currentQuestion) {
     console.log('NAY');
-    const answerObject = {
-      id: userAnswerChoices.length + 1,
-      answer: userAnswer,
-    };
-    userAnswerChoices.push(answerObject);
-    localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
   }
+  const answerObject = {
+    id: userAnswerChoices.length + 1,
+    answer: userAnswer,
+    isCorrect: isCorrect,
+  };
+  userAnswerChoices.push(answerObject);
+  localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
 
   newQuestion();
 }
