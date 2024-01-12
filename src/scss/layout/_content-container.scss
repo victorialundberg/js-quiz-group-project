@@ -12,9 +12,24 @@
     justify-content: center;
     display: flex;
 
+    @include response(sm) {
+      font-size: fontSize(xs) * 0.9;
+      min-height: 30svh;
+      @include flexCenter($fd: column); 
+    }
+
     @include response(md) {
       font-size: fontSize(sm);
       @include flexCenter($fd: column);
+    }
+
+    @include response(lg) {
+      padding: 0 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      min-height: 60svh;
+      min-width: 95svw;
+      @include flexCenter;
     }
 
     .img-container {
@@ -22,31 +37,47 @@
       width: 35%;
       background-color: #fff;
       border-radius: 12px 0px 0px 12px;
-      object-fit: cover;
+      // object-fit: contain;
+      @include flexCenter();
+      overflow: hidden;
 
       img {
-        @extend %fullspace;
-        object-fit: fill;
-        border-radius: 12px 0px 0px 12px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        // border-radius: 12px 0px 0px 12px;
+
+        // @include response(lg) {
+        //   object-fit: cover;
+        //   border-radius: 12px 0px 0px 12px;
+        // min-height: 60svh;
+        //   min-width: 40svh;
+        // }
+      }
+
+      @include response(sm) {
+        min-height: 10svh;
+        max-height: 25svh;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
       }
 
       @include response(md) {
-        height: 20svh;
+        min-height: 20svh;
         width: 100%;
         border-radius: 12px 12px 0 0;
+      }
+      
+      @include response(lg) {
+        min-height: 60svh;
+        width: 50%;
+        background-color: #fff;
+        border-radius: 12px 0px 0px 12px;
       }
     }
 
     .content-container {
       position: relative;
-      // background-color: color(purple-blue);
-      // background: linear-gradient(
-      //   to top,
-      //   red 10%,
-      //   purple 35%,
-      //   color(purple-blue) 60%
-      // );
-
       border-radius: 0 12px 12px 0;
       width: 65%;
       min-height: 60svh;
@@ -54,10 +85,28 @@
       @include flexCenter($fd: column, $jc: flex-start, $ai: flex-start);
 
       @include response(sm) {
-        height: 65%;
+        border-radius: 0 0 12px 12px;
+        min-height: 30svh;
         width: 100%;
-        border-radius: 12px 12px 0 0;
+        padding-bottom: 5rem;
       }
+
+      @include response(md) {
+        border-radius: 0 0 12px 12px;
+        min-height: 30svh;
+        width: 100%;
+        padding-bottom: 3rem;
+      }
+
+      @include response(lg) {
+        position: relative;
+        border-radius: 0 12px 12px 0;
+        width: 65%;
+        min-height: 60svh;
+        padding: 0 1.5rem;
+        @include flexCenter($fd: column, $jc: flex-start, $ai: flex-start);
+      }
+
       .input-name {
         //in quiz results
         font-family: $font-grover;
@@ -69,6 +118,34 @@
         height: 2.625rem;
         width: 300px;
         padding: 1rem;
+
+        @include response(sm) {
+          position: relative;
+          right: 0;
+          left: 0; 
+          min-width: 20svw;
+          max-width: 75svw;
+          margin-top: 2rem;
+          margin-left: 0;
+          margin-bottom: 2rem;
+        }
+
+        @include response(md) {
+          position: relative;
+          right: 0;
+          left: 0; 
+          min-width: 20svw;
+          max-width: 75svw;
+          margin-top: 2rem;
+          margin-left: 0;
+          margin-bottom: 5rem;
+        }
+
+        @include response(lg) {
+          position: absolute;
+          bottom: -4rem;
+          left: 25rem; 
+        }
       }
 
       .next-button {
@@ -78,16 +155,10 @@
         align-self: flex-end;
         margin-right: 2rem;
         background-color: transparent;
-        // background-color: color(header);
-        // height: 2.625rem;
-        // width: 9.375rem;
         width: 125px;
         height: 100px;
         border: none;
-        // border-radius: 1.25rem;
         cursor: pointer;
-        // font-family: $font-grover;
-        // font-size: fontSize(sm) * 0.888;
       }
 
       .button-effect {
@@ -106,19 +177,15 @@
       //   animation-direction: alternate; /* Alternates the animation direction */
     }
 
-    //! Other backgrounds
-    .notimer-color {
-      width: 100%;
-      background: linear-gradient(to top, red, #8d87d0);
-      background-size: 200% 300%; /* Double the height to accommodate the animation */
-      // animation: colorChange 30s linear forwards;
-      //   animation-direction: alternate; /* Alternates the animation direction */
+    .no-animation {
+      animation: none;
     }
 
     @keyframes colorChange {
       0% {
         background-position: 0% 0%; /* Start at the bottom */
       }
+      
       100% {
         background-position: 0% 100%; /* End at the top */
       }

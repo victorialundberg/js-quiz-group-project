@@ -9,6 +9,12 @@
       rows: 12svh,
     )
   );
+  @include response(sm) {
+    @include flexCenter;
+    justify-content: space-between;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem; 
+  }
 
   .abort-quiz-button {
     @include flexCenter;
@@ -37,11 +43,22 @@
   .timer {
     @include flexCenter;
     font-size: fontSize(sm);
+    
+    @include response(sm) {
+      font-size: fontSize(xs);
+    }
   }
   .points {
     @include flexCenter;
     grid-area: 1 / 3 / 2 / 4;
     font-size: fontSize(sm);
+
+    @include response(sm) {
+      font-size: fontSize(xs);
+    }
+    @include response(md) {
+      font-size: fontSize(sm);
+    }
   }
 
   a {

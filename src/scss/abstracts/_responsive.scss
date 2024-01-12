@@ -41,7 +41,7 @@
   }
 
   @if ($breakpoint == lg) {
-    @media screen and (min-width: 781px) {
+    @media screen and (min-width: 946px) {
       @content;
     }
   }

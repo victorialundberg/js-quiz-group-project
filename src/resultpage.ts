@@ -1,6 +1,6 @@
-import { userAnswerChoices } from './questionpage.js';
-import { HighscoreList } from './models/HighscoreList.js';
-import { ScoreItem } from './models/Score.js';
+// import { userAnswerChoices } from './questionpage.js';
+// import { HighscoreList } from './models/HighscoreList.js';
+// import { ScoreItem } from './models/Score.js';
 import { addEffectToButton } from './questionpage.js';
 
 // const highscoreList = HighscoreList.instance;
@@ -44,7 +44,7 @@ const renderResults = function (): void {
           (questionObj: any, index: number) => `
               <p class="answer">${index + 1}. <span>${
                 questionObj.answer
-              }</span> - ${questionObj.isCorrect}</p>
+              }</span> - ${questionObj.isCorrect ? '🎉' : '💀'}</p>
             `
         )
         .join('')}
@@ -57,7 +57,7 @@ const renderResults = function (): void {
        (questionObj: any, index: number) => `
               <p class="answer">${index + 6}. <span>${
                 questionObj.answer
-              }</span> - ${questionObj.isCorrect}</p>
+              }</span> - ${questionObj.isCorrect ? '🎉' : '💀'}</p>
             `
      )
      .join('')}
@@ -157,7 +157,7 @@ function renderInputField() {
 
   if (
     highscoreListArray.length <= 10 ||
-    points > highscoreListArray[9]._totalPoints
+    points > highscoreListArray[highscoreListArray.length - 1]._totalPoints
   ) {
     resultsList.innerHTML = inputHTML;
 
@@ -165,7 +165,8 @@ function renderInputField() {
       '.submit-button'
     ) as HTMLButtonElement | null;
     addEffectToButton(submitButton);
-    submitButton.addEventListener('click', () => {
+    submitButton.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
       saveInputName();
       navigateToHighscorePage();
     });
@@ -206,41 +207,83 @@ function renderInputField() {
 //   resultsList.innerHTML = inputHTML;
 // }
 
+// ------------------------------------------------------ //
+// -------------------------Jari------------------------- //
+// ------------------------------------------------------ //
+
 function saveInputName() {
   let nameInput = document.querySelector(
     '.input-name'
-  ) as HTMLInputElement | null;
-
-  if (nameInput) {
-    let playerName = nameInput.value;
-    const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
-    const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
-
-    console.log('Player Name:', playerName);
-    console.log('Points:', points);
-    console.log('Time:', time);
-
-    console.log('Parsed Time:', new Date(time));
-
-    let newScore = new ScoreItem(playerName, points, time);
-
-    HighscoreList.instance.addScore(newScore);
-
-    // Clear the input field after saving the name
-    nameInput.value = '';
-  } else {
-    console.log('Name input field not found');
+    ) as HTMLInputElement | null;
+    
+    if (nameInput) {
+      let playerName = nameInput.value;
+      const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
+      const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
+      
+      let newScore = {
+        _name: playerName,
+        _totalPoints: points,
+        _totalTime: time,
+      };
+      
+      let highscoreList = JSON.parse(localStorage.getItem('highScores') || '[]');
+      
+      highscoreList.push(newScore);
+      
+      highscoreList.sort((a: any, b: any) => b._totalPoints - a._totalPoints);
+      
+      if (highscoreList.length > 10) {
+        highscoreList = highscoreList.slice(0, 10);
+      }
+      
+      localStorage.setItem('highScores', JSON.stringify(highscoreList));
+      
+      console.log('After adding new score:', highscoreList);
+      
+      nameInput.value = '';
+    } else {
+      console.log('Name input field not found');
+    }
   }
-}
+  
+  // function saveInputName() {
+    //   let nameInput = document.querySelector(
+      //     '.input-name'
+      //   ) as HTMLInputElement | null;
+      
+      //   if (nameInput) {
+        //     let playerName = nameInput.value;
+        //     const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
+        //     const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
+        
+        //     console.log('Player Name:', playerName);
+        //     console.log('Points:', points);
+        //     console.log('Time:', time);
+        
+        //     console.log('Parsed Time:', new Date(time));
+        
+        //     let newScore = new ScoreItem(playerName, points, time);
+        
+        //     HighscoreList.instance.addScore(newScore);
+        
+        //     // Clear the input field after saving the name
+        //     nameInput.value = '';
+        //   } else {
+          //     console.log('Name input field not found');
+          //   }
+          // }
+          
+          // ------------------------------------------------------ //
+          // -------------------------Jari------------------------- //
+          // ------------------------------------------------------ //
 
-const navigateToHighscorePage = () => {
-  window.location.href = './highscorepage.html';
-  // localStorage.removeItem('answers');
-  // localStorage.removeItem('timeToPoints');
-  // localStorage.removeItem('stoppedTime');
-  // localStorage.removeItem('correctAnswersCount');
-};
-
-renderInputField();
-console.log('Hej');
-console.log(userAnswerChoices);
+          const navigateToHighscorePage = () => {
+            window.location.href = './highscorepage.html';
+            // localStorage.removeItem('answers');
+            // localStorage.removeItem('timeToPoints');
+            // localStorage.removeItem('stoppedTime');
+            // localStorage.removeItem('correctAnswersCount');
+          };
+          
+          renderInputField();

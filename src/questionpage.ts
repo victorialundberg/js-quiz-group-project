@@ -5,6 +5,17 @@ import { IQuizQuestion, QuizQuestions } from './models/Questions.js';
 // ------------------------------------------   GLOBAL   --------------------------------------------
 // ==================================================================================================
 
+let questionCounter: number;
+
+let currentSessionArray: number[] = [];
+let usedQuestionsArray: IQuizQuestion[] = [];
+
+const storedUsedQuestions = localStorage.getItem('usedQuestions');
+
+if (storedUsedQuestions) {
+  usedQuestionsArray = JSON.parse(storedUsedQuestions);
+}
+
 const nextButton = document.querySelector('#nextButton') as HTMLButtonElement;
 const pointsCounter = document.querySelector('.points');
 const abortQuizButton = document.querySelector(
@@ -21,7 +32,6 @@ const clearStorage = function () {
 abortQuizButton.addEventListener('click', clearStorage);
 
 const renderPoints: any = function () {
-  // const storedPoints = parseInt(localStorage.getItem('timeToPoints')) || 0;
   const storedPoints = localStorage.getItem('timeToPoints') || 0;
 
   if (pointsCounter) {
@@ -35,31 +45,20 @@ const renderPoints: any = function () {
   }
 };
 
-// QuizQuestions.forEach((question) => {
-//   addTocurrentSessionArray(question.id);
-// });
-
-// QuizQuestions.forEach((question) => {
-//   addTocurrentSessionArray(question.id); // Pass the ID directly instead of the entire object
-// });
-
-// Clone the array for current session to array for used questions
-// function addToUsedQuestionsArray(): void {
-// usedQuestionsArray.push(...currentSessionArray);
-// }
-
-// Stringify array for used questions and store in local storage
 function saveToLocalStorage(): void {
   const usedQuestionsArrayAsString = JSON.stringify(usedQuestionsArray);
   localStorage.setItem('usedQuestions', usedQuestionsArrayAsString);
 }
-// Clear current session (after 10 questions)
-// function clearcurrentSessionArray(): void {
-//   currentSessionArray = [];
-// }
-// Clear used questions (after 20 questions)
+
 function clearusedQuestionsArray(): void {
-  localStorage.removeItem('usedQuestions');
+  console.log('Clearing usedQuestionsArray');
+  usedQuestionsArray.length = 0;
+  saveToLocalStorage();
+}
+
+function getUsedQuestionsArray(): string[] {
+  const storedArray = localStorage.getItem('usedQuestions');
+  return storedArray ? JSON.parse(storedArray) : [];
 }
 
 // ==================================================================================================
@@ -75,18 +74,8 @@ let countUpTimerValue = parseInt(
 
 let countUpIntervalId: ReturnType<typeof setInterval>;
 let countDownIntervalId: ReturnType<typeof setInterval>;
-// let timerStopped = localStorage.getItem('timerStopped') === 'true';
 
 const timerElement = document.querySelector('.timer') as HTMLDivElement;
-// const stoppedTimeElement = document.querySelector('#stoppedTimer') as HTMLDivElement;
-
-// get stopped time from localstorage
-// const stoppedTime = localStorage.getItem('stoppedTime');
-
-// showing stopped time if any
-/*  if (stoppedTime !== null) {
-  stoppedTimeElement.innerHTML = stoppedTime;
-}  */
 
 function updateTimerDisplay(): void {
   const minutes = Math.floor(countUpTimerValue / 60);
@@ -117,49 +106,7 @@ function stopTimer(): void {
 
   localStorage.setItem('stoppedTime', currentTime);
   console.log('Value in localStorage:', localStorage.getItem('stoppedTime'));
-
-  // const stoppedTime = localStorage.getItem('stoppedTime');
-  // timerStopped = true;
-  /* if (stoppedTime !== null && stoppedTime !== undefined) {
-    stoppedTimeElement.innerText = stoppedTime;
-  }  */
 }
-
-// stopTimeBtn.addEventListener('click', stopTimer);
-
-// function resumeTimer(): void {
-//   if (countUpIntervalId === null && timerStopped) {
-//     startTimer();
-//     timerStopped = false;
-//   }
-// }
-
-/* function resetTimer(): void {
-  countUpTimerValue = 0;
-  timerStopped = false;
-  updateTimerDisplay();
-  localStorage.removeItem('stoppedTime');
-  localStorage.setItem('countUpTimerValue', countUpTimerValue.toString());
-  localStorage.setItem('timerStopped', timerStopped.toString());
-} */
-
-// const currentPage = window.location.pathname;
-
-// if (currentPage.includes('question')) {
-//   startTimer();
-// }
-
-/* window.addEventListener('beforeunload', () => {
-  localStorage.setItem('countUpTimerValue', countUpTimerValue.toString());
-  localStorage.setItem('timerStopped', timerStopped.toString());
-});
-
-window.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    timerStopped = localStorage.getItem('timerStopped') === 'true';
-    resumeTimer();
-  }
-}); */
 
 // ====================================== COUNT DOWN TIMER ==========================================
 const contentContainer: any = document.querySelector('.content-container');
@@ -176,12 +123,6 @@ const updatePoints = function (newPoints: number) {
   renderPoints();
 };
 
-let questionCounter: number;
-
-let currentSessionArray: number[] = []; // Array for current session
-let usedQuestionsArray: IQuizQuestion[] = []; // Array for questions used this and previous session
-
-// Push rendered question into array for current session
 function addTocurrentSessionArray(id: number): void {
   currentSessionArray.push(id);
 }
@@ -208,7 +149,6 @@ export function startCountdownTimer(
     } else {
       timeLeft = seconds;
       seconds--;
-      console.warn(seconds);
       if (callback) {
         callback(timeLeft);
       }
@@ -220,16 +160,13 @@ function stopCountDownTimer(): number {
   clearInterval(countDownIntervalId);
   console.log('Time left:', timeLeft);
 
-  // Retrieve the current value from local storage and parse it as a number
   const currentPoints = parseInt(
     localStorage.getItem('timeToPoints') || '0',
     10
   );
 
-  // Add the current value of timeLeft to the existing points
   const updatedPoints = currentPoints + timeLeft;
 
-  // Set the updated value in local storage
   localStorage.setItem('timeToPoints', updatedPoints.toString());
 
   updatePoints(updatedPoints);
@@ -240,20 +177,6 @@ function stopCountDownTimer(): number {
 // ==================================================================================================
 // --------------------------------------   CLEAR QUIZ   --------------------------------------------
 // ==================================================================================================
-
-/* function clearQuiz(): void {
-  resetTimer();
-  // clearPoints();
-  resetQuestions();
-}
-
-// function clearPoints(): void {}
-
-function resetQuestions(): void {
-  clearcurrentSessionArray();
-} */
-
-// abortQuizButton.addEventListener('click', clearQuiz);
 
 // ==================================================================================================
 // -----------------------------------   RANDOM QUESTIONS   -----------------------------------------
@@ -284,14 +207,14 @@ export function getRandomQuestion(): IQuizQuestion | null {
     });
 
     if (!isQuestionUsed) {
-      usedQuestionsArray.push(randomQuestion); // Push the entire question object
-      return randomQuestion; // Return the whole question object
+      usedQuestionsArray.push(randomQuestion); 
+      return randomQuestion; 
     }
 
     attempts++;
   } while (attempts < maxAttempts);
 
-  return null; // Return null if no unique question found within attempts
+  return null;
 }
 
 // ==================================================================================================
@@ -409,23 +332,31 @@ function getCurrentQuestion(): IQuizQuestion | null {
   return currentQuestion;
 }
 
+nextButton.addEventListener('click', function () {
+  // Ensure the event listener callback is not attached multiple times
+  nextButton.removeEventListener('click', checkIfCorrectAnswer);
+  checkIfCorrectAnswer();
+});
+
+
 export const newQuestion = function () {
   countQuestions();
-  // const stoppedTime = stopCountDownTimer();
+  
   if (questionCounter < 10) {
     // stopCountDownTimer();
-
+    
     startCountdownTimer();
-
+    
     const randomQuestion = getRandomQuestion();
     if (randomQuestion) {
       renderQuestion(randomQuestion as any);
       shuffleAnswerOptions(randomQuestion);
-
+      
       currentQuestion = randomQuestion;
-
-      nextButton.addEventListener('click', checkIfCorrectAnswer);
+      
+      // nextButton.addEventListener('click', checkIfCorrectAnswer);
       console.warn('Render and stopCountdown');
+      getCurrentQuestion();
     } else {
       console.log('No ducking questions available.');
     }
@@ -433,7 +364,6 @@ export const newQuestion = function () {
     console.log('Q 10');
     navigateToResultPage();
   }
-  getCurrentQuestion();
 };
 
 const startQuizFromStorage = localStorage.getItem('startQuiz');
@@ -473,22 +403,18 @@ const navigateToResultPage = () => {
 };
 
 function countQuestions(): void {
+  const usedQuestionsArray = getUsedQuestionsArray();
   questionCounter = currentSessionArray.length;
+
   if (currentSessionArray.length <= 10) {
     console.log('Length num Q', questionCounter);
     saveToLocalStorage();
-  } else if (questionCounter === 10) {
-    nextButton.addEventListener('click', navigateToResultPage);
-    // checkIfHighscore();
-    // Use the array
-    // ---- code ----
-    // Clear current session
-    // clearcurrentSessionArray();
-    // When used question array is at 20, clear
-    if (usedQuestionsArray.length > 20) {
-      clearusedQuestionsArray();
-    }
   }
+
+  if (usedQuestionsArray.length >= 20) {
+    clearusedQuestionsArray();
+  }
+
   console.log('current session:', currentSessionArray);
 }
 
@@ -530,12 +456,6 @@ export function checkIfCorrectAnswer() {
       (correctAnswersCount + 1).toString()
     );
 
-    // const answerObject = {
-    //   id: userAnswerChoices.length + 1,
-    //   answer: userAnswer,
-    // };
-    // userAnswerChoices.push(answerObject);
-    // localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
     stopCountDownTimer();
   } else if (currentQuestion) {
     console.log('NAY');
@@ -551,43 +471,4 @@ export function checkIfCorrectAnswer() {
   newQuestion();
 }
 
-// const pointsDispencer = function () {};
 
-// function checkAnswer() {
-//   const selectedAnswer = document.querySelector(
-//     'input[name="radio"]:checked'
-//   ) as HTMLInputElement;
-
-//   if (!selectedAnswer) {
-//      console.log('PICK AN ANSWER, DUCKER');
-//      return;
-//   }
-
-//   if (selectedAnswer) {
-//     const userAnswer = selectedAnswer.value;
-//     //const correctAnswer = {}; //! connect this to quizquestions array
-//     const correctAnswer = IQuizQuestions[currentQuestion].correctAnswer;
-
-//     if (userAnswer === correctAnswer) {
-//       ti();
-//       console.log('correct answer selected!');
-//     } else {
-//       score = 0;
-//       console.log('incorrect answer selected!');
-//     }
-//     console.log('Points:', score);
-//   }
-// }
-
-// checkAnswer();
-
-// ==================================================================================================
-// -----------------------------------   CALCULATE POINTS   -----------------------------------------
-// ==================================================================================================
-
-// let score = 0;
-
-// function calculateScore(): void {
-//   score = Math.max(0, 30 - startCountdownTimer());
-//   console.log('Points:', score);
-// }

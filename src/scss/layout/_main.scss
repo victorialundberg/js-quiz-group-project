@@ -42,21 +42,21 @@ main {
     }
 
     @include response(md) {
-      font-size: fontSize(md);
+      font-size: fontSize(xl);
     }
 
     @include response(lg) {
-      font-size: 3rem;
-    }
-
-    @include response(xl) {
-      font-size: 4rem;
+      font-size: fontSize(xl) * 1.3;
     }
   }
 
   .game-rules {
     grid-column: 1 / 2;
     position: relative;
+
+    @include response(lg) {
+      margin-left: 5rem;   
+    }  
 
     .game-rules-heading {
       font-size: fontSize(xs);
@@ -91,6 +91,16 @@ main {
     }
   }
 
+  .highscore-landing {
+    @include response(sm) {
+      display: grid;
+    }  
+
+    @include response(lg) {
+      margin-right: 5rem;   
+    }  
+  }
+
   .game-rules,
   .highscore-landing {
     background-color: color(purple-blue);    
@@ -103,6 +113,7 @@ main {
       align-self: center;
       margin-bottom: 0;
       width: 80vw;
+      padding-bottom: 1rem;
     }
 
     @include response(md) {
@@ -114,7 +125,7 @@ main {
     @include response(lg) {
       align-self: flex-end;
       margin-bottom: 9svh;
-      width: 300px;
+      max-width: 30vw;
     }
 
     .highscore-heading {
@@ -127,7 +138,7 @@ main {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
 
-      .highscore-landing-1to5 {
+      .highscoreTopFive {
         grid-column: 2 / 6;
         margin-top: 0.3rem;
         text-align: start;
@@ -152,6 +163,10 @@ main {
 
       @include response(md) {
         display: none;
+      }
+
+      @include response(lg) {
+        display: block;
       }
     }
   }
@@ -178,9 +193,9 @@ main {
     @include response(lg) {
       align-self: end;
       min-width: 18svw;
+      max-width: 40svh;
       height: 9svh;
     }
-
   }
 
   .highscore-landing {
