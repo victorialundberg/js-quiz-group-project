@@ -444,6 +444,25 @@ if (startQuizFromStorage === 'true') {
   localStorage.removeItem('startQuiz');
 }
 
+function buttonEffect(element: HTMLElement) {
+  element.addEventListener('mouseover', () => {
+    element.style.transform = 'rotate(3deg)';
+  });
+
+  element.addEventListener('mouseout', () => {
+    element.style.transform = 'rotate(0deg)';
+  });
+}
+
+export function addEffectToButton(button: any) {
+  if (button) {
+    buttonEffect(button);
+  }
+}
+
+addEffectToButton(nextButton);
+addEffectToButton(abortQuizButton);
+
 // ==================================================================================================
 // ----------------------------------   QUESTION COUNTER   ------------------------------------------
 // ==================================================================================================

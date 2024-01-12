@@ -1,3 +1,4 @@
+import { addEffectToButton } from './questionpage.js';
 const renderHighscoreList = function (): void {
   let highscoreHTML = `
     <h2 class="highscore-title">Highscore</h2>
@@ -43,7 +44,7 @@ const renderHighscoreList = function (): void {
         </div>
     </div>
     
-      <button class="next-button" id="playAgainButton" aria-label="next-button"><img src="../assets/images/ducks-with-signs/PlayAgainDuck.webp"
+      <button class="next-button button-effect" id="playAgainButton" aria-label="next-button"><img src="../assets/images/ducks-with-signs/PlayAgainDuck.webp"
       alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
     
       `;
@@ -54,6 +55,7 @@ const renderHighscoreList = function (): void {
     document.querySelector('.content-container');
   highscoreListContainer.innerHTML = highscoreHTML;
   const playAgainButton: any = document.querySelector('#playAgainButton');
+  addEffectToButton(playAgainButton);
   playAgainButton.addEventListener('click', startQuizFromHighscore);
 };
 

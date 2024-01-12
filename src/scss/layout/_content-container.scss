@@ -26,7 +26,8 @@
 
       img {
         @extend %fullspace;
-        object-fit: cover;
+        object-fit: fill;
+        border-radius: 12px 0px 0px 12px;
       }
 
       @include response(md) {
@@ -87,6 +88,13 @@
         cursor: pointer;
         // font-family: $font-grover;
         // font-size: fontSize(sm) * 0.888;
+      }
+
+      .button-effect {
+        transition: transform 0.2s ease-in-out;
+        &:hover {
+          transform: rotate(3deg);
+        }
       }
     }
 

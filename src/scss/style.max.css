@@ -282,8 +282,9 @@ main a {
      object-fit: cover;
 }
 .section-content-container .wrapper-container .img-container img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: fill;
+     object-fit: fill;
+  border-radius: 12px 0px 0px 12px;
 }
 @media screen and (max-width: 780px) {
   .section-content-container .wrapper-container .img-container {
@@ -333,6 +334,12 @@ main a {
   height: 100px;
   border: none;
   cursor: pointer;
+}
+.section-content-container .wrapper-container .content-container .button-effect {
+  transition: transform 0.2s ease-in-out;
+}
+.section-content-container .wrapper-container .content-container .button-effect:hover {
+  transform: rotate(3deg);
 }
 .section-content-container .wrapper-container .timer-color {
   width: 100%;
