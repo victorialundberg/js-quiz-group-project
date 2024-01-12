@@ -9,7 +9,6 @@ const renderHighscoreList = function () {
     const scores = storedHighscores ? JSON.parse(storedHighscores) : [];
     console.table(storedHighscores);
     console.log(scores);
-    //!
     console.log(scores.length);
     if (scores.length > 0) {
         scores.slice(0, 5).forEach((score, index) => {
@@ -38,7 +37,6 @@ const renderHighscoreList = function () {
       alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
     
       `;
-    //!
     const highscoreListContainer = document.querySelector('.content-container');
     highscoreListContainer.innerHTML = highscoreHTML;
     const playAgainButton = document.querySelector('#playAgainButton');

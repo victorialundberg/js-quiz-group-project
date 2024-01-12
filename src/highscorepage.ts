@@ -12,7 +12,6 @@ const renderHighscoreList = function (): void {
   console.table(storedHighscores);
   console.log(scores);
 
-  //!
   console.log(scores.length);
 
   if (scores.length > 0) {
@@ -48,8 +47,6 @@ const renderHighscoreList = function (): void {
       alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
     
       `;
-
-  //!
 
   const highscoreListContainer: any =
     document.querySelector('.content-container');

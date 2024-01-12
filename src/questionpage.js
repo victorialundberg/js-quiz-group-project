@@ -139,20 +139,23 @@ export function getRandomQuestion() {
     }
     let randomQuestion = null;
     let attempts = 0;
-    const maxAttempts = 3;
-    do {
+    while (true) {
         const randomIndex = Math.floor(Math.random() * QuizQuestions.length);
         randomQuestion = QuizQuestions[randomIndex];
         const isQuestionUsed = usedQuestionsArray.some((usedQuestion) => {
             return usedQuestion.id === randomQuestion.id;
         });
+        console.log('Attempts:', attempts);
+        console.log('Random Index:', randomIndex);
+        console.log('Is Question Used:', isQuestionUsed);
+        console.log('Used Questions Array:', usedQuestionsArray);
         if (!isQuestionUsed) {
             usedQuestionsArray.push(randomQuestion);
+            console.log('Selected Question:', randomQuestion);
             return randomQuestion;
         }
         attempts++;
-    } while (attempts < maxAttempts);
-    return null;
+    }
 }
 // ==================================================================================================
 // -------------------------------------   RENDER QUESTIONS   ---------------------------------------
@@ -247,11 +250,6 @@ function getCurrentQuestion() {
     console.log('THIS IS NEW', currentQuestion);
     return currentQuestion;
 }
-nextButton.addEventListener('click', function () {
-    // Ensure the event listener callback is not attached multiple times
-    nextButton.removeEventListener('click', checkIfCorrectAnswer);
-    checkIfCorrectAnswer();
-});
 export const newQuestion = function () {
     countQuestions();
     if (questionCounter < 10) {
@@ -262,7 +260,7 @@ export const newQuestion = function () {
             renderQuestion(randomQuestion);
             shuffleAnswerOptions(randomQuestion);
             currentQuestion = randomQuestion;
-            // nextButton.addEventListener('click', checkIfCorrectAnswer);
+            nextButton.addEventListener('click', checkIfCorrectAnswer);
             console.warn('Render and stopCountdown');
             getCurrentQuestion();
         }
@@ -347,3 +345,4 @@ export function checkIfCorrectAnswer() {
     localStorage.setItem('answers', JSON.stringify(userAnswerChoices));
     newQuestion();
 }
+console.log();
