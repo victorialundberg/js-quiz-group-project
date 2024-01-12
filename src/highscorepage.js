@@ -1,4 +1,4 @@
-"use strict";
+import { addEffectToButton } from './questionpage.js';
 const renderHighscoreList = function () {
     let highscoreHTML = `
     <h2 class="highscore-title">Highscore</h2>
@@ -34,7 +34,7 @@ const renderHighscoreList = function () {
         </div>
     </div>
     
-      <button class="next-button" id="playAgainButton" aria-label="next-button"><img src="../assets/images/ducks-with-signs/PlayAgainDuck.webp"
+      <button class="next-button button-effect" id="playAgainButton" aria-label="next-button"><img src="../assets/images/ducks-with-signs/PlayAgainDuck.webp"
       alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
     
       `;
@@ -42,6 +42,7 @@ const renderHighscoreList = function () {
     const highscoreListContainer = document.querySelector('.content-container');
     highscoreListContainer.innerHTML = highscoreHTML;
     const playAgainButton = document.querySelector('#playAgainButton');
+    addEffectToButton(playAgainButton);
     playAgainButton.addEventListener('click', startQuizFromHighscore);
 };
 const navigateToQuestionPageFromHighscore = () => {

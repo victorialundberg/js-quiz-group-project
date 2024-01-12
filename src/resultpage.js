@@ -1,6 +1,7 @@
 import { userAnswerChoices } from './questionpage.js';
 import { HighscoreList } from './models/HighscoreList.js';
 import { ScoreItem } from './models/Score.js';
+import { addEffectToButton } from './questionpage.js';
 // const highscoreList = HighscoreList.instance;
 const printTime = localStorage.getItem('stoppedTime');
 const abortQuizButton = document.querySelector('.abort-quiz-button');
@@ -10,6 +11,7 @@ const clearStorage = function () {
     localStorage.removeItem('stoppedTime');
     localStorage.removeItem('correctAnswersCount');
 };
+addEffectToButton(abortQuizButton);
 abortQuizButton.addEventListener('click', clearStorage);
 const renderResults = function () {
     const storedQuestions = localStorage.getItem('answers');
@@ -103,11 +105,11 @@ function renderInputField() {
     console.log('INPUT POINTS', points);
     let inputHTML = `
   <input type="text" class="input-name" placeholder="Your name here">
-  <button class="submit-button" aria-label="submit-button"><img src="../assets/images/ducks-with-signs/SubmitDuck.webp"
+  <button class="submit-button button-effect" aria-label="submit-button"><img src="../assets/images/ducks-with-signs/SubmitDuck.webp"
   alt="Duck with sign saying 'submit'" width="130" height="100" loading="lazy"></button>
   `;
     let inputNotHighscoreHTML = `
-  <button class="next-button" aria-label="next-button"><img src="../assets/images/ducks-with-signs/NextDuck.webp"
+  <button class="next-button button-effect" aria-label="next-button"><img src="../assets/images/ducks-with-signs/NextDuck.webp"
   alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
 
   `;
@@ -119,6 +121,7 @@ function renderInputField() {
         points > highscoreListArray[9]._totalPoints) {
         resultsList.innerHTML = inputHTML;
         const submitButton = document.querySelector('.submit-button');
+        addEffectToButton(submitButton);
         submitButton.addEventListener('click', () => {
             saveInputName();
             navigateToHighscorePage();

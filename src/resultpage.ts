@@ -1,6 +1,7 @@
 import { userAnswerChoices } from './questionpage.js';
 import { HighscoreList } from './models/HighscoreList.js';
 import { ScoreItem } from './models/Score.js';
+import { addEffectToButton } from './questionpage.js';
 
 // const highscoreList = HighscoreList.instance;
 
@@ -16,6 +17,7 @@ const clearStorage = function () {
   localStorage.removeItem('correctAnswersCount');
 };
 
+addEffectToButton(abortQuizButton);
 abortQuizButton.addEventListener('click', clearStorage);
 
 const renderResults = function (): void {
@@ -138,12 +140,12 @@ function renderInputField() {
 
   let inputHTML = `
   <input type="text" class="input-name" placeholder="Your name here">
-  <button class="submit-button" aria-label="submit-button"><img src="../assets/images/ducks-with-signs/SubmitDuck.webp"
+  <button class="submit-button button-effect" aria-label="submit-button"><img src="../assets/images/ducks-with-signs/SubmitDuck.webp"
   alt="Duck with sign saying 'submit'" width="130" height="100" loading="lazy"></button>
   `;
 
   let inputNotHighscoreHTML = `
-  <button class="next-button" aria-label="next-button"><img src="../assets/images/ducks-with-signs/NextDuck.webp"
+  <button class="next-button button-effect" aria-label="next-button"><img src="../assets/images/ducks-with-signs/NextDuck.webp"
   alt="Duck with sign saying 'next'" width="130" height="100" loading="lazy"></button>
 
   `;
@@ -162,6 +164,7 @@ function renderInputField() {
     const submitButton: any = document.querySelector(
       '.submit-button'
     ) as HTMLButtonElement | null;
+    addEffectToButton(submitButton);
     submitButton.addEventListener('click', () => {
       saveInputName();
       navigateToHighscorePage();
