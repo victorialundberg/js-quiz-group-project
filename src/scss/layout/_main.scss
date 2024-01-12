@@ -2,17 +2,30 @@ main {
   .landing-page {
     background-color: #ffbb00;
     height: 76svh;
-    display: grid;
+    /* display: grid;
     justify-items: center;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 15% 85%;
+    grid-template-rows: 15% 85%; */
     padding-bottom: 8svh;
     padding-top: 1rem;
 
+    @include response(sm) {
+      @include flexCenter($fd: column);
+      gap: 1.1rem; 
+    }
+
     @include response(md) {
       @include flexCenter($fd: column);
+      gap: 1.1rem; 
     }
-  }
+
+    @include response(lg) {
+      display: grid;
+      justify-items: center;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 15% 85%;
+    }
+  
 
   .main-heading {
     font-size: 4rem;
@@ -24,7 +37,7 @@ main {
     padding-bottom: 0;
 
     @include response(sm) {
-      font-size: fontSize(sm);
+      font-size: fontSize(md);
       @include flexCenter(column);
     }
 
@@ -80,13 +93,29 @@ main {
 
   .game-rules,
   .highscore-landing {
-    background-color: color(purple-blue);
-    align-self: flex-end;
-    height: 380px;
-    width: 300px;
+    background-color: color(purple-blue);    
+    height: 380px;    
     border-radius: 20px;
     padding-top: 0.5rem;
-    margin-bottom: 9svh;
+    // margin-bottom: 9svh;
+
+    @include response(sm) {
+      align-self: center;
+      margin-bottom: 0;
+      width: 80vw;
+    }
+
+    @include response(md) {
+      align-self: center;
+      margin-bottom: 0;
+      width: 80vw;
+    }
+
+    @include response(lg) {
+      align-self: flex-end;
+      margin-bottom: 9svh;
+      width: 300px;
+    }
 
     .highscore-heading {
       font-size: fontSize(xs);
@@ -107,8 +136,8 @@ main {
           font-family: $font-roboto;
         }
       }
-    }
-
+    }  
+  
     .left-eye-container,
     .right-eye-container {
       border-radius: 50px;
@@ -117,22 +146,41 @@ main {
       width: 150px;
       box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 6);
 
+      @include response(sm) {
+        display: none;
+      }
+
       @include response(md) {
         display: none;
       }
     }
   }
-
   .start-quiz-button {
-    border: none;
-    min-width: 18svw;
-    height: 9svh;
+    border: none;    
     border-radius: 20px;
-    cursor: pointer;
+    cursor: pointer; //lägg till på xl
     background-color: color(beak);
-    align-self: end;
     font-family: $font-grover;
     font-size: fontSize(xs);
+
+    @include response(sm) {
+      align-self: center;
+      height: 15svh; 
+      width: 80vw;
+    }
+
+    @include response(md) {
+      align-self: center;
+      height: 15svh; 
+      width: 80vw;
+    }
+
+    @include response(lg) {
+      align-self: end;
+      min-width: 18svw;
+      height: 9svh;
+    }
+
   }
 
   .highscore-landing {
@@ -150,6 +198,7 @@ main {
         height: 80px;
         width: 80px;
       }
+      
     }
   }
 
@@ -157,4 +206,5 @@ main {
     text-decoration: none;
     color: black;
   }
+}
 }
