@@ -2,21 +2,17 @@ main {
   .landing-page {
     background-color: #ffbb00;
     height: 76svh;
-    /* display: grid;
-    justify-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 15% 85%; */
     padding-bottom: 8svh;
     padding-top: 1rem;
 
     @include response(sm) {
       @include flexCenter($fd: column);
-      gap: 1.1rem; 
+      gap: 1.1rem;
     }
 
     @include response(md) {
       @include flexCenter($fd: column);
-      gap: 1.1rem; 
+      gap: 1.1rem;
     }
 
     @include response(lg) {
@@ -25,201 +21,198 @@ main {
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: 15% 85%;
     }
-  
 
-  .main-heading {
-    font-size: 4rem;
-    grid-column: 1 / 4;
-    margin: 0;
-    padding-top: 1.3rem;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-
-    @include response(sm) {
-      font-size: fontSize(md);
-      @include flexCenter(column);
-    }
-
-    @include response(md) {
-      font-size: fontSize(xl);
-    }
-
-    @include response(lg) {
-      font-size: fontSize(xl) * 1.3;
-    }
-  }
-
-  .game-rules {
-    grid-column: 1 / 2;
-    position: relative;
-
-    @include response(lg) {
-      margin-left: 5rem;   
-    }  
-
-    .game-rules-heading {
-      font-size: fontSize(xs);
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    .game-rules-text {
-      font-family: $font-roboto;
-      font-size: fontSize(xs) * 0.68;
-      text-align: center;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-
-      span {
-        display: inline-block;
-        font-family: $font-grover;
-        font-size: fontSize(xs) * 0.75;
-      }
-    }
-
-    .left-eye-container {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-
-      .left-pupil {
-        border-radius: 50px;
-        background-color: black;
-        height: 80px;
-        width: 80px;
-      }
-    }
-  }
-
-  .highscore-landing {
-    @include response(sm) {
-      display: grid;
-    }  
-
-    @include response(lg) {
-      margin-right: 5rem;   
-    }  
-  }
-
-  .game-rules,
-  .highscore-landing {
-    background-color: color(purple-blue);    
-    height: 380px;    
-    border-radius: 20px;
-    padding-top: 0.5rem;
-    // margin-bottom: 9svh;
-
-    @include response(sm) {
-      align-self: center;
-      margin-bottom: 0;
-      width: 80vw;
-      padding-bottom: 1rem;
-    }
-
-    @include response(md) {
-      align-self: center;
-      margin-bottom: 0;
-      width: 80vw;
-    }
-
-    @include response(lg) {
-      align-self: flex-end;
-      margin-bottom: 9svh;
-      max-width: 30vw;
-    }
-
-    .highscore-heading {
-      font-size: fontSize(xs);
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-
-    .highscore-landing-text-container {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-
-      .highscoreTopFive {
-        grid-column: 2 / 6;
-        margin-top: 0.3rem;
-        text-align: start;
-
-        span {
-          font-family: $font-roboto;
-        }
-      }
-    }  
-  
-    .left-eye-container,
-    .right-eye-container {
-      border-radius: 50px;
-      background-color: white;
-      height: 170px;
-      width: 150px;
-      box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 6);
+    .main-heading {
+      font-size: 4rem;
+      grid-column: 1 / 4;
+      margin: 0;
+      padding-top: 1.3rem;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
 
       @include response(sm) {
-        display: none;
+        font-size: fontSize(md);
+        @include flexCenter(column);
       }
 
       @include response(md) {
-        display: none;
+        font-size: fontSize(xl);
       }
 
       @include response(lg) {
-        display: block;
+        font-size: fontSize(xl) * 1.3;
       }
     }
-  }
-  .start-quiz-button {
-    border: none;    
-    border-radius: 20px;
-    cursor: pointer; //lägg till på xl
-    background-color: color(beak);
-    font-family: $font-grover;
-    font-size: fontSize(xs);
 
-    @include response(sm) {
-      align-self: center;
-      height: 15svh; 
-      width: 80vw;
+    .game-rules {
+      grid-column: 1 / 2;
+      position: relative;
+
+      @include response(lg) {
+        margin-left: 5rem;
+      }
+
+      .game-rules-heading {
+        font-size: fontSize(xs);
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+      .game-rules-text {
+        font-family: $font-roboto;
+        font-size: fontSize(xs) * 0.68;
+        text-align: center;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+
+        span {
+          display: inline-block;
+          font-family: $font-grover;
+          font-size: fontSize(xs) * 0.75;
+        }
+      }
+
+      .left-eye-container {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+
+        .left-pupil {
+          border-radius: 50px;
+          background-color: black;
+          height: 80px;
+          width: 80px;
+        }
+      }
     }
 
-    @include response(md) {
-      align-self: center;
-      height: 15svh; 
-      width: 80vw;
+    .highscore-landing {
+      @include response(sm) {
+        display: grid;
+      }
+
+      @include response(lg) {
+        margin-right: 5rem;
+      }
     }
 
-    @include response(lg) {
-      align-self: end;
-      min-width: 18svw;
-      max-width: 40svh;
-      height: 9svh;
-    }
-  }
+    .game-rules,
+    .highscore-landing {
+      background-color: color(purple-blue);
+      height: 380px;
+      border-radius: 20px;
+      padding-top: 0.5rem;
 
-  .highscore-landing {
-    grid-column: 3 / 4;
-    position: relative;
+      @include response(sm) {
+        align-self: center;
+        margin-bottom: 0;
+        width: 80vw;
+        padding-bottom: 1rem;
+      }
 
-    .right-eye-container {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
+      @include response(md) {
+        align-self: center;
+        margin-bottom: 0;
+        width: 80vw;
+      }
 
-      .right-pupil {
+      @include response(lg) {
+        align-self: flex-end;
+        margin-bottom: 9svh;
+        max-width: 30vw;
+      }
+
+      .highscore-heading {
+        font-size: fontSize(xs);
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      .highscore-landing-text-container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+
+        .highscoreTopFive {
+          grid-column: 2 / 6;
+          margin-top: 0.3rem;
+          text-align: start;
+
+          span {
+            font-family: $font-roboto;
+          }
+        }
+      }
+
+      .left-eye-container,
+      .right-eye-container {
         border-radius: 50px;
-        background-color: black;
-        height: 80px;
-        width: 80px;
+        background-color: white;
+        height: 170px;
+        width: 150px;
+        box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 6);
+
+        @include response(sm) {
+          display: none;
+        }
+
+        @include response(md) {
+          display: none;
+        }
+
+        @include response(lg) {
+          display: block;
+        }
       }
-      
+    }
+    .start-quiz-button {
+      border: none;
+      border-radius: 20px;
+      cursor: pointer; //lägg till på xl
+      background-color: color(beak);
+      font-family: $font-grover;
+      font-size: fontSize(xs);
+
+      @include response(sm) {
+        align-self: center;
+        height: 15svh;
+        width: 80vw;
+      }
+
+      @include response(md) {
+        align-self: center;
+        height: 15svh;
+        width: 80vw;
+      }
+
+      @include response(lg) {
+        align-self: end;
+        min-width: 18svw;
+        max-width: 40svh;
+        height: 9svh;
+      }
+    }
+
+    .highscore-landing {
+      grid-column: 3 / 4;
+      position: relative;
+
+      .right-eye-container {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+
+        .right-pupil {
+          border-radius: 50px;
+          background-color: black;
+          height: 80px;
+          width: 80px;
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
     }
   }
-
-  a {
-    text-decoration: none;
-    color: black;
-  }
-}
 }

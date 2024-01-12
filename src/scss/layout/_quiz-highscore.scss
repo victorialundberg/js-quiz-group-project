@@ -1,3 +1,7 @@
+.img-container-highscore-page {
+  display: none;
+}
+
 .highscore-title {
   width: 100%;
   display: flex;
@@ -14,15 +18,29 @@
   gap: 1.1rem;
   flex-wrap: wrap;
 
+  @include response(sm) {
+    height: 100%;
+    padding-bottom: 3rem;
+    margin-top: 0;
+    gap: 0;
+  }
+
   .highscore-1to5,
   .highscore-6to10 {
-    width: 50%;
+    width: 30%;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     margin: 1rem 0;
 
-
+    @include response(sm) {
+      @include flexCenter($fd: column);
+      width: 100%;
+      font-size: fontSize(xs) * 0.7;
+      text-align: start;
+      margin: 0;
+      display: grid;
+    }
   }
 
   .highscore {

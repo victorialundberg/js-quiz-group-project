@@ -1,21 +1,23 @@
 .section-content-container {
-  min-height: 76svh;
+  height: auto;
+  width: 100svw;
   background-color: color(primary);
   @include flexCenter;
+  flex-direction: column;
 
   .wrapper-container {
     padding: 0 2rem;
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    min-height: 60svh;
-    min-width: 95svw;
+    margin-bottom: 4rem;
+    height: 60svh;
+    width: 95%;
     justify-content: center;
     display: flex;
 
     @include response(sm) {
       font-size: fontSize(xs) * 0.9;
-      min-height: 30svh;
-      @include flexCenter($fd: column); 
+      height: 30svh;
+      @include flexCenter($fd: column);
     }
 
     @include response(md) {
@@ -27,73 +29,66 @@
       padding: 0 2rem;
       margin-top: 2rem;
       margin-bottom: 2rem;
-      min-height: 60svh;
-      min-width: 95svw;
-      @include flexCenter;
+      @include flexCenter($fd: row);
     }
 
     .img-container {
-      min-height: 60svh;
-      width: 35%;
-      background-color: #fff;
+      height: 100%;
+      width: 30%;
       border-radius: 12px 0px 0px 12px;
-      // object-fit: contain;
-      @include flexCenter();
-      overflow: hidden;
+      @include flexCenter;
+      overflow: auto;
+
+      @include response(sm) {
+        margin-top: 2rem;
+      }
 
       img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        // border-radius: 12px 0px 0px 12px;
-
-        // @include response(lg) {
-        //   object-fit: cover;
-        //   border-radius: 12px 0px 0px 12px;
-        // min-height: 60svh;
-        //   min-width: 40svh;
-        // }
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
       }
 
       @include response(sm) {
-        min-height: 10svh;
-        max-height: 25svh;
         width: 100%;
         border-radius: 12px 12px 0 0;
       }
 
       @include response(md) {
+        margin-top: 2rem;
         min-height: 20svh;
         width: 100%;
         border-radius: 12px 12px 0 0;
       }
-      
+
       @include response(lg) {
-        min-height: 60svh;
-        width: 50%;
         background-color: #fff;
+        border-radius: 12px 0px 0px 12px;
+        margin: 0;
+        padding: 0;
+        height: 90svh;
+      }
+      @include response(xxl) {
         border-radius: 12px 0px 0px 12px;
       }
     }
 
     .content-container {
       position: relative;
-      border-radius: 0 12px 12px 0;
+      border-radius: 12px;
       width: 65%;
+      height: 95%;
       min-height: 60svh;
       padding: 0 1.5rem;
+
       @include flexCenter($fd: column, $jc: flex-start, $ai: flex-start);
 
-      @include response(sm) {
-        border-radius: 0 0 12px 12px;
-        min-height: 30svh;
-        width: 100%;
-        padding-bottom: 5rem;
-      }
+      margin-bottom: 3rem;
 
       @include response(md) {
         border-radius: 0 0 12px 12px;
-        min-height: 30svh;
+
         width: 100%;
         padding-bottom: 3rem;
       }
@@ -102,13 +97,13 @@
         position: relative;
         border-radius: 0 12px 12px 0;
         width: 65%;
-        min-height: 60svh;
+        height: 90svh;
         padding: 0 1.5rem;
         @include flexCenter($fd: column, $jc: flex-start, $ai: flex-start);
+        margin: 0;
       }
 
       .input-name {
-        //in quiz results
         font-family: $font-grover;
         position: absolute;
         bottom: 1rem;
@@ -122,7 +117,7 @@
         @include response(sm) {
           position: relative;
           right: 0;
-          left: 0; 
+          left: 0;
           min-width: 20svw;
           max-width: 75svw;
           margin-top: 2rem;
@@ -133,18 +128,21 @@
         @include response(md) {
           position: relative;
           right: 0;
-          left: 0; 
+          left: 0;
+          bottom: 3.5rem;
           min-width: 20svw;
           max-width: 75svw;
-          margin-top: 2rem;
+          margin-top: 5rem;
           margin-left: 0;
-          margin-bottom: 5rem;
+          margin-bottom: 3rem;
         }
 
         @include response(lg) {
           position: absolute;
-          bottom: -4rem;
-          left: 25rem; 
+          width: 30svw;
+          left: 33%;
+          bottom: 5rem;
+          font-size: fontSize(xs) * 0.8;
         }
       }
 
@@ -172,9 +170,8 @@
     .timer-color {
       width: 100%;
       background: linear-gradient(to top, red, #8d87d0);
-      background-size: 200% 300%; /* Double the height to accommodate the animation */
+      background-size: 200% 300%;
       animation: colorChange 30s linear forwards;
-      //   animation-direction: alternate; /* Alternates the animation direction */
     }
 
     .no-animation {
@@ -183,11 +180,11 @@
 
     @keyframes colorChange {
       0% {
-        background-position: 0% 0%; /* Start at the bottom */
+        background-position: 0% 0%;
       }
-      
+
       100% {
-        background-position: 0% 100%; /* End at the top */
+        background-position: 0% 100%;
       }
     }
   }

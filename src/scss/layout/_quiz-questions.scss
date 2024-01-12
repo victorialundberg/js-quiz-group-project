@@ -1,6 +1,4 @@
 .question-text-container {
-  // display: flex;
-  // align-items: flex-start;
   @include flexCenter($fd: column, $jc: space-between, $ai: flex-start);
   gap: 1.1rem;
 
@@ -11,6 +9,12 @@
     @include response(sm) {
       font-size: fontSize(sm);
     }
+    @include response(lg) {
+      font-size: fontSize(lg);
+    }
+    @include response(xl) {
+      font-size: fontSize(xl);
+    }
   }
 
   .question-text {
@@ -20,6 +24,12 @@
 
     @include response(sm) {
       font-size: fontSize(xs) * 0.7;
+    }
+    @include response(lg) {
+      font-size: fontSize(xs);
+    }
+    @include response(xl) {
+      font-size: fontSize(xl) * 0.7;
     }
   }
 
@@ -45,6 +55,12 @@
       @include response(sm) {
         font-size: fontSize(xs) * 0.7;
       }
+      @include response(lg) {
+        font-size: fontSize(xs);
+      }
+      @include response(xl) {
+        font-size: fontSize(sm);
+      }
 
       .answer-button {
         margin-right: 0.5rem;
@@ -61,12 +77,11 @@
         @include response(sm) {
           font-size: fontSize(xs) * 0.7;
         }
-        // padding-left: 0.5rem;
       }
     }
 
     .answers {
-      font-size: fontSize(md);      
+      font-size: fontSize(md);
     }
   }
 }

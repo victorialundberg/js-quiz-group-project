@@ -13,7 +13,7 @@ const renderHighscoreList = function () {
     if (scores.length > 0) {
         scores.slice(0, 5).forEach((score, index) => {
             highscoreHTML += `
-        <p class="highscore">${index + 1}. <span>${score._name}, ${score._totalPoints}p, ${score._totalTime} minutes</span></p>
+        <p class="highscore">${index + 1}. <span>${score._name}, ${score._totalPoints}p</span></p>
       `;
         });
         highscoreHTML += `
@@ -22,7 +22,7 @@ const renderHighscoreList = function () {
     `;
         scores.slice(5, 10).forEach((score, index) => {
             highscoreHTML += `
-        <p class="highscore">${index + 6}. <span>${score._name}, ${score._totalPoints}p, ${score._totalTime}m</span></p>
+        <p class="highscore">${index + 6}. <span>${score._name}, ${score._totalPoints}p</span></p>
       `;
         });
     }

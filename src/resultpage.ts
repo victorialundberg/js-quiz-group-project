@@ -1,9 +1,4 @@
-// import { userAnswerChoices } from './questionpage.js';
-// import { HighscoreList } from './models/HighscoreList.js';
-// import { ScoreItem } from './models/Score.js';
 import { addEffectToButton } from './questionpage.js';
-
-// const highscoreList = HighscoreList.instance;
 
 const printTime = localStorage.getItem('stoppedTime');
 const abortQuizButton = document.querySelector(
@@ -44,7 +39,7 @@ const renderResults = function (): void {
           (questionObj: any, index: number) => `
               <p class="answer">${index + 1}. <span>${
                 questionObj.answer
-              }</span> - ${questionObj.isCorrect ? '🎉' : '💀'}</p>
+              }</span> - ${questionObj.isCorrect ? '✅' : '💀'}</p>
             `
         )
         .join('')}
@@ -57,14 +52,14 @@ const renderResults = function (): void {
        (questionObj: any, index: number) => `
               <p class="answer">${index + 6}. <span>${
                 questionObj.answer
-              }</span> - ${questionObj.isCorrect ? '🎉' : '💀'}</p>
+              }</span> - ${questionObj.isCorrect ? '✅' : '💀'}</p>
             `
      )
      .join('')}
    </div>
    </div>
   
-   <div class="input-wrapper">HALLOJ</div>
+   <div class="input-wrapper"></div>
   
    </div>
   
@@ -106,36 +101,8 @@ console.log();
 // -----------------------------------   HIGHSCORE CHECK   ------------------------------------------
 // ==================================================================================================
 
-// Funktion som tar in currentScore
-// Kollar highscore i local storage
-
-// function checkIfHighscore(): void {
-
-//   let highscoreListArrayString = localStorage.getItem('highScores');
-//   let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
-//   let lowestScore: number = highscoreListArray[9];
-
-//   if (currentScore > lowestScore) {
-//     renderInputField();
-//   } else {
-//     renderNextButton();
-//   }
-
-//   // if > index 9 run functions for
-//   // render input, from input:
-//   // add name
-//   // set highscore
-//   // store to local
-//   // else render next button
-
-//   // currentSession, set name
-// }
-
 function renderInputField() {
-  // let currentScore: number = 500;
-  // let lowestScore: number = 500
   const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
-  // const time = localStorage.getItem('stoppedTime');
   console.log('INPUT POINTS', points);
 
   let inputHTML = `
@@ -150,7 +117,6 @@ function renderInputField() {
 
   `;
 
-  // const resultsList: any = document.querySelector('.input-wrapper');
   const resultsList: any = document.querySelector('.input-wrapper');
   let highscoreListArrayString = localStorage.getItem('highScores');
   let highscoreListArray: any[] = JSON.parse(highscoreListArrayString || '[]');
@@ -179,111 +145,49 @@ function renderInputField() {
   }
 }
 
-// if (points > lowestScore || 0) {
-//   resultsList.innerHTML = inputHTML;
-
-//   const submitButton: any = document.querySelector(
-//     '.submit-button'
-//   ) as HTMLButtonElement | null;
-//   submitButton.addEventListener('click', saveInputName);
-//   submitButton.addEventListener('click', navigateToHighscorePage);
-// } else {
-//   resultsList.innerHTML = inputNotHighscoreHTML;
-
-//   const navigateToHighscoreBtn: any = document.querySelector('.next-button');
-//   navigateToHighscoreBtn.addEventListener('click', navigateToHighscorePage);
-//   // const nextButton: any = document.querySelector('.next-button');
-//   // navigateToHighscorePage();
-//   console.log('Where is my ducking button');
-// }
-
-// resultsList.innerHTML = inputHTML;
-// }
-
-// function renderNextButton() {
-//   let inputHTML = `
-//     <button class="next-button">Next</button>`;
-//   const resultsList: any = document.querySelector('.input-wrapper');
-//   resultsList.innerHTML = inputHTML;
-// }
-
-// ------------------------------------------------------ //
-// -------------------------Jari------------------------- //
-// ------------------------------------------------------ //
-
 function saveInputName() {
   let nameInput = document.querySelector(
     '.input-name'
-    ) as HTMLInputElement | null;
-    
-    if (nameInput) {
-      let playerName = nameInput.value;
-      const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
-      const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
-      
-      let newScore = {
-        _name: playerName,
-        _totalPoints: points,
-        _totalTime: time,
-      };
-      
-      let highscoreList = JSON.parse(localStorage.getItem('highScores') || '[]');
-      
-      highscoreList.push(newScore);
-      
-      highscoreList.sort((a: any, b: any) => b._totalPoints - a._totalPoints);
-      
-      if (highscoreList.length > 10) {
-        highscoreList = highscoreList.slice(0, 10);
-      }
-      
-      localStorage.setItem('highScores', JSON.stringify(highscoreList));
-      
-      console.log('After adding new score:', highscoreList);
-      
-      nameInput.value = '';
-    } else {
-      console.log('Name input field not found');
-    }
-  }
-  
-  // function saveInputName() {
-    //   let nameInput = document.querySelector(
-      //     '.input-name'
-      //   ) as HTMLInputElement | null;
-      
-      //   if (nameInput) {
-        //     let playerName = nameInput.value;
-        //     const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
-        //     const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
-        
-        //     console.log('Player Name:', playerName);
-        //     console.log('Points:', points);
-        //     console.log('Time:', time);
-        
-        //     console.log('Parsed Time:', new Date(time));
-        
-        //     let newScore = new ScoreItem(playerName, points, time);
-        
-        //     HighscoreList.instance.addScore(newScore);
-        
-        //     // Clear the input field after saving the name
-        //     nameInput.value = '';
-        //   } else {
-          //     console.log('Name input field not found');
-          //   }
-          // }
-          
-          // ------------------------------------------------------ //
-          // -------------------------Jari------------------------- //
-          // ------------------------------------------------------ //
+  ) as HTMLInputElement | null;
 
-          const navigateToHighscorePage = () => {
-            window.location.href = './highscorepage.html';
-            // localStorage.removeItem('answers');
-            // localStorage.removeItem('timeToPoints');
-            // localStorage.removeItem('stoppedTime');
-            // localStorage.removeItem('correctAnswersCount');
-          };
-          
-          renderInputField();
+  if (nameInput) {
+    let playerName = nameInput.value;
+    const points = parseInt(localStorage.getItem('timeToPoints') || '0', 10);
+    const time = parseInt(localStorage.getItem('stoppedTime') || '0', 10);
+
+    console.log('Time from localStorage:', time);
+
+    let newScore = {
+      _name: playerName,
+      _totalPoints: points,
+    };
+
+    let highscoreList = JSON.parse(localStorage.getItem('highScores') || '[]');
+
+    highscoreList.push(newScore);
+
+    highscoreList.sort((a: any, b: any) => b._totalPoints - a._totalPoints);
+
+    if (highscoreList.length > 10) {
+      highscoreList = highscoreList.slice(0, 10);
+    }
+
+    localStorage.setItem('highScores', JSON.stringify(highscoreList));
+
+    console.log('After adding new score:', highscoreList);
+
+    nameInput.value = '';
+  } else {
+    console.log('Name input field not found');
+  }
+}
+
+const navigateToHighscorePage = () => {
+  window.location.href = './highscorepage.html';
+  localStorage.removeItem('answers');
+  localStorage.removeItem('timeToPoints');
+  localStorage.removeItem('stoppedTime');
+  localStorage.removeItem('correctAnswersCount');
+};
+
+renderInputField();

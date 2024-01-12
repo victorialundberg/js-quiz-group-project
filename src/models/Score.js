@@ -1,7 +1,5 @@
 class ScoreItem {
-    constructor(_name, 
-    // private _countDownToPoints: number,
-    _totalPoints, _totalTime, id) {
+    constructor(_name, _totalPoints, _totalTime, id) {
         Object.defineProperty(this, "_name", {
             enumerable: true,
             configurable: true,
@@ -31,21 +29,12 @@ class ScoreItem {
     get id() {
         return this._id;
     }
-    // set id(id: number) {
-    //   this._id = id;
-    // }
     get name() {
         return this._name;
     }
     set name(name) {
         this._name = name;
     }
-    //   get countDownToPoints(): number {
-    //     return this._countDownToPoints;
-    //   }
-    //   set countDownToPoints(countDownToPoints: number) {
-    //     this._countDownToPoints = countDownToPoints;
-    //   }
     get totalPoints() {
         return this._totalPoints;
     }

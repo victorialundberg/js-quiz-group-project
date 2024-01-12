@@ -19,16 +19,18 @@ const renderHighscoreListMain = function (): void {
       highscoreHTMLMain += `
         <p class="highscore-landing-1to5">${index + 1}. <span>${score._name}, ${
           score._totalPoints
-        }p, ${score._totalTime} minutes</span></p>
+        }p</span></p>
       `;
     });
-
-    const highscoreListContainer: any =
-      document.querySelector('.highscore-landing');
-    highscoreListContainer.innerHTML = highscoreHTMLMain;
-  } else {
-    'No highscores are set yet!'
+  } else if (scores.length < 0) {
+    highscoreHTMLMain = `
+    <p class="highscore-landing-1to5">No highscores set yet</p>
+    `;
   }
+
+  const highscoreListContainer: any =
+    document.querySelector('.highscore-landing');
+  highscoreListContainer.innerHTML = highscoreHTMLMain;
 };
 renderHighscoreListMain();
 

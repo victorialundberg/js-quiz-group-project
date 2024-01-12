@@ -42,15 +42,15 @@ export const QuizQuestions = [
     {
         id: 5,
         question: 'Which of the following have rubber ducks been used to measure?',
-        answerOne: 'Rubber ducks have been employed to study the migratory patterns of deep-sea creatures.',
-        answerTwo: 'Rubber ducks have been utilized to map underwater geological features and topography.',
-        correctAnswer: 'Rubber ducks have been used to measure ocean currents.',
+        answerOne: 'Migratory patterns of deep-sea creatures.',
+        answerTwo: 'Geological features and topography.',
+        correctAnswer: 'Ocean currents.',
         alt: 'rubber duck in clear water with a group of blurry rubber ducks behind it',
         src: '../assets/images/duckrace.webp',
     },
     {
         id: 6,
-        question: 'What prestigious award did the esteemed rubber duck receive in 2023 for its outstanding contributions to bath-time entertainment and quacking innovation?',
+        question: 'What prestigious award did the esteemed rubber duck receive in 2023?',
         answerOne: 'The Nobel Quackson Prize',
         answerTwo: 'The Ducky Distinguished Award',
         correctAnswer: 'The Golden Quacker Prize',
@@ -77,7 +77,7 @@ export const QuizQuestions = [
     },
     {
         id: 9,
-        question: 'What material is commonly used to make traditional yellow rubber ducks, ensuring their iconic appearance?',
+        question: 'What material is commonly used to make traditional yellow rubber ducks?',
         answerOne: 'Latex',
         answerTwo: 'Silicone',
         correctAnswer: 'Vinyl',

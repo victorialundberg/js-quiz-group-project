@@ -19,7 +19,7 @@ const renderHighscoreList = function (): void {
       highscoreHTML += `
         <p class="highscore">${index + 1}. <span>${score._name}, ${
           score._totalPoints
-        }p, ${score._totalTime} minutes</span></p>
+        }p</span></p>
       `;
     });
 
@@ -32,7 +32,7 @@ const renderHighscoreList = function (): void {
       highscoreHTML += `
         <p class="highscore">${index + 6}. <span>${score._name}, ${
           score._totalPoints
-        }p, ${score._totalTime}m</span></p>
+        }p</span></p>
       `;
     });
   } else {

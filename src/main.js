@@ -15,15 +15,17 @@ const renderHighscoreListMain = function () {
     if (scores.length > 0) {
         scores.slice(0, 5).forEach((score, index) => {
             highscoreHTMLMain += `
-        <p class="highscore-landing-1to5">${index + 1}. <span>${score._name}, ${score._totalPoints}p, ${score._totalTime} minutes</span></p>
+        <p class="highscore-landing-1to5">${index + 1}. <span>${score._name}, ${score._totalPoints}p</span></p>
       `;
         });
-        const highscoreListContainer = document.querySelector('.highscore-landing');
-        highscoreListContainer.innerHTML = highscoreHTMLMain;
     }
-    else {
-        'No highscores are set yet!';
+    else if (scores.length < 0) {
+        highscoreHTMLMain = `
+    <p class="highscore-landing-1to5">No highscores set yet</p>
+    `;
     }
+    const highscoreListContainer = document.querySelector('.highscore-landing');
+    highscoreListContainer.innerHTML = highscoreHTMLMain;
 };
 renderHighscoreListMain();
 const navigateToQuestionPage = () => {

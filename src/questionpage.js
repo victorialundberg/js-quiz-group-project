@@ -1,4 +1,3 @@
-// import { images } from './models/Images.js';
 import { QuizQuestions } from './models/Questions.js';
 // ==================================================================================================
 // ------------------------------------------   GLOBAL   --------------------------------------------
@@ -94,7 +93,7 @@ function addTocurrentSessionArray(id) {
 let timeLeft = 0;
 export function startCountdownTimer(callback) {
     clearInterval(countDownIntervalId);
-    let seconds = 60;
+    let seconds = 30;
     startTimerColorAnimation();
     countDownIntervalId = setInterval(() => {
         timeLeft = seconds;
@@ -124,9 +123,6 @@ function stopCountDownTimer() {
     updatePoints(updatedPoints);
     return updatedPoints;
 }
-// ==================================================================================================
-// --------------------------------------   CLEAR QUIZ   --------------------------------------------
-// ==================================================================================================
 // ==================================================================================================
 // -----------------------------------   RANDOM QUESTIONS   -----------------------------------------
 // ==================================================================================================
@@ -200,8 +196,8 @@ export const renderQuestion = function (question) {
           <img
             src="${question.src}"
             alt="${question.alt}"
-            width = 640
-            heigth = 500>
+            width = 1920
+            heigth = 1080>
           `;
         if (questionTextContainer) {
             questionTextContainer.innerHTML = html;
@@ -216,19 +212,17 @@ export const renderQuestion = function (question) {
             console.log('IMG not found');
         }
         addTocurrentSessionArray(question.id);
-        // countQuestions();
     }
     else {
         console.log('No ducking question found');
     }
 };
 function shuffleArray(array) {
-    const shuffledArray = array.slice(); // Create a shallow copy of the array to avoid modifying the original
+    const shuffledArray = array.slice();
     let correctAnswerIndex = -1;
     for (let i = shuffledArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-        // Update the correctAnswerIndex when the correct answer is moved
         if (shuffledArray[i] === array[array.length - 1]) {
             correctAnswerIndex = i;
         }
@@ -253,7 +247,6 @@ function getCurrentQuestion() {
 export const newQuestion = function () {
     countQuestions();
     if (questionCounter < 10) {
-        // stopCountDownTimer();
         startCountdownTimer();
         const randomQuestion = getRandomQuestion();
         if (randomQuestion) {

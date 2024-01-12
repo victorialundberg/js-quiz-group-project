@@ -2,7 +2,6 @@
 interface IScore {
   id: number;
   name: string;
-  //   countDownToPoints: number;
   totalPoints: number;
   totalTime: number;
 }
@@ -12,7 +11,6 @@ class ScoreItem implements IScore {
 
   constructor(
     private _name: string,
-    // private _countDownToPoints: number,
     private _totalPoints: number,
     private _totalTime: number,
     id?: number
@@ -24,10 +22,6 @@ class ScoreItem implements IScore {
     return this._id;
   }
 
-  // set id(id: number) {
-  //   this._id = id;
-  // }
-
   get name(): string {
     return this._name;
   }
@@ -35,14 +29,6 @@ class ScoreItem implements IScore {
   set name(name: string) {
     this._name = name;
   }
-
-  //   get countDownToPoints(): number {
-  //     return this._countDownToPoints;
-  //   }
-
-  //   set countDownToPoints(countDownToPoints: number) {
-  //     this._countDownToPoints = countDownToPoints;
-  //   }
 
   get totalPoints(): number {
     return this._totalPoints;
